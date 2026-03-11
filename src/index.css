@@ -1,0 +1,78 @@
+#root,body{
+  margin: 0rem;
+  padding: 1rem;
+  background-color: #272727;
+}
+
+main{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.menu-acciones{
+  background-color: #404040;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.dungeon-port{
+  padding: 1rem;
+  width: 20rem;
+  height: 100px;
+}
+
+.dungeon-view{
+  width: 20rem;
+  height: 20rem;
+  background-color: rgb(196, 159, 159);
+  justify-content: center;
+  align-content: center;
+  display: flex;
+}
+
+.dungeon-buttons{
+  
+}
+
+.flex{
+  display: flex;
+  gap: 0.5rem;
+}
+
+.row{
+  flex-direction: row;
+}
+
+.col{
+  flex-direction: column;
+}
+
+.pad-05{
+  padding: 0.5rem
+} 
+.pad-1{
+  padding: 1rem;
+}
+
+img{
+  width: 2rem;
+  height: 2rem;
+  filter: drop-shadow(0px 0px 10px black);
+}
+
+.center{
+  justify-content: center;
+}
+
+.monster{
+  width: 10rem;
+  height: 10rem;
+}
+
+.section-tienda{
+  background-color: #6f8f71;
+  padding: 0.5rem;
+}
