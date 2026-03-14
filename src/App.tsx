@@ -4,8 +4,10 @@ import Dungeon from './components/Dungeon'
 import ToolTipAtributo from './components/ToolTipAtributo'
 import ComercioPage from './components/comercio/Comercio-page'
 import { ToastContainer, toast } from 'react-toastify';
+import InventarioPage from './components/inventario/Inventario-page'
+import MapaGlobal from './components/mapa/Mapa-page'
 function App() {
-  const [count, setCount] = useState(0)
+  const [page, setPage] = useState<'crear' | 'mapa' | 'dungeon' | 'comercio' | 'inventario' | 'trabajar'>('mapa')
   const [mochila, setMochila] = useState<Mochila>({
     circuito: 0,
     metales: 0,
@@ -15,27 +17,57 @@ function App() {
 
   const notify = () => toast('Wow so easy !');
 
+  const showPage = () => {
+    switch(page){
+      case 'mapa':
+        return <MapaGlobal/>
+      case 'dungeon':
+        return <Dungeon 
+          mochilla={mochila}
+          updateMochila={setMochila}/>
+      case 'comercio':
+        return <ComercioPage
+            mochila={mochila}
+            updateMochila={setMochila}
+          />
+      case 'inventario':
+        return <InventarioPage/>
+    }
+  }
+
   return (
     <>
       <main>
-      <ToastContainer
-        aria-label={''}
-      />
-        <button
-          onClick={notify}
-        >clicl</button>
         <aside className='menu-acciones'>
-          <button>
+          <button
+            onClick={() => setPage('mapa')}
+          >
+            Mapa
+          </button>
+          <button
+            onClick={() => setPage('trabajar')}
+          >
             Trabajar
           </button>
-          <button>
+          <button
+            onClick={() => setPage('crear')}
+          >
+            Crear
+          </button>
+          <button
+            onClick={() => setPage('comercio')}
+          >
             Comerciar
           </button>
-          <button>
-            Minar
-          </button>
-          <button>
+          <button
+            onClick={() => setPage('dungeon')}
+            >
             Dungeon
+          </button>
+          <button
+            onClick={() => setPage('inventario')}
+            >
+            Inventario
           </button>
           <div className='flex col'>
             <span className='flex center'>Pociones:</span>
@@ -79,16 +111,10 @@ function App() {
             />
           </div>
         </aside>
-        <section>
-          <Dungeon 
-            mochilla={mochila}
-            updateMochila={setMochila}/>
-        </section>
-        <section style={{marginTop:'2rem'}}>
-          <ComercioPage
-            mochila={mochila}
-            updateMochila={setMochila}
-          />
+        <section className='pad-1'>
+          {
+            showPage()
+          }
         </section>
       </main>
     </>

@@ -35,9 +35,11 @@ function Dungeon(
 
   function handleAttack(){
     setOpponentLive((val) => {
+      const lifeRest: number = val.live - (1*statusJugador.bonos.ataque)
+      const finalLifeEnemy: number = lifeRest > 0? lifeRest : 0
       return {
         ...val,
-        live: val.live - (1*statusJugador.bonos.ataque)
+        live: finalLifeEnemy,
       }
     })
 
@@ -94,7 +96,7 @@ function Dungeon(
 
   function handleEndTurno(){
     setStatusJugador((val) => {
-      const ataque = 1
+      const ataque = opponentLive.live > 0? 1: 0;
       const defensaFinal = val.bonos.defensa-ataque > 0? val.bonos.defensa-ataque : 0;
       const atk = ataque-val.bonos.defensa
       const ataqueAVida = atk > 0? atk : 0
@@ -111,13 +113,26 @@ function Dungeon(
         acciones: 0
       }
     })
-
+    const addEnemy: boolean = opponentLive.live <= 0
+    if(addEnemy){
+      setOpponentLive((val) => {
+        let typeOfEnemy: number = Math.random() * 10
+        return {
+          maxLive: Number((val.maxLive*typeOfEnemy).toPrecision(3)),
+          live: Number((val.maxLive*typeOfEnemy).toPrecision(3)),
+        }
+      })
+    }
     setTurno('Jugador')
   }
 
   return (
     <>
     <section className='dungeon-port'>
+      {
+        statusJugador.vida > 0?
+
+      
       <div className='dungeon-view flex col'>
         <div className='flex row center'>
           <div className='flex col'>
@@ -127,9 +142,13 @@ function Dungeon(
               maxValue={opponentLive.maxLive}
             />
 
-          <img 
-            className='monster'
-            src={bestiario.monsterT1[0]}/>
+
+          {opponentLive.live > 0 ?
+            <img 
+              className='monster'
+              src={bestiario.monsterT1[0]}/>
+            : <div className='monster'></div>
+          }
           </div>
         </div>
         <div id='toolbar' className='flex row center'>
@@ -153,6 +172,11 @@ function Dungeon(
           maxValue={99}
         />
       </div>
+      : <div className='flex row center'>
+        <h2>Quedas inconciente</h2>
+
+      </div>
+      }
       <div className='flex row pad-05'>
         <button
           disabled={!isTurnoJugador()}

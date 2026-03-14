@@ -34,9 +34,20 @@ function ComercioPage(
 
     })
   }
+
+  function spanTextoBuy(val: ItemCompra){
+    return <>
+      <td><span>{val.nombre}</span></td>
+      <td><span className={val.circuito < props.mochila.circuito ? 'green' : ''}>{val.circuito}</span></td>
+      <td><span className={val.nucleosEnergeticos < props.mochila.nucleosEnergeticos ? 'green' : ''}>{val.nucleosEnergeticos}</span></td>
+      <td><span className={val.metales < props.mochila.metales ? 'green' : ''}>{val.metales}</span></td>
+      <td><span className={val.cristales < props.mochila.cristales ? 'green' : ''}>{val.cristales}</span></td>
+    </>
+  }
+
   return (
     <>
-      <section className="section-tienda">
+      <section className="section-tienda background-texto pad-05">
         <table>
           <thead>
             <tr>
@@ -51,9 +62,9 @@ function ComercioPage(
           <tbody>
               {
                 listaItems.map(obj => <tr>
-                {Object.entries(obj).map(([_name,value]) =><td>
-                    <span>{value}</span>
-                  </td>)}
+                  {
+                    spanTextoBuy(obj)
+                  }
                   <td>
                     <button
                       onClick={() => handleBuy(1)}

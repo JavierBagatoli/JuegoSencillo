@@ -33,10 +33,6 @@ main{
   display: flex;
 }
 
-.dungeon-buttons{
-  
-}
-
 .flex{
   display: flex;
   gap: 0.5rem;
@@ -72,7 +68,10 @@ img{
   height: 10rem;
 }
 
-.section-tienda{
-  background-color: #6f8f71;
-  padding: 0.5rem;
+.background-texto{
+  background-color: rgb(197, 204, 218);
+}
+
+.green{
+  color: green;
 }
