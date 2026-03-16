@@ -1,23 +1,22 @@
 import { useState } from 'react'
 import type { Mochila } from '../App'
 import SeleccionNivelpage from './dungeon/SeleccionNivelpage'
-import type { PlayerStatsControl } from './models/player.interfaces'
-import { PLAYER_INITIAL_DUNGEON } from './initialData/player.init'
 import PantallaDungeon from './dungeon/PantallaDungeon'
 import type { EnemyStatscontrol } from './models/enemy.interfaces'
 import { EMPTY_ENEMY, SLIME_HARD, SLIME_ROCK, SLIME_SOFT } from './initialData/enemys.init'
+import type { PlayerStatsControl } from './models/player.interfaces'
 
 function Dungeon(
   prop: {
     mochilla: Mochila,
     updateMochila: Function,
-    equipment: PlayerStatsControl
+    playerStats: PlayerStatsControl
   }
 ) {
   const [enemy, setEnemy] = useState<EnemyStatscontrol>(EMPTY_ENEMY)
   const [level, setLevel] = useState<number>(0)
   const [startMission, setStartMission] = useState<boolean>(false)
-  const [statusJugador, setStatusJugador] = useState<PlayerStatsControl>(prop.equipment)
+  const [playerStats, setplayerStats] = useState<PlayerStatsControl>(prop.playerStats)
   const [turno, setTurno] = useState<'Jugador' | 'Oponente'>('Jugador');
 
   const updateEnemy = () => {
@@ -37,7 +36,7 @@ function Dungeon(
 
   function handleAttack(){
     setEnemy((val) => {
-      const lifeRest: number = val.life - (1*(statusJugador.baseAttack+statusJugador.bonos.attack))
+      const lifeRest: number = val.life - (1*(playerStats.baseAttack+playerStats.bonos.attack))
       const finalLifeEnemy: number = lifeRest > 0? lifeRest : 0
       
       const enemy:EnemyStatscontrol = {
@@ -48,7 +47,7 @@ function Dungeon(
       return enemy;
     })
 
-    setStatusJugador(val => {
+    setplayerStats(val => {
       return {
         ...val,
         acciones: val.actions++
@@ -79,13 +78,13 @@ function Dungeon(
   }
 
   function markEndOfTurn(){
-    if(statusJugador.actions+1 >= statusJugador.actionsMax + statusJugador.bonos.actions){
+    if(playerStats.actions+1 >= playerStats.actionsMax + playerStats.bonos.actions){
       setTurno('Oponente')
     }
   }
 
   function handleShield(){
-    setStatusJugador((val) => {
+    setplayerStats((val) => {
       return {
         ...val,
         bonos:{
@@ -100,7 +99,7 @@ function Dungeon(
   }
 
   function handleEndTurno(){
-    setStatusJugador((val) => {
+    setplayerStats((val: PlayerStatsControl) => {
       const ataque = enemy.life > 0? 1: 0;
       const defensaFinal = val.bonos.defense-ataque > 0? val.bonos.defense-ataque : 0;
       const atk = ataque-val.bonos.defense
@@ -145,7 +144,7 @@ function Dungeon(
         {
           startMission?
             <PantallaDungeon
-              statusPlayer={statusJugador}
+              playerStats={playerStats}
               statusEnemy={enemy}
               startMission={(val: boolean) => handleSelectLevel(val)}
               />

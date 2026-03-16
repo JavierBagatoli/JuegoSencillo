@@ -5,7 +5,7 @@ import type { EnemyStatscontrol } from "../models/enemy.interfaces"
 
 function PantallaDungeon(
   props: {
-    statusPlayer: PlayerStatsControl,
+    playerStats: PlayerStatsControl,
     statusEnemy: EnemyStatscontrol,
     startMission: Function
   }
@@ -13,7 +13,7 @@ function PantallaDungeon(
   return (
     <>
       {
-        props.statusPlayer.life > 0? 
+        props.playerStats.life > 0? 
           <div className='dungeon-view flex col'>
             <div className='flex row center'>
               <div className='flex col'>
@@ -34,17 +34,17 @@ function PantallaDungeon(
             <div>
               <ToolTipAtributo
                 text='Vida'
-                actualValue={props.statusPlayer.life}
-                maxValue={props.statusPlayer.lifeMax}
+                actualValue={props.playerStats.life}
+                maxValue={props.playerStats.lifeMax}
               />
               <ToolTipAtributo
                 text='Acciones'
-                actualValue={props.statusPlayer.actions}
-                maxValue={props.statusPlayer.actionsMax + props.statusPlayer.bonos.actions}
+                actualValue={props.playerStats.actions}
+                maxValue={props.playerStats.actionsMax + props.playerStats.bonos.actions}
               />
               <ToolTipAtributo
                 text='Defensa'
-                actualValue={props.statusPlayer.bonos.defense}
+                actualValue={props.playerStats.bonos.defense}
                 maxValue={99}
               />
             </div>

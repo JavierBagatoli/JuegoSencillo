@@ -1,5 +1,6 @@
 import escopeta from "../../assets/icons/escopeta.png"
 import armadura from "../../assets/icons/armadura.png"
+import shield from "../../assets/icons/shield.png"
 import type { Weapon } from "../models/items-fight.interfaces"
 
 export const ARMORY: Record<number, Weapon> ={
@@ -34,17 +35,17 @@ export const ARMORY: Record<number, Weapon> ={
       uses: 0,
     },
     2: {
-      nombre: 'Escopeta',
-      descripcion: 'Arma antigua',
+      nombre: 'Escudo',
+      descripcion: 'Escudo',
       id: 2,
-      type: 'weapon',
-      icon: '',
+      type: 'shield',
+      icon: shield,
       damage: 0,
-      defense: 0,
+      defense: 1,
       uses: 0,
     },
     3: {
-      nombre: 'Escopeta',
+      nombre: 'Escopeta 2',
       descripcion: 'Arma antigua',
       id: 3,
       type: 'weapon',

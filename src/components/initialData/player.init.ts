@@ -12,4 +12,9 @@ export const PLAYER_INITIAL_DUNGEON: PlayerStatsControl = {
     baseAttack: 1,
     actions: 0,
     actionsMax: 1,
+    equipment: {
+        idWeapon: null,
+        idArmor: null,
+        idShield: null
+    }
 }

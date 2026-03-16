@@ -16,7 +16,7 @@ function App() {
     cristales: 0,
     nucleosEnergeticos: 0
   })
-  const [equipment, setEquipment] = useState<PlayerStatsControl>(PLAYER_INITIAL_DUNGEON)
+  const [playerStats, setPlayerStats] = useState<PlayerStatsControl>(PLAYER_INITIAL_DUNGEON)
 
   const showPage = () => {
     switch(page){
@@ -26,7 +26,7 @@ function App() {
         return <Dungeon 
           mochilla={mochila}
           updateMochila={setMochila}
-          equipment={equipment}
+          playerStats={playerStats}
           />
       case 'crear':
         return <ComercioPage
@@ -35,8 +35,8 @@ function App() {
           />
       case 'inventario':
         return <InventarioPage
-          equipment={equipment}
-          setEquipment={setEquipment}
+          playerStats={playerStats}
+          setEquipment={setPlayerStats}
         />
     }
   }
@@ -119,12 +119,12 @@ function App() {
             <div style={{backgroundColor: 'white'}}>
               <ToolTipAtributo
                 text='Atk'
-                actualValue={equipment.baseAttack + equipment.bonos.attack}
+                actualValue={playerStats.baseAttack + playerStats.bonos.attack}
                 maxValue={999}
               />
               <ToolTipAtributo
                 text='Defense'
-                actualValue={equipment.bonos.defense}
+                actualValue={playerStats.bonos.defense}
                 maxValue={999}
               />
             </div>

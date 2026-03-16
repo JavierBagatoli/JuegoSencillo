@@ -1,4 +1,4 @@
-export interface PlayerStatsControl{
+export default interface StatsControl{
   life: number,
   lifeMax: number,
   bonos: {
@@ -10,4 +10,15 @@ export interface PlayerStatsControl{
   baseAttack: number;
   actions: number,
   actionsMax: number,
+}
+
+
+export interface PlayerStatsControl extends StatsControl{
+  equipment: EquipmentUser,
+}
+
+export interface EquipmentUser{
+  idWeapon: number | null,
+  idShield: number | null,
+  idArmor: number | null,
 }

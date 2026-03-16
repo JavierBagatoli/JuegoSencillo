@@ -3,24 +3,18 @@ import SlotInvetario from "./slot-inventario-component"
 import cocina from "../../assets/icons/cocina.png"
 import { ARMORY } from "../initialData/armory.init"
 import type { Weapon } from "../models/items-fight.interfaces"
-import type { PlayerStatsControl } from "../models/player.interfaces"
+import type { EquipmentUser, PlayerStatsControl } from "../models/player.interfaces"
 
 function InventarioPage(
   props: {
-    equipment: PlayerStatsControl,
+    playerStats: PlayerStatsControl,
     setEquipment: Function
   }
 ) {
   const [slot, setSlot] = useState<string | null>(null)
   const [slotInvetory, setSlotInvetory] = useState<string | null>(null)
 
-  const [inventario, setInventario] = useState<{
-    arma: number,
-    armadura: number,
-  }>({
-    arma: 999,
-    armadura: 999,
-  })
+  const [inventario, setInventario] = useState<EquipmentUser>(props.playerStats.equipment)
 
   const naveEspacio = {
     vida: 0,
@@ -40,6 +34,10 @@ function InventarioPage(
     {
       id: 1,
       cantidad: 2,
+    },
+    {
+      id: 2,
+      cantidad: 1,
     },
   ]
 
@@ -65,20 +63,26 @@ function InventarioPage(
     if(slot !== null){
       const id: number = Number(ids)
       console.log(id)
-      if(slot === 'inv-arma' || slot === 'inv-armadura'){
+      if(['inv-arma','inv-armadura','inv-shield'].includes(slot)){
         if(slot === 'inv-arma' && biblioteca[id]?.type === 'weapon'){
           setInventario((val) => {
-            return {
+            const final: EquipmentUser = {
               ...val,
-              arma: biblioteca[id].id
+              idWeapon: biblioteca[id].id
             }
+
+            return final
           }) 
           props.setEquipment((val: PlayerStatsControl) => {
-            const finalStatus = {
+            const finalStatus:PlayerStatsControl = {
               ...val,
               bonos:{
                 ...val.bonos,
                 attack: biblioteca[id].damage
+              },
+              equipment:{
+                ...val.equipment,
+                idWeapon: biblioteca[id].id
               }
             }
 
@@ -87,10 +91,12 @@ function InventarioPage(
           clean();
         }else if(slot === 'inv-armadura' && biblioteca[id]?.type === 'armor'){
           setInventario((val) => {
-            return {
+            const final: EquipmentUser = {
               ...val,
-              armadura: biblioteca[id].id
+              idArmor: biblioteca[id].id
             }
+
+            return final
           }) 
 
           props.setEquipment((val: PlayerStatsControl) => {
@@ -99,12 +105,18 @@ function InventarioPage(
               bonos:{
                 ...val.bonos,
                 defense: biblioteca[id].defense
+              },
+              equipment:{
+                ...val.equipment,
+                idArmor: biblioteca[id].id
               }
             }
 
             return finalStatus;
           })
 
+          clean();
+        }else if(slot === 'inv-shield' && biblioteca[id]?.type === 'shield'){
           clean();
         }
       }
@@ -129,21 +141,39 @@ function InventarioPage(
                 </div>)
             }
             <section className="flex">
-            <SlotInvetario
-              id="inv-arma"
-              slotSlected={slot}
-              icon={biblioteca[inventario.arma].icon || null}
-              selected={(val:string) => handleSetSlot(val)}
-              cant={null}
-            />
-            <SlotInvetario
-              id="inv-armadura"
-              slotSlected={slot}
-              icon={biblioteca[inventario.armadura].icon || null}
-              selected={(val:string) => handleSetSlot(val)}
-              cant={null}
-            />
+              <SlotInvetario
+                id="inv-arma"
+                slotSlected={slot}
+                icon={biblioteca[inventario?.idWeapon || 0]?.icon}
+                selected={(val:string) => handleSetSlot(val)}
+                cant={null}
+              />
+              <SlotInvetario
+                id="inv-armadura"
+                slotSlected={slot}
+                icon={biblioteca[inventario?.idArmor || 0].icon || null}
+                selected={(val:string) => handleSetSlot(val)}
+                cant={null}
+              />
 
+              <SlotInvetario
+                id="inv-shield"
+                slotSlected={slot}
+                icon={biblioteca[inventario?.idShield || 0].icon || null}
+                selected={(val:string) => handleSetSlot(val)}
+                cant={null}
+              />
+              <div className="tooltip-info flex col pad-05">
+                <span>
+                  Nombre:
+                </span>
+                <span>
+                  Descripcion:
+                </span>
+                <span>
+                  Usos:
+                </span>
+              </div>
             </section>
 
           <h3>Equipo Nave Espacial</h3>

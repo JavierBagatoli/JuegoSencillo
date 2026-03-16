@@ -1,6 +1,6 @@
-import type { PlayerStatsControl } from "../models/player.interfaces";
+import type { EnemyStatscontrol } from "../models/enemy.interfaces"
 
-export const EMPTY_ENEMY: PlayerStatsControl = {
+export const EMPTY_ENEMY: EnemyStatscontrol = {
     life: 0,
     lifeMax: 0,
     bonos: {
@@ -14,7 +14,7 @@ export const EMPTY_ENEMY: PlayerStatsControl = {
     actionsMax: 1,
 }
 
-export const SLIME_SOFT: PlayerStatsControl = {
+export const SLIME_SOFT: EnemyStatscontrol = {
     life: 10,
     lifeMax: 10,
     bonos: {
@@ -28,7 +28,7 @@ export const SLIME_SOFT: PlayerStatsControl = {
     actionsMax: 1,
 }
 
-export const SLIME_HARD: PlayerStatsControl = {
+export const SLIME_HARD: EnemyStatscontrol = {
     life: 100,
     lifeMax: 100,
     bonos: {
@@ -42,7 +42,7 @@ export const SLIME_HARD: PlayerStatsControl = {
     actionsMax: 1,
 }
 
-export const SLIME_ROCK: PlayerStatsControl = {
+export const SLIME_ROCK: EnemyStatscontrol = {
     life: 80,
     lifeMax: 80,
     bonos: {

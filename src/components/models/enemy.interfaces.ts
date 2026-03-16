@@ -1,5 +1,5 @@
-import type { PlayerStatsControl } from "./player.interfaces";
+import type StatsControl from "./player.interfaces";
 
-export interface EnemyStatscontrol extends PlayerStatsControl{
+export interface EnemyStatscontrol extends StatsControl{
     
 }
