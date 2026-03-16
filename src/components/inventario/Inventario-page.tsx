@@ -1,12 +1,18 @@
 import { useState } from "react"
-import escopeta from "../../assets/icons/escopeta.png"
-import armadura from "../../assets/icons/armadura.png"
 import SlotInvetario from "./slot-inventario-component"
 import cocina from "../../assets/icons/cocina.png"
+import { ARMORY } from "../initialData/armory.init"
+import type { Weapon } from "../models/items-fight.interfaces"
+import type { PlayerStatsControl } from "../models/player.interfaces"
 
-function InventarioPage() {
+function InventarioPage(
+  props: {
+    equipment: PlayerStatsControl,
+    setEquipment: Function
+  }
+) {
   const [slot, setSlot] = useState<string | null>(null)
-  const [slotInvetory, setSlotInvetory] = useState<number | null>(null)
+  const [slotInvetory, setSlotInvetory] = useState<string | null>(null)
 
   const [inventario, setInventario] = useState<{
     arma: number,
@@ -37,49 +43,7 @@ function InventarioPage() {
     },
   ]
 
-  const biblioteca: Record<number, {
-    nombre: string,
-    descripcion: string,
-    id: number,
-    type: 'weapon' | 'armor',
-    icon: any
-  }> = {
-    999: {
-      nombre: 'Puños',
-      descripcion: '',
-      id: 0,
-      type: 'weapon',
-      icon: null
-    },
-    0: {
-      nombre: 'Escopeta',
-      descripcion: 'Arma antigua',
-      id: 0,
-      type: 'weapon',
-      icon: escopeta
-    },
-    1: {
-      nombre: 'Armadura',
-      descripcion: 'Armadura antigua',
-      id: 1,
-      type: 'armor',
-      icon: armadura
-    },
-    2: {
-      nombre: 'Escopeta',
-      descripcion: 'Arma antigua',
-      id: 2,
-      type: 'weapon',
-      icon: ''
-    },
-    3: {
-      nombre: 'Escopeta',
-      descripcion: 'Arma antigua',
-      id: 3,
-      type: 'weapon',
-      icon: ''
-    },
-  }
+  const biblioteca: Record<number, Weapon> = ARMORY;
 
   const bibliotecaNave: Record<number, {
     id: number,
@@ -92,26 +56,64 @@ function InventarioPage() {
   }
 
   function handleSetSlot(id: string){
-    setSlot(id)
+    setSlot((val:string | null) => val !== id? id: null)
   }
 
-  function handleSetSlotInvetory(id: number){
-    setSlotInvetory(id)
+  function handleSetSlotInvetory(ids: string){
+    setSlotInvetory((val:string | null) => val !== ids? ids: null)
 
     if(slot !== null){
-      if(slot === 'inv-arma'){
-        setInventario((val) => {
-          return {
-            ...val,
-            arma:biblioteca[id].id
-          }
-        }) 
+      const id: number = Number(ids)
+      console.log(id)
+      if(slot === 'inv-arma' || slot === 'inv-armadura'){
+        if(slot === 'inv-arma' && biblioteca[id]?.type === 'weapon'){
+          setInventario((val) => {
+            return {
+              ...val,
+              arma: biblioteca[id].id
+            }
+          }) 
+          props.setEquipment((val: PlayerStatsControl) => {
+            const finalStatus = {
+              ...val,
+              bonos:{
+                ...val.bonos,
+                attack: biblioteca[id].damage
+              }
+            }
 
-        setSlot(null)
-        setSlotInvetory(null)
+            return finalStatus;
+          })
+          clean();
+        }else if(slot === 'inv-armadura' && biblioteca[id]?.type === 'armor'){
+          setInventario((val) => {
+            return {
+              ...val,
+              armadura: biblioteca[id].id
+            }
+          }) 
+
+          props.setEquipment((val: PlayerStatsControl) => {
+            const finalStatus: PlayerStatsControl = {
+              ...val,
+              bonos:{
+                ...val.bonos,
+                defense: biblioteca[id].defense
+              }
+            }
+
+            return finalStatus;
+          })
+
+          clean();
+        }
       }
-      
     }
+  }
+
+  function clean(){
+    setSlot(null);
+    setSlotInvetory(null);
   }
 
   return (
@@ -122,7 +124,7 @@ function InventarioPage() {
         <div>
           <h3>Equipo Personaje</h3>
             {
-              Object.entries(inventario).map(([key, value]) => <div>
+              Object.entries(inventario).map(([key, value]) => <div key={key}>
                   <span>{key}: {value}</span>
                 </div>)
             }
@@ -132,12 +134,14 @@ function InventarioPage() {
               slotSlected={slot}
               icon={biblioteca[inventario.arma].icon || null}
               selected={(val:string) => handleSetSlot(val)}
+              cant={null}
             />
             <SlotInvetario
               id="inv-armadura"
               slotSlected={slot}
               icon={biblioteca[inventario.armadura].icon || null}
               selected={(val:string) => handleSetSlot(val)}
+              cant={null}
             />
 
             </section>
@@ -155,10 +159,12 @@ function InventarioPage() {
                   naveEspacio.habitacion5,
                 ].map((val, index) => 
                   <SlotInvetario
+                    key={index}
                     id={`habitacion-${index}`}
                     slotSlected={slot}
                     icon={bibliotecaNave[val].icon || null}
                     selected={(val:string) => handleSetSlot(val)}
+                    cant={null}
                   />
                 )
                 }
@@ -169,24 +175,17 @@ function InventarioPage() {
           <h3>Inventario</h3>
            <section className="flex wrap">
             {
-            /*[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19].map((val) =>
-              <SlotInvetario
-                id={`inv-${val}`}
-                slotSlected={slot}
-                icon={''}
-                selected={(val:string) => handleSetSlotInvetory(val)}
-              />)*/
-            }
-            {
-              [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19].map((val) => 
-                <div
-                  onClick={() => handleSetSlotInvetory(val)}
-                  className="slot-item">
-                  <span>{biblioteca[inventarioReal[val]?.id]?.nombre}: {inventarioReal[val]?.cantidad}  </span>
-                </div>
+            ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19'].map((val) => 
+                <SlotInvetario
+                  key={val}
+                  id={val}
+                  slotSlected={slotInvetory}
+                  icon={biblioteca[inventarioReal[Number(val)]?.id]?.icon}
+                  selected={(val:string) => handleSetSlotInvetory(val)}
+                  cant={inventarioReal[Number(val)]?.cantidad}
+                />
               )
             }
-
             </section>
         </div>
 

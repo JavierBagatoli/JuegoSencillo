@@ -5,6 +5,9 @@ import ToolTipAtributo from './components/ToolTipAtributo'
 import ComercioPage from './components/comercio/Comercio-page'
 import InventarioPage from './components/inventario/Inventario-page'
 import MapaGlobal from './components/mapa/Mapa-page'
+import { PLAYER_INITIAL_DUNGEON } from './components/initialData/player.init'
+import type { PlayerStatsControl } from './components/models/player.interfaces'
+
 function App() {
   const [page, setPage] = useState<'crear' | 'mapa' | 'dungeon' | 'comercio' | 'inventario' | 'trabajar'>('mapa')
   const [mochila, setMochila] = useState<Mochila>({
@@ -13,6 +16,7 @@ function App() {
     cristales: 0,
     nucleosEnergeticos: 0
   })
+  const [equipment, setEquipment] = useState<PlayerStatsControl>(PLAYER_INITIAL_DUNGEON)
 
   const showPage = () => {
     switch(page){
@@ -21,14 +25,19 @@ function App() {
       case 'dungeon':
         return <Dungeon 
           mochilla={mochila}
-          updateMochila={setMochila}/>
+          updateMochila={setMochila}
+          equipment={equipment}
+          />
       case 'crear':
         return <ComercioPage
             mochila={mochila}
             updateMochila={setMochila}
           />
       case 'inventario':
-        return <InventarioPage/>
+        return <InventarioPage
+          equipment={equipment}
+          setEquipment={setEquipment}
+        />
     }
   }
 
@@ -84,7 +93,7 @@ function App() {
               maxValue={99}
             />
           </div>
-          <div>
+          <div style={{backgroundColor: 'white'}}>
             <span className='flex center'>Recusos</span>
             <ToolTipAtributo
               text='Circuitos'
@@ -106,6 +115,20 @@ function App() {
               actualValue={mochila.cristales}
               maxValue={999}
             />
+
+            <div style={{backgroundColor: 'white'}}>
+              <ToolTipAtributo
+                text='Atk'
+                actualValue={equipment.baseAttack + equipment.bonos.attack}
+                maxValue={999}
+              />
+              <ToolTipAtributo
+                text='Defense'
+                actualValue={equipment.bonos.defense}
+                maxValue={999}
+              />
+            </div>
+            
           </div>
         </aside>
         <section className='pad-1'>

@@ -114,3 +114,23 @@ img{
   box-sizing: border-box;
   border: 5px solid rgb(51, 133, 51);
 }
+
+.mapa-munda{
+  img{
+    width: 4rem;
+    height: 4rem;
+    animation: animationShip 2s ease-in-out infinite;
+  }
+}
+
+@keyframes animationShip {
+  0% {
+    transform: rotate(90deg) scale(1) translateY(-0rem);
+  }
+  50% {
+    transform: rotate(90deg) scale(1.5) translateY(-1rem);
+  }
+  100% {
+    transform: rotate(90deg) scale(1) translateY(-0rem);
+  }
+}

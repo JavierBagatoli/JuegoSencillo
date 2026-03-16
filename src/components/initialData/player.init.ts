@@ -9,7 +9,7 @@ export const PLAYER_INITIAL_DUNGEON: PlayerStatsControl = {
         actions: 1,
         luck: 1
     },
-    baseAttack: 100,
+    baseAttack: 1,
     actions: 0,
     actionsMax: 1,
 }

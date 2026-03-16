@@ -10,13 +10,14 @@ import { EMPTY_ENEMY, SLIME_HARD, SLIME_ROCK, SLIME_SOFT } from './initialData/e
 function Dungeon(
   prop: {
     mochilla: Mochila,
-    updateMochila: Function
+    updateMochila: Function,
+    equipment: PlayerStatsControl
   }
 ) {
   const [enemy, setEnemy] = useState<EnemyStatscontrol>(EMPTY_ENEMY)
   const [level, setLevel] = useState<number>(0)
   const [startMission, setStartMission] = useState<boolean>(false)
-  const [statusJugador, setStatusJugador] = useState<PlayerStatsControl>(PLAYER_INITIAL_DUNGEON)
+  const [statusJugador, setStatusJugador] = useState<PlayerStatsControl>(prop.equipment)
   const [turno, setTurno] = useState<'Jugador' | 'Oponente'>('Jugador');
 
   const updateEnemy = () => {
@@ -146,6 +147,7 @@ function Dungeon(
             <PantallaDungeon
               statusPlayer={statusJugador}
               statusEnemy={enemy}
+              startMission={(val: boolean) => handleSelectLevel(val)}
               />
           :
             <SeleccionNivelpage
