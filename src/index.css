@@ -36,6 +36,7 @@ main{
 .flex{
   display: flex;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .row{
@@ -45,6 +46,7 @@ main{
 .col{
   flex-direction: column;
 }
+
 
 .pad-05{
   padding: 0.5rem
@@ -74,4 +76,41 @@ img{
 
 .green{
   color: green;
+}
+
+#dungeon-selector-level{
+  width: 20rem;
+  height: 20rem;
+  background-color: rgb(78, 107, 107);
+}
+
+.dungeon-selector-buttons{
+  button{
+    height: 2rem;
+    background-color: #404040;
+    border: 0rem;
+    color: rgb(236, 229, 229);
+  }
+
+  button:hover{
+    transform: scale(1.02);
+    cursor: pointer;
+  }
+}
+
+.buttons{
+  button{
+    height: 2rem;
+  }
+}
+
+.slot-item{
+  width: 4rem;
+  height: 4rem;
+  background-color: #272727a3;
+}
+
+.slot-item-selected{
+  box-sizing: border-box;
+  border: 5px solid rgb(51, 133, 51);
 }

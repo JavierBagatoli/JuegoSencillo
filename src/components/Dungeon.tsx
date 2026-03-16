@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import sword from '../assets/icons/sword.png'
-import shield from '../assets/icons/shield.png'
-import potion from '../assets/icons/potion.png'
-import bestiario from '../assets/monster/monsters'
-import ToolTipAtributo from './ToolTipAtributo'
 import type { Mochila } from '../App'
-
+import SeleccionNivelpage from './dungeon/SeleccionNivelpage'
+import type { PlayerStatsControl } from './models/player.interfaces'
+import { PLAYER_INITIAL_DUNGEON } from './initialData/player.init'
+import PantallaDungeon from './dungeon/PantallaDungeon'
+import type { EnemyStatscontrol } from './models/enemy.interfaces'
+import { EMPTY_ENEMY, SLIME_HARD, SLIME_ROCK, SLIME_SOFT } from './initialData/enemys.init'
 
 function Dungeon(
   prop: {
@@ -13,40 +13,44 @@ function Dungeon(
     updateMochila: Function
   }
 ) {
-  const [opponentLive, setOpponentLive] = useState<ControlVidaDungeon>({
-    live: 10,
-    maxLive: 10
-  })
-
-  
-  const [statusJugador, setStatusJugador] = useState<ControlPersonaDungeon>({vida: 10,
-      vidaMax: 10,
-      bonos: {
-        defensa: 1,
-        ataque: 1,
-        acciones: 1,
-        suerte: 1
-      },
-      acciones: 0,
-      accionesMaximas: 1,
-    })
-
+  const [enemy, setEnemy] = useState<EnemyStatscontrol>(EMPTY_ENEMY)
+  const [level, setLevel] = useState<number>(0)
+  const [startMission, setStartMission] = useState<boolean>(false)
+  const [statusJugador, setStatusJugador] = useState<PlayerStatsControl>(PLAYER_INITIAL_DUNGEON)
   const [turno, setTurno] = useState<'Jugador' | 'Oponente'>('Jugador');
 
-  function handleAttack(){
-    setOpponentLive((val) => {
-      const lifeRest: number = val.live - (1*statusJugador.bonos.ataque)
-      const finalLifeEnemy: number = lifeRest > 0? lifeRest : 0
-      return {
-        ...val,
-        live: finalLifeEnemy,
+  const updateEnemy = () => {
+    const numberOfEnemy = Math.round(Math.random()*2)
+    
+      if(level === 3){
+        setEnemy(numberOfEnemy === 1? SLIME_HARD: SLIME_ROCK)
+      }else{
+        setEnemy(SLIME_SOFT)
       }
+  }
+
+  function handleSelectLevel(val: boolean){
+    setStartMission(val)
+    updateEnemy()
+  }
+
+  function handleAttack(){
+    setEnemy((val) => {
+      const lifeRest: number = val.life - (1*(statusJugador.baseAttack+statusJugador.bonos.attack))
+      const finalLifeEnemy: number = lifeRest > 0? lifeRest : 0
+      
+      const enemy:EnemyStatscontrol = {
+        ...val,
+        life: finalLifeEnemy
+      }
+      
+      return enemy;
     })
 
     setStatusJugador(val => {
       return {
         ...val,
-        acciones: val.acciones++
+        acciones: val.actions++
       }
     })
 
@@ -74,7 +78,7 @@ function Dungeon(
   }
 
   function markEndOfTurn(){
-    if(statusJugador.acciones+1 >= statusJugador.accionesMaximas + statusJugador.bonos.acciones){
+    if(statusJugador.actions+1 >= statusJugador.actionsMax + statusJugador.bonos.actions){
       setTurno('Oponente')
     }
   }
@@ -85,9 +89,9 @@ function Dungeon(
         ...val,
         bonos:{
           ...val.bonos,
-          defensa: val.bonos.defensa+1
+          defensa: val.bonos.defense+1
         },
-        acciones: val.acciones++
+        acciones: val.actions++
       }
     })
 
@@ -96,124 +100,83 @@ function Dungeon(
 
   function handleEndTurno(){
     setStatusJugador((val) => {
-      const ataque = opponentLive.live > 0? 1: 0;
-      const defensaFinal = val.bonos.defensa-ataque > 0? val.bonos.defensa-ataque : 0;
-      const atk = ataque-val.bonos.defensa
+      const ataque = enemy.life > 0? 1: 0;
+      const defensaFinal = val.bonos.defense-ataque > 0? val.bonos.defense-ataque : 0;
+      const atk = ataque-val.bonos.defense
       const ataqueAVida = atk > 0? atk : 0
-      const vidaFinal = defensaFinal == 0? val.vida-ataqueAVida : val.vida
+      const vidaFinal = defensaFinal == 0? val.life-ataqueAVida : val.life
       
-
-      return {
+      const statusFinal: PlayerStatsControl = {
         ...val,
-        vida: vidaFinal,
+        life: vidaFinal,
         bonos: {
           ...val.bonos,
-          defensa: defensaFinal,
+          defense: defensaFinal,
         },
-        acciones: 0
+        actions: 0
       }
+
+      return statusFinal
     })
-    const addEnemy: boolean = opponentLive.live <= 0
+    const addEnemy: boolean = enemy.life <= 0
+    
     if(addEnemy){
-      setOpponentLive((val) => {
+      setEnemy((val: EnemyStatscontrol) => {
         let typeOfEnemy: number = Math.random() * 10
         return {
-          maxLive: Number((val.maxLive*typeOfEnemy).toPrecision(3)),
-          live: Number((val.maxLive*typeOfEnemy).toPrecision(3)),
+          ...val,
+          lifeMax: Number((val.lifeMax*typeOfEnemy).toPrecision(3)),
+          life: Number((val.lifeMax*typeOfEnemy).toPrecision(3)),
         }
       })
     }
-    setTurno('Jugador')
+    if(enemy.life <= 0){
+      updateEnemy()
+    }
+    setTurno('Jugador');
   }
 
   return (
-    <>
-    <section className='dungeon-port'>
-      {
-        statusJugador.vida > 0?
-
-      
-      <div className='dungeon-view flex col'>
-        <div className='flex row center'>
-          <div className='flex col'>
-            <ToolTipAtributo
-              text='Vida'
-              actualValue={opponentLive.live}
-              maxValue={opponentLive.maxLive}
+    <> 
+      <section className='dungeon-port'>
+        <span style={{color: 'white'}}>
+          </span>
+        {
+          startMission?
+            <PantallaDungeon
+              statusPlayer={statusJugador}
+              statusEnemy={enemy}
+              />
+          :
+            <SeleccionNivelpage
+              level={level}
+              updateLevel={(val: number) => setLevel(val)}
+              startMission={(val: boolean) => handleSelectLevel(val)}
             />
-
-
-          {opponentLive.live > 0 ?
-            <img 
-              className='monster'
-              src={bestiario.monsterT1[0]}/>
-            : <div className='monster'></div>
-          }
+        }
+        
+        
+        <div className='flex col pad-05 buttons'>
+          <div className='flex row buttons'>
+            <button
+              disabled={!isTurnoJugador()}
+              onClick={() => handleAttack()}
+            >Golpear</button>
+            <button
+              disabled={!isTurnoJugador()}
+              onClick={() => handleShield()}
+              >Defender</button>
+            <button
+              disabled={!isTurnoJugador()}
+              >Pocion</button>
           </div>
+          <button
+            onClick={() => handleEndTurno()}
+          >Terminar Turno</button>
         </div>
-        <div id='toolbar' className='flex row center'>
-          <img src={shield}/>
-          <img src={sword}/>
-          <img src={potion}/>
-        </div>
-        <ToolTipAtributo
-          text='Vida'
-          actualValue={statusJugador.vida}
-          maxValue={statusJugador.vidaMax}
-        />
-        <ToolTipAtributo
-          text='Acciones'
-          actualValue={statusJugador.acciones}
-          maxValue={statusJugador.accionesMaximas + statusJugador.bonos.acciones}
-        />
-        <ToolTipAtributo
-          text='Defensa'
-          actualValue={statusJugador.bonos.defensa}
-          maxValue={99}
-        />
-      </div>
-      : <div className='flex row center'>
-        <h2>Quedas inconciente</h2>
-
-      </div>
-      }
-      <div className='flex row pad-05'>
-        <button
-          disabled={!isTurnoJugador()}
-          onClick={() => handleAttack()}
-        >Golpear</button>
-        <button
-          disabled={!isTurnoJugador()}
-          onClick={() => handleShield()}
-          >Defender</button>
-        <button
-          disabled={!isTurnoJugador()}
-          >Pocion</button>
-        <button
-          onClick={() => handleEndTurno()}
-        >Terminar Turno</button>
-      </div>
-    </section>
+      </section>
     </>
   )
 }
 
-export default Dungeon
-
-interface ControlVidaDungeon{
-  live: number,
-  maxLive: number
-}
-
-interface ControlPersonaDungeon{
-    vida: number,
-    vidaMax: number,
-    bonos: {
-      defensa: number,
-      ataque: number,
-      acciones: number,
-      suerte: number
-    }
-    acciones: number,
-    accionesMaximas: number,
-  }
+export default Dungeon;
