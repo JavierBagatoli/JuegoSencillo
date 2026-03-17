@@ -55,7 +55,7 @@ function App() {
           >
             Trabajar
           </button>
-          <button
+          <button className='active'
             onClick={() => setPage('crear')}
           >
             Crear
@@ -75,8 +75,10 @@ function App() {
             >
             Inventario
           </button>
-          <div className='flex col'>
-            <span className='flex center'>Pociones:</span>
+
+          
+          <div className='flex col stats-section'>
+            <h4 className='flex center'>Pociones:</h4>
             <ToolTipAtributo
               text='Velocidad'
               actualValue={0}
@@ -93,8 +95,8 @@ function App() {
               maxValue={99}
             />
           </div>
-          <div style={{backgroundColor: 'white'}}>
-            <span className='flex center'>Recusos</span>
+          <div className='flex col stats-section'>
+            <h4 className='flex center'>Recusos</h4>
             <ToolTipAtributo
               text='Circuitos'
               actualValue={mochila.circuito}
@@ -116,7 +118,7 @@ function App() {
               maxValue={999}
             />
 
-            <div style={{backgroundColor: 'white'}}>
+            <div>
               <ToolTipAtributo
                 text='Atk'
                 actualValue={playerStats.baseAttack + playerStats.bonos.attack}

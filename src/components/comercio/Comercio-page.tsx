@@ -1,4 +1,5 @@
 import type { Mochila } from "../../App"
+import "./comercio.css"
 
 function ComercioPage(
   props: {
@@ -6,6 +7,27 @@ function ComercioPage(
     updateMochila: Function
   }
 ) {
+
+  function isDisableBuy(index: number):boolean{
+    let isDisable: boolean = false;
+
+    props.updateMochila((val: Mochila)=>{
+      const metalesFinal = val.metales - listaItems[index].metales;
+      const nucleFinal = val.nucleosEnergeticos - listaItems[index].nucleosEnergeticos;
+      const circuitoFinal = val.circuito - listaItems[index].cristales;
+      const cristalFinal = val.cristales - listaItems[index].cristales;
+
+      
+      if(metalesFinal > 0 && 
+        nucleFinal > 0 && 
+        circuitoFinal > 0 && 
+        cristalFinal > 0
+      ){
+        isDisable= true
+    }})
+    
+    return isDisable
+  }
 
   function handleBuy(index: number){
     props.updateMochila((val: Mochila)=>{
@@ -36,18 +58,28 @@ function ComercioPage(
   }
 
   function spanTextoBuy(val: ItemCompra){
+    const circuito: boolean = val.circuito <= props.mochila.circuito
+    const nucleo:   boolean = val.nucleosEnergeticos <= props.mochila.nucleosEnergeticos
+    const metales:  boolean = val.metales <= props.mochila.metales
+    const cristales:boolean = val.cristales <= props.mochila.cristales 
+
     return <>
-      <td><span>{val.nombre}</span></td>
-      <td><span className={val.circuito < props.mochila.circuito ? 'green' : ''}>{val.circuito}</span></td>
-      <td><span className={val.nucleosEnergeticos < props.mochila.nucleosEnergeticos ? 'green' : ''}>{val.nucleosEnergeticos}</span></td>
-      <td><span className={val.metales < props.mochila.metales ? 'green' : ''}>{val.metales}</span></td>
-      <td><span className={val.cristales < props.mochila.cristales ? 'green' : ''}>{val.cristales}</span></td>
+      <td className="left"><span>{val.nombre}</span></td>
+      <td><span className={circuito ? 'green' : ''}>{val.circuito}</span></td>
+      <td><span className={nucleo   ? 'green' : ''}>{val.nucleosEnergeticos}</span></td>
+      <td><span className={metales  ? 'green' : ''}>{val.metales}</span></td>
+      <td><span className={cristales? 'green' : ''}>{val.cristales}</span></td>
+      <td><button
+            disabled={!circuito || !nucleo || !metales || !cristales}
+            onClick={() => handleBuy(1)}>
+            Comprar {circuito}
+      </button></td>
     </>
   }
 
   return (
     <>
-      <section className="section-tienda background-texto pad-05">
+      <section className="section-tienda background-comercio pad-05">
         <table>
           <thead>
             <tr>
@@ -61,17 +93,10 @@ function ComercioPage(
           </thead>
           <tbody>
               {
-                listaItems.map(obj => <tr>
+                listaItems.map((obj) => <tr>
                   {
                     spanTextoBuy(obj)
                   }
-                  <td>
-                    <button
-                      onClick={() => handleBuy(1)}
-                      >
-                      Comprar
-                    </button>
-                  </td>
                 </tr>
                 )
               }

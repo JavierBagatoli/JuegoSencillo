@@ -3,6 +3,7 @@ import SlotInvetario from "./slot-inventario-component"
 import { ARMORY } from "../initialData/armory.init"
 import type { Weapon } from "../models/items-fight.interfaces"
 import type { EquipmentShipUser, EquipmentUser, PlayerStatsControl } from "../models/player.interfaces"
+import "./inventario.css"
 
 function InventarioPage(
   props: {
@@ -224,14 +225,9 @@ function InventarioPage(
     <>
       <section 
         style={{maxWidth: '30rem'}}
-        className="flex col background-texto pad-05">
+        className="flex col background-inventario pad-05">
         <div>
           <h3>Equipo Personaje</h3>
-            {
-              Object.entries(inventario).map(([key, value]) => <div key={key}>
-                  <span>{key}: {value}</span>
-                </div>)
-            }
             <section className="flex">
               <SlotInvetario
                 id="inv-arma"
@@ -257,7 +253,7 @@ function InventarioPage(
               />
               <div className="tooltip-info flex col pad-05">
                 <span>
-                  Nombre: {biblioteca[idShowInfo].nombre}
+                  <b>Nombre:</b> {biblioteca[idShowInfo].nombre}
                 </span>
                 <span>
                   Descripcion: {biblioteca[idShowInfo].descripcion}

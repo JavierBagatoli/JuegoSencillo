@@ -10,26 +10,19 @@ function SlotInvetario(
   return (
     <>
        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignContent: 'center',
-            justifyItems: 'center'
-          }}
           onClick={() => props.selected(props.id)}
           className={`${props.slotSlected === props.id? 'slot-item-selected' : ''} slot-item`}>
-            {props?.icon &&
+            {props?.icon ?
               <img
-               style={{
-                marginLeft: '0.5rem',
-               }}
-               src={props?.icon || ''}/>
+               src={props?.icon}/>
+              :
+              <div></div>
             }
-            <span style={{marginLeft: '0.5rem',color: 'white'}}>{props.cant || ''}</span>
+            <div>
+              <span className={(props.cant || 0) > 0? 'tooltip-count': ''}>{props.cant || ''}</span>
+            </div>
         </div>
 
-  </>)
-}
+  </>)}
 
 export default SlotInvetario
