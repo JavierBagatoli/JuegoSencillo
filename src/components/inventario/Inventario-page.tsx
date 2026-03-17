@@ -1,9 +1,8 @@
 import { useState } from "react"
 import SlotInvetario from "./slot-inventario-component"
-import cocina from "../../assets/icons/cocina.png"
 import { ARMORY } from "../initialData/armory.init"
 import type { Weapon } from "../models/items-fight.interfaces"
-import type { EquipmentUser, PlayerStatsControl } from "../models/player.interfaces"
+import type { EquipmentShipUser, EquipmentUser, PlayerStatsControl } from "../models/player.interfaces"
 
 function InventarioPage(
   props: {
@@ -13,18 +12,16 @@ function InventarioPage(
 ) {
   const [slot, setSlot] = useState<string | null>(null)
   const [slotInvetory, setSlotInvetory] = useState<string | null>(null)
-
+  const [idShowInfo, setIdShowInfo] = useState<number>(0)
+  const [roomsShips, setRoomsShips] = useState<EquipmentShipUser>({
+    r1: 0,
+    r2: 0,
+    r3: 0,
+    r4: 0,
+    r5: 0,
+  })
+ 
   const [inventario, setInventario] = useState<EquipmentUser>(props.playerStats.equipment)
-
-  const naveEspacio = {
-    vida: 0,
-    damage: 0,
-    habitacion1: 0,
-    habitacion2: 0,
-    habitacion3: 0,
-    habitacion4: 0,
-    habitacion5: 0,
-  }
 
   const inventarioReal: {id: number, cantidad: number}[] =[
     {
@@ -39,22 +36,49 @@ function InventarioPage(
       id: 2,
       cantidad: 1,
     },
+    {
+      id: 100001,
+      cantidad: 1,
+    },{
+      id: 100004,
+      cantidad: 1,
+    },{
+      id: 100015,
+      cantidad: 1,
+    },
   ]
 
   const biblioteca: Record<number, Weapon> = ARMORY;
 
-  const bibliotecaNave: Record<number, {
-    id: number,
-    icon: any
-  }> = {
-    0:{
-      id:0,
-      icon: cocina
-    }
-  }
-
   function handleSetSlot(id: string){
     setSlot((val:string | null) => val !== id? id: null)
+
+    switch(id){
+      case 'inv-arma':
+        setIdShowInfo(props.playerStats.equipment.idWeapon || 0);
+        break;
+      case 'inv-armadura':
+        setIdShowInfo(props.playerStats.equipment.idArmor || 0);
+        break;
+      case 'inv-shield':
+        setIdShowInfo(props.playerStats.equipment.idShield || 0);
+        break;
+      case 'habitacion-1':
+        setIdShowInfo(props.playerStats.room?.r1 || 0);
+        break;
+      case 'habitacion-2':
+        setIdShowInfo(props.playerStats.room?.r2 || 0);
+        break;
+      case 'habitacion-3':
+        setIdShowInfo(props.playerStats.room?.r3 || 0);
+        break;
+      case 'habitacion-4':
+        setIdShowInfo(props.playerStats.room?.r4 || 0);
+        break;
+      case 'habitacion-5':
+        setIdShowInfo(props.playerStats.room?.r5 || 0);
+        break;
+    }
   }
 
   function handleSetSlotInvetory(ids: string){
@@ -62,7 +86,6 @@ function InventarioPage(
 
     if(slot !== null){
       const id: number = Number(ids)
-      console.log(id)
       if(['inv-arma','inv-armadura','inv-shield'].includes(slot)){
         if(slot === 'inv-arma' && biblioteca[id]?.type === 'weapon'){
           setInventario((val) => {
@@ -117,8 +140,77 @@ function InventarioPage(
 
           clean();
         }else if(slot === 'inv-shield' && biblioteca[id]?.type === 'shield'){
+          
+          setInventario((val) => {
+            const final: EquipmentUser = {
+              ...val,
+              idShield: biblioteca[id].id
+            }
+
+            return final
+          }) 
+
+          props.setEquipment((val: PlayerStatsControl) => {
+            const finalStatus: PlayerStatsControl = {
+              ...val,
+              bonos:{
+                ...val.bonos,
+                defense: biblioteca[id].defense
+              },
+              equipment:{
+                ...val.equipment,
+                idShield: biblioteca[id].id
+              }
+            }
+
+            return finalStatus;
+          })
           clean();
         }
+      }
+
+      let roomsFinal: EquipmentShipUser = {
+        r1: 0, 
+        r2: 0,
+        r3: 0,
+        r4: 0,
+        r5: 0,
+      }
+
+      if(['habitacion-0',
+        'habitacion-1',
+        'habitacion-2',
+        'habitacion-3',
+        'habitacion-4'].includes(slot)){ 
+          
+        setRoomsShips((val) => {
+  
+          const r01: number = slot === 'habitacion-0'? biblioteca[inventarioReal[id].id].id : val.r1
+          const r02: number = slot === 'habitacion-1'? biblioteca[inventarioReal[id].id].id : val.r2
+          const r03: number = slot === 'habitacion-2'? biblioteca[inventarioReal[id].id].id : val.r3
+          const r04: number = slot === 'habitacion-3'? biblioteca[inventarioReal[id].id].id : val.r4
+          const r05: number = slot === 'habitacion-4'? biblioteca[inventarioReal[id].id].id : val.r5
+          
+          roomsFinal = {
+            ...val,
+            r1: r01, 
+            r2: r02,
+            r3: r03,
+            r4: r04,
+            r5: r05,
+          }
+          
+          return roomsFinal;
+        }) 
+          
+        props.setEquipment((val: PlayerStatsControl) => {
+          const finalStatus:PlayerStatsControl = {
+            ...val,
+            room: roomsFinal
+          }
+
+          return finalStatus;
+        })
       }
     }
   }
@@ -165,37 +257,36 @@ function InventarioPage(
               />
               <div className="tooltip-info flex col pad-05">
                 <span>
-                  Nombre:
+                  Nombre: {biblioteca[idShowInfo].nombre}
                 </span>
                 <span>
-                  Descripcion:
+                  Descripcion: {biblioteca[idShowInfo].descripcion}
                 </span>
                 <span>
-                  Usos:
+                  Usos: {biblioteca[idShowInfo].uses}
                 </span>
               </div>
             </section>
 
           <h3>Equipo Nave Espacial</h3>
             <div className="flex col">
-              <span>Vida: {naveEspacio.vida}</span>
-              <span>Daño: {naveEspacio.damage}</span>
+              <span>Vida: ??</span>
+              <span>Daño: ??</span>
             
               <section className="flex">
-                {[naveEspacio.habitacion1,
-                  naveEspacio.habitacion2,
-                  naveEspacio.habitacion3,
-                  naveEspacio.habitacion4,
-                  naveEspacio.habitacion5,
-                ].map((val, index) => 
-                  <SlotInvetario
+                {[roomsShips.r1,
+                  roomsShips.r2,
+                  roomsShips.r3,
+                  roomsShips.r4,
+                  roomsShips.r5,
+                ].map((val, index) => <SlotInvetario
                     key={index}
                     id={`habitacion-${index}`}
                     slotSlected={slot}
-                    icon={bibliotecaNave[val].icon || null}
+                    icon={biblioteca[val].icon || null}
                     selected={(val:string) => handleSetSlot(val)}
                     cant={null}
-                  />
+                    />
                 )
                 }
               </section>

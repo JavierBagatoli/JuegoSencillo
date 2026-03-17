@@ -16,5 +16,12 @@ export const PLAYER_INITIAL_DUNGEON: PlayerStatsControl = {
         idWeapon: null,
         idArmor: null,
         idShield: null
+    },
+    room:{
+        r1:0,
+        r2:0,
+        r3:0,
+        r4:0,
+        r5:0,
     }
 }
