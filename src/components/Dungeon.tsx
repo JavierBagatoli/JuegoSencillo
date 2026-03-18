@@ -8,6 +8,8 @@ import type { PlayerStatsControl } from './models/player.interfaces'
 import attackAnimation from '../assets/gif/ataque.gif'
 import Animation1sec from './generics/Animation-1sec'
 import { ARMORY } from './initialData/armory.init'
+import fireDebuf from '../assets/debuf/fire.png'
+import slowDebuf from '../assets/debuf/snail.png'
 
 function Dungeon(
   prop: {
@@ -179,6 +181,21 @@ function Dungeon(
                 setShow={setShowAttack}
                 animation={attackAnimation}
               />
+              <section
+                style={{position: 'absolute'}}
+                className='flex row pad-1'>
+                {enemy.debuf.poison > 0 &&
+                  <img
+                    src={fireDebuf}
+                  />
+                }
+                {enemy.debuf.slowness > 0 &&
+                  <img
+                    src={slowDebuf}
+                  />
+                }
+              </section>
+              
               <PantallaDungeon
                 playerStats={playerStats}
                 statusEnemy={enemy}

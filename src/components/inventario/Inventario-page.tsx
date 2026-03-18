@@ -23,8 +23,6 @@ function InventarioPage(
     r5: 0,
   })
  
-  const [inventario, setInventario] = useState<EquipmentUser>(props.playerStats.equipment)
-
   const inventarioReal: {id: number, cantidad: number}[] = INVENTARY;
   const biblioteca: Record<number, Weapon> = ARMORY;
 
@@ -59,7 +57,57 @@ function InventarioPage(
     }
   }
 
-  function handleSetSlotInvetory(ids: string){
+
+  function handleSetSlotInventory2(id: string){
+    setSlotInvetory((val:string | null) => val !== id? id: null)
+
+    if(['inv-arma','inv-armadura','inv-shield','habitacion-0','habitacion-1','habitacion-2','habitacion-3','habitacion-4'].includes(slot || '')){
+      const i: number = Number(id)
+        let idW: number = props.playerStats.equipment.idWeapon || 999;
+        let idA: number = props.playerStats.equipment.idArmor || 999;
+        let idS: number = props.playerStats.equipment.idShield || 999;
+        let idR: number = 999;
+
+      if(typeof biblioteca[i] !== 'undefined'){
+        if(slot === 'inv-arma' && biblioteca[i].type === 'weapon'){
+          idW = biblioteca[i].id
+        }else if(slot === 'inv-armadura' && biblioteca[i].type === 'armor'){
+          idA = biblioteca[i].id 
+        }else if(slot === 'inv-shield'   && biblioteca[i].type === 'shield'){
+          idS = biblioteca[i].id
+        }else if(slot === 'room' && biblioteca[i].type === 'room_civil'){
+          idR = biblioteca[i].id
+        }
+      }
+
+      const final: EquipmentUser = {
+        idWeapon: idW,
+        idShield: idS,
+        idArmor:  idA,
+      }
+
+      const actions: number = (biblioteca[idW].actions || 1) 
+        + (biblioteca[idA].actions || 0)
+        + (biblioteca[idS].actions || 0)
+
+      props.setEquipment((val: PlayerStatsControl) => {
+
+        const finalStatus:PlayerStatsControl = {
+          ...val,
+          bonos:{
+            ...val.bonos,
+            attack: biblioteca[i].damage,
+            actions: actions
+          },
+          equipment: final
+        }
+
+        return finalStatus;
+      })
+    }
+  }
+
+  /*function handleSetSlotInvetory(ids: string){
     setSlotInvetory((val:string | null) => val !== ids? ids: null)
 
     if(slot !== null){
@@ -180,7 +228,7 @@ function InventarioPage(
 
       }
     }
-  }
+  }*/
 
   function clean(){
     setSlot(null);
@@ -220,14 +268,14 @@ function InventarioPage(
               <SlotInvetario
                 id="inv-arma"
                 slotSlected={slot}
-                icon={biblioteca[inventario?.idWeapon || 0]?.icon}
+                icon={biblioteca[props.playerStats.equipment?.idWeapon || 0]?.icon}
                 selected={(val:string) => handleSetSlot(val)}
                 cant={null}
               />
               <SlotInvetario
                 id="inv-armadura"
                 slotSlected={slot}
-                icon={biblioteca[inventario?.idArmor || 0].icon || null}
+                icon={biblioteca[props.playerStats.equipment?.idArmor || 0].icon || null}
                 selected={(val:string) => handleSetSlot(val)}
                 cant={null}
               />
@@ -235,7 +283,7 @@ function InventarioPage(
               <SlotInvetario
                 id="inv-shield"
                 slotSlected={slot}
-                icon={biblioteca[inventario?.idShield || 0].icon || null}
+                icon={biblioteca[props.playerStats.equipment?.idShield || 0].icon || null}
                 selected={(val:string) => handleSetSlot(val)}
                 cant={null}
               />
@@ -302,7 +350,7 @@ function InventarioPage(
                   id={val}
                   slotSlected={slotInvetory}
                   icon={biblioteca[inventarioReal[Number(val)]?.id]?.icon}
-                  selected={(val:string) => handleSetSlotInvetory(val)}
+                  selected={(val:string) => handleSetSlotInventory2(val)}
                   cant={inventarioReal[Number(val)]?.cantidad}
                 />
               )

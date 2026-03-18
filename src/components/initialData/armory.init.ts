@@ -1,4 +1,6 @@
 import escopeta from "../../assets/icons/escopeta.png"
+import escopetaFuego from "../../assets/icons/escopeta-fuego.png"
+
 import armadura from "../../assets/icons/armadura.png"
 import shield from "../../assets/icons/shield.png"
 import dagas from "../../assets/icons/dagas.png"
@@ -101,7 +103,7 @@ export const ARMORY: Record<number, Weapon> ={
       descripcion: 'Arroja fuego, 10% de prender fuego',
       id: 4,
       type: 'weapon',
-      icon: escopeta,
+      icon: escopetaFuego,
       damage: 0,
       defense: 0,
       uses: 0,
@@ -109,8 +111,8 @@ export const ARMORY: Record<number, Weapon> ={
       nucleosEnergeticos: 5,
       circuito: 3,
       cristales: 4,
-      special: 'poison',
-      prop: 0.1
+      special: 'slowness',
+      prop: 1
     },
     // Habitaciones nave espacialCIVIL (5)
     100001:{
