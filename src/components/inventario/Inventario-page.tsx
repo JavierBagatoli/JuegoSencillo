@@ -216,23 +216,28 @@ function InventarioPage(
     <>
       <section 
         style={{maxWidth: '30rem'}}
-        className="flex col background-inventario pad-05">
+        className="flex col background-inventario pad-05 max-h">
         <div>
           <h3 className="text-center">Equipo Personaje</h3>
-            <span>
-              Daño: {
-                ARMORY[props.playerStats.baseAttack].damage
-                + ARMORY[props.playerStats.equipment.idArmor || 0].damage
-                + ARMORY[props.playerStats.equipment.idShield || 0].damage
-                + ARMORY[props.playerStats.equipment.idWeapon || 0].damage}
-            </span>
-            <span>
-              Defensa: {
-                ARMORY[props.playerStats.baseAttack].defense
-                + ARMORY[props.playerStats.equipment.idArmor || 0].defense
-                + ARMORY[props.playerStats.equipment.idShield || 0].defense
-                + ARMORY[props.playerStats.equipment.idWeapon || 0].defense}
-            </span>
+            <div
+              style={{paddingBottom: '0.5rem'}}
+             className="flex col">
+              <span>
+                Daño: {
+                  ARMORY[props.playerStats.baseAttack].damage
+                  + ARMORY[props.playerStats.equipment.idArmor || 0].damage
+                  + ARMORY[props.playerStats.equipment.idShield || 0].damage
+                  + ARMORY[props.playerStats.equipment.idWeapon || 0].damage}
+              </span>
+              <span>
+                Defensa: {
+                  ARMORY[props.playerStats.baseAttack].defense
+                  + ARMORY[props.playerStats.equipment.idArmor || 0].defense
+                  + ARMORY[props.playerStats.equipment.idShield || 0].defense
+                  + ARMORY[props.playerStats.equipment.idWeapon || 0].defense}
+              </span>
+            </div>
+
             <section className="flex">
               <SlotInvetario
                 id="inv-arma"
@@ -310,7 +315,7 @@ function InventarioPage(
             </div>
               
             
-          <h3>Inventario</h3>
+          <h3 style={{paddingTop: '0.5rem'}}>Inventario</h3>
            <section className="flex wrap">
             {
             ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19'].map((val) => 

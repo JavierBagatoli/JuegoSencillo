@@ -57,7 +57,7 @@ function App() {
 
         {((showAsidenav && isMobile) ||!isMobile) &&
           <aside 
-            style={{position: 'absolute', zIndex: 1}}
+            style={{position: isMobile?'absolute':'relative', zIndex: 1}}
             className='menu-acciones'>
               {isMobile &&
               <button

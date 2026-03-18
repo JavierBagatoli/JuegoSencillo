@@ -193,7 +193,6 @@ button:disabled{
 
 .background-comercio{
   background-color: #373535;
-  padding: 1rem;
 }
 
 .mapa-mundo{
@@ -233,5 +232,9 @@ button:disabled{
 
   .max-w{
     width: 100dvw;
+  }
+
+  .max-h{
+    height: 100dvh;
   }
 }
