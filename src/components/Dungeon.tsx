@@ -64,7 +64,6 @@ function Dungeon(
           slowness: isSlownessWeapon && applySlowness ? val.debuf.slowness++:  (val.debuf.slowness-1 >0? val.debuf.slowness-1 :0),
           poison: isPoisonWeapon && applyPoison ? val.debuf.poison++:  ((val.debuf.poison-1) >0? val.debuf.poison-1 :0),
         }
-      
       }
       
       return enemy;
@@ -207,17 +206,21 @@ function Dungeon(
                   <button
                     disabled={!isTurnoJugador()}
                     onClick={() => handleAttack()}
+                    onTouchEnd={() => handleAttack()}
                   >Golpear</button>
                   <button
                     disabled={!isTurnoJugador()}
                     onClick={() => handleShield()}
+                    onTouchEnd={() => handleAttack()}
                     >Defender</button>
                   <button
                     disabled={!isTurnoJugador()}
-                    >Pocion</button>
+                    onTouchEnd={() => handleAttack()}
+                    >Pocion cel</button>
                 </div>
                 <button
                   onClick={() => handleEndTurno()}
+                  onTouchEnd={() => handleAttack()}
                 >Terminar Turno</button>
               </div>
             </>
