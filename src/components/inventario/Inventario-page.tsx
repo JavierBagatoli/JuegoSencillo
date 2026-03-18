@@ -80,6 +80,9 @@ function InventarioPage(
         }
       }
 
+      console.log(idR)
+      setRoomsShips(val => val)
+      
       const final: EquipmentUser = {
         idWeapon: idW,
         idShield: idS,
@@ -105,134 +108,6 @@ function InventarioPage(
         return finalStatus;
       })
     }
-  }
-
-  /*function handleSetSlotInvetory(ids: string){
-    setSlotInvetory((val:string | null) => val !== ids? ids: null)
-
-    if(slot !== null){
-      const id: number = Number(ids)
-      if(['inv-arma','inv-armadura','inv-shield'].includes(slot)){
-        if(slot === 'inv-arma' && biblioteca[id]?.type === 'weapon'){
-          setInventario((val) => {
-            const final: EquipmentUser = {
-              ...val,
-              idWeapon: biblioteca[id].id
-            }
-
-            return final
-          }) 
-          props.setEquipment((val: PlayerStatsControl) => {
-            const idArmor: number = val.equipment.idArmor || 999
-            const idShield: number = val.equipment.idShield || 999
-
-            const finalStatus:PlayerStatsControl = {
-              ...val,
-              bonos:{
-                ...val.bonos,
-                attack: biblioteca[id].damage,
-                actions: (biblioteca[id].actions || 1) 
-                  + (biblioteca[idArmor].actions || 0)
-                  + (biblioteca[idShield].actions || 0),
-              },
-              equipment:{
-                ...val.equipment,
-                idWeapon: biblioteca[id].id
-              }
-            }
-
-            return finalStatus;
-          })
-          clean();
-        }else if(slot === 'inv-armadura' && biblioteca[id]?.type === 'armor'){
-          setInventario((val) => {
-            const final: EquipmentUser = {
-              ...val,
-              idArmor: biblioteca[id].id
-            }
-
-            return final
-          }) 
-
-          props.setEquipment((val: PlayerStatsControl) => {
-            const finalStatus: PlayerStatsControl = {
-              ...val,
-              bonos:{
-                ...val.bonos,
-                defense: biblioteca[id].defense
-              },
-              equipment:{
-                ...val.equipment,
-                idArmor: biblioteca[id].id
-              }
-            }
-
-            return finalStatus;
-          })
-
-          clean();
-        }else if(slot === 'inv-shield' && biblioteca[id]?.type === 'shield'){
-          
-          setInventario((val) => {
-            const final: EquipmentUser = {
-              ...val,
-              idShield: biblioteca[id].id
-            }
-
-            return final
-          }) 
-
-          props.setEquipment((val: PlayerStatsControl) => {
-            const finalStatus: PlayerStatsControl = {
-              ...val,
-              bonos:{
-                ...val.bonos,
-                defense: biblioteca[id].defense
-              },
-              equipment:{
-                ...val.equipment,
-                idShield: biblioteca[id].id
-              }
-            }
-
-            return finalStatus;
-          })
-          clean();
-        }
-      }
-
-      const rooms = props.playerStats.room
-      let roomsFinal: EquipmentShipUser = {
-        r1: slot === 'habitacion-0'? biblioteca[inventarioReal[id].id].id : rooms.r1, 
-        r2: slot === 'habitacion-1'? biblioteca[inventarioReal[id].id].id : rooms.r2,
-        r3: slot === 'habitacion-2'? biblioteca[inventarioReal[id].id].id : rooms.r3,
-        r4: slot === 'habitacion-3'? biblioteca[inventarioReal[id].id].id : rooms.r4,
-        r5: slot === 'habitacion-4'? biblioteca[inventarioReal[id].id].id : rooms.r5,
-      }
-
-      if(['habitacion-0',
-        'habitacion-1',
-        'habitacion-2',
-        'habitacion-3',
-        'habitacion-4'].includes(slot)){ 
-          
-        setRoomsShips(roomsFinal) 
-          
-        props.setEquipment((val: PlayerStatsControl) => {
-          const finalStatus:PlayerStatsControl = {
-            ...val,
-            room: roomsFinal
-          }
-          return finalStatus;
-        })
-
-      }
-    }
-  }*/
-
-  function clean(){
-    setSlot(null);
-    setSlotInvetory(null);
   }
 
   return (
