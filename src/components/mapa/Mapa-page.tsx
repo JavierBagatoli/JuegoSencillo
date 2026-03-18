@@ -1,10 +1,12 @@
 import spaceShip from '../../assets/mapa/space-ship.webp'
+import ufoShip from '../../assets/mapa/ufo.png'
+import './mapa-mundo.css'
 
 function MapaGlobal() {
   return (
     <>
       <section 
-        className="flex col background-texto mapa-mundo">
+        className="flex col background-texto mapa-mundo max-h">
           <div>
             <img 
               src={spaceShip}
@@ -16,13 +18,17 @@ function MapaGlobal() {
             />
           </div>
           <div style={{transform: 'translateX(20px)'}}>
-            <img 
-              src={spaceShip}
+            <img
+              style={{width: 'auto'}} 
+              className='ufo'
+              src={ufoShip}
             />
           </div>
           <div  style={{transform: 'translateX(70px)'}}>
-            <img 
-              src={spaceShip}
+            <img
+              style={{width: 'auto'}} 
+              className='ufo'
+              src={ufoShip}
             />
           </div>
       </section>

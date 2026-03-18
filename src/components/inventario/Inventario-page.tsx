@@ -4,6 +4,7 @@ import { ARMORY } from "../initialData/armory.init"
 import type { Weapon } from "../models/items-fight.interfaces"
 import type { EquipmentShipUser, EquipmentUser, PlayerStatsControl } from "../models/player.interfaces"
 import "./inventario.css"
+import { INVENTARY } from "../initialData/inventary.init"
 
 function InventarioPage(
   props: {
@@ -24,39 +25,7 @@ function InventarioPage(
  
   const [inventario, setInventario] = useState<EquipmentUser>(props.playerStats.equipment)
 
-  const inventarioReal: {id: number, cantidad: number}[] =[
-    {
-      id: 0,
-      cantidad: 2,
-    },
-    {
-      id: 1,
-      cantidad: 2,
-    },
-    {
-      id: 2,
-      cantidad: 1,
-    },
-    {
-      id: 100001,
-      cantidad: 1,
-    },{
-      id: 100004,
-      cantidad: 1,
-    },{
-      id: 100015,
-      cantidad: 1,
-    },{
-      id: 100011,
-      cantidad: 1,
-    },{
-      id: 100012,
-      cantidad: 1,
-    },
-
-    
-  ]
-
+  const inventarioReal: {id: number, cantidad: number}[] = INVENTARY;
   const biblioteca: Record<number, Weapon> = ARMORY;
 
   function handleSetSlot(id: string){
@@ -106,11 +75,17 @@ function InventarioPage(
             return final
           }) 
           props.setEquipment((val: PlayerStatsControl) => {
+            const idArmor: number = val.equipment.idArmor || 999
+            const idShield: number = val.equipment.idShield || 999
+
             const finalStatus:PlayerStatsControl = {
               ...val,
               bonos:{
                 ...val.bonos,
-                attack: biblioteca[id].damage
+                attack: biblioteca[id].damage,
+                actions: (biblioteca[id].actions || 1) 
+                  + (biblioteca[idArmor].actions || 0)
+                  + (biblioteca[idShield].actions || 0),
               },
               equipment:{
                 ...val.equipment,
@@ -235,6 +210,9 @@ function InventarioPage(
                   + ARMORY[props.playerStats.equipment.idArmor || 0].defense
                   + ARMORY[props.playerStats.equipment.idShield || 0].defense
                   + ARMORY[props.playerStats.equipment.idWeapon || 0].defense}
+              </span>
+              <span>
+                Acciones: {props.playerStats.actionsMax + props.playerStats.bonos.actions}
               </span>
             </div>
 

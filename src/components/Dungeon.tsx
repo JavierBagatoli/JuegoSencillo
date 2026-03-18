@@ -5,6 +5,9 @@ import PantallaDungeon from './dungeon/PantallaDungeon'
 import type { EnemyStatscontrol } from './models/enemy.interfaces'
 import { EMPTY_ENEMY, SLIME_HARD, SLIME_ROCK, SLIME_SOFT } from './initialData/enemys.init'
 import type { PlayerStatsControl } from './models/player.interfaces'
+import attackAnimation from '../assets/gif/ataque.gif'
+import Animation1sec from './generics/Animation-1sec'
+import { ARMORY } from './initialData/armory.init'
 
 function Dungeon(
   prop: {
@@ -18,6 +21,7 @@ function Dungeon(
   const [startMission, setStartMission] = useState<boolean>(false)
   const [playerStats, setplayerStats] = useState<PlayerStatsControl>(prop.playerStats)
   const [turno, setTurno] = useState<'Jugador' | 'Oponente'>('Jugador');
+  const [showAttack, setShowAttack] = useState<boolean | null>(null)
 
   const updateEnemy = () => {
     const numberOfEnemy = Math.round(Math.random()*2)
@@ -25,7 +29,7 @@ function Dungeon(
       if(level === 3){
         setEnemy(numberOfEnemy === 1? SLIME_HARD: SLIME_ROCK)
       }else{
-        setEnemy(SLIME_SOFT)
+        setEnemy(JSON.parse(JSON.stringify(SLIME_SOFT)))
       }
   }
 
@@ -35,13 +39,30 @@ function Dungeon(
   }
 
   function handleAttack(){
+    setShowAttack(true)
+
     setEnemy((val) => {
       const lifeRest: number = val.life - (1*(playerStats.baseAttack+playerStats.bonos.attack))
-      const finalLifeEnemy: number = lifeRest > 0? lifeRest : 0
+      const finalLifeEnemy: number = lifeRest > 0? lifeRest : 0;
       
+      const weapon = ARMORY[prop.playerStats.equipment.idWeapon || 999]
+      // Slowness
+      const isSlownessWeapon = weapon.special === "slowness"
+      const applySlowness = Math.random() < (weapon.prop || 0)
+      // Poison
+      const isPoisonWeapon = weapon.special === "poison"
+      const applyPoison = Math.random() < (weapon.prop || 0)
+
+      console.log(Math.random() < (weapon.prop || 0),Math.random() , (weapon.prop || 0))
+
       const enemy:EnemyStatscontrol = {
         ...val,
-        life: finalLifeEnemy
+        life: finalLifeEnemy,
+        debuf:{
+          slowness: isSlownessWeapon && applySlowness ? val.debuf.slowness++:  (val.debuf.slowness-1 >0? val.debuf.slowness-1 :0),
+          poison: isPoisonWeapon && applyPoison ? val.debuf.poison++:  ((val.debuf.poison-1) >0? val.debuf.poison-1 :0),
+        }
+      
       }
       
       return enemy;
@@ -78,6 +99,15 @@ function Dungeon(
   }
 
   function markEndOfTurn(){
+     setEnemy((val: EnemyStatscontrol) => {
+      const life: number = val.life - val.debuf.poison
+      const lifeFinal: number = life > 0? life: 0
+      return {
+        ...val,
+        life: lifeFinal
+      }
+    })
+
     if(playerStats.actions+1 >= playerStats.actionsMax + playerStats.bonos.actions){
       setTurno('Oponente')
     }
@@ -113,7 +143,7 @@ function Dungeon(
           ...val.bonos,
           defense: defensaFinal,
         },
-        actions: 0
+        actions: 0,
       }
 
       return statusFinal
@@ -144,6 +174,11 @@ function Dungeon(
         {
           startMission?
             <>
+              <Animation1sec
+                show={showAttack}
+                setShow={setShowAttack}
+                animation={attackAnimation}
+              />
               <PantallaDungeon
                 playerStats={playerStats}
                 statusEnemy={enemy}

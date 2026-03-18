@@ -10,12 +10,12 @@ export default interface StatsControl{
   baseAttack: number;
   actions: number,
   actionsMax: number,
-  room: EquipmentShipUser,
 }
 
 
 export interface PlayerStatsControl extends StatsControl{
   equipment: EquipmentUser,
+  room: EquipmentShipUser,
 }
 
 export interface EquipmentUser{

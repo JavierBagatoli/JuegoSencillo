@@ -12,6 +12,10 @@ export const EMPTY_ENEMY: EnemyStatscontrol = {
     baseAttack: 1,
     actions: 0,
     actionsMax: 1,
+    debuf: {
+        poison: 0,
+        slowness: 0,
+    }
 }
 
 export const SLIME_SOFT: EnemyStatscontrol = {
@@ -26,6 +30,10 @@ export const SLIME_SOFT: EnemyStatscontrol = {
     baseAttack: 1,
     actions: 0,
     actionsMax: 1,
+    debuf: {
+        poison: 0,
+        slowness: 0,
+    }
 }
 
 export const SLIME_HARD: EnemyStatscontrol = {
@@ -40,6 +48,10 @@ export const SLIME_HARD: EnemyStatscontrol = {
     baseAttack: 5,
     actions: 0,
     actionsMax: 1,
+    debuf: {
+        poison: 0,
+        slowness: 0,
+    }
 }
 
 export const SLIME_ROCK: EnemyStatscontrol = {
@@ -54,4 +66,8 @@ export const SLIME_ROCK: EnemyStatscontrol = {
     baseAttack: 5,
     actions: 0,
     actionsMax: 1,
+    debuf: {
+        poison: 0,
+        slowness: 0,
+    }
 }

@@ -1,4 +1,4 @@
-import {useEffect, useState } from 'react'
+import { useState } from 'react'
 import './index.css'
 import Dungeon from './components/Dungeon'
 import ToolTipAtributo from './components/ToolTipAtributo'
@@ -18,7 +18,7 @@ function App() {
   })
   const [playerStats, setPlayerStats] = useState<PlayerStatsControl>(PLAYER_INITIAL_DUNGEON)
   const [showAsidenav, setShowAsidenav] = useState<boolean>(false)
-  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 431)
+  const isMobile: boolean =window.innerWidth < 431
 
   const showPage = () => {
     switch(page){

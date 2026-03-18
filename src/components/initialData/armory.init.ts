@@ -1,7 +1,8 @@
 import escopeta from "../../assets/icons/escopeta.png"
 import armadura from "../../assets/icons/armadura.png"
 import shield from "../../assets/icons/shield.png"
-import ship from "../../assets/mapa/space-ship.webp"
+import dagas from "../../assets/icons/dagas.png"
+
 
 import armor1 from "../../assets/icons/room_armor/armor1.png";
 import armor2 from "../../assets/icons/room_armor/armor2.png";
@@ -53,9 +54,24 @@ export const ARMORY: Record<number, Weapon> ={
       cristales: 4,
     },
     1: {
+      nombre: 'Dagas Dobles',
+      descripcion: 'Son dos dagas',
+      id: 1,
+      type: 'weapon',
+      icon: dagas,
+      damage: 1,
+      defense: 0,
+      uses: 3,
+      actions: 2,
+      metales: 12,
+      nucleosEnergeticos: 0,
+      circuito: 0,
+      cristales: 2,
+    },
+    2: {
       nombre: 'Armadura',
       descripcion: 'Armadura antigua',
-      id: 1,
+      id: 2,
       type: 'armor',
       icon: armadura,
       damage: 0,
@@ -66,10 +82,10 @@ export const ARMORY: Record<number, Weapon> ={
       circuito: 3,
       cristales: 4,
     },
-    2: {
+    3: {
       nombre: 'Escudo',
       descripcion: 'Escudo',
-      id: 2,
+      id: 3,
       type: 'shield',
       icon: shield,
       damage: 0,
@@ -80,12 +96,12 @@ export const ARMORY: Record<number, Weapon> ={
       circuito: 3,
       cristales: 4,
     },
-    3: {
-      nombre: 'Escopeta 2',
-      descripcion: 'Arma antigua',
-      id: 3,
+    4: {
+      nombre: 'Escopeta de fuego',
+      descripcion: 'Arroja fuego, 10% de prender fuego',
+      id: 4,
       type: 'weapon',
-      icon: '',
+      icon: escopeta,
       damage: 0,
       defense: 0,
       uses: 0,
@@ -93,6 +109,8 @@ export const ARMORY: Record<number, Weapon> ={
       nucleosEnergeticos: 5,
       circuito: 3,
       cristales: 4,
+      special: 'poison',
+      prop: 0.1
     },
     // Habitaciones nave espacialCIVIL (5)
     100001:{

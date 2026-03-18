@@ -11,4 +11,7 @@ export interface Weapon{
     nucleosEnergeticos: number,
     circuito: number,
     cristales: number,
+    actions?: number,
+    special?: 'reflex' | 'slowness' | 'poison'
+    prop?: number
 }
