@@ -137,17 +137,38 @@ function Dungeon(
   }
 
   return (
-    <> 
+    <section className='flex center max-w'> 
       <section className='dungeon-port'>
         <span style={{color: 'white'}}>
           </span>
         {
           startMission?
-            <PantallaDungeon
-              playerStats={playerStats}
-              statusEnemy={enemy}
-              startMission={(val: boolean) => handleSelectLevel(val)}
-              />
+            <>
+              <PantallaDungeon
+                playerStats={playerStats}
+                statusEnemy={enemy}
+                startMission={(val: boolean) => handleSelectLevel(val)}
+                />
+                <div className='flex col pad-05 buttons'>
+                
+                <div className='flex row buttons'>
+                  <button
+                    disabled={!isTurnoJugador()}
+                    onClick={() => handleAttack()}
+                  >Golpear</button>
+                  <button
+                    disabled={!isTurnoJugador()}
+                    onClick={() => handleShield()}
+                    >Defender</button>
+                  <button
+                    disabled={!isTurnoJugador()}
+                    >Pocion</button>
+                </div>
+                <button
+                  onClick={() => handleEndTurno()}
+                >Terminar Turno</button>
+              </div>
+            </>
           :
             <SeleccionNivelpage
               level={level}
@@ -155,28 +176,8 @@ function Dungeon(
               startMission={(val: boolean) => handleSelectLevel(val)}
             />
         }
-        
-        
-        <div className='flex col pad-05 buttons'>
-          <div className='flex row buttons'>
-            <button
-              disabled={!isTurnoJugador()}
-              onClick={() => handleAttack()}
-            >Golpear</button>
-            <button
-              disabled={!isTurnoJugador()}
-              onClick={() => handleShield()}
-              >Defender</button>
-            <button
-              disabled={!isTurnoJugador()}
-              >Pocion</button>
-          </div>
-          <button
-            onClick={() => handleEndTurno()}
-          >Terminar Turno</button>
-        </div>
       </section>
-    </>
+    </section>
   )
 }
 

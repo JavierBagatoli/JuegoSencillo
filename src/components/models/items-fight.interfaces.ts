@@ -7,4 +7,8 @@ export interface Weapon{
     damage: number,
     defense: number,
     uses: number,
+    metales: number,
+    nucleosEnergeticos: number,
+    circuito: number,
+    cristales: number,
 }

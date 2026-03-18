@@ -4,7 +4,7 @@ function MapaGlobal() {
   return (
     <>
       <section 
-        className="flex col background-texto pad-1 mapa-mundo">
+        className="flex col background-texto mapa-mundo">
           <div>
             <img 
               src={spaceShip}

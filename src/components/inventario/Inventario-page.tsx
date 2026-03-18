@@ -46,7 +46,15 @@ function InventarioPage(
     },{
       id: 100015,
       cantidad: 1,
+    },{
+      id: 100011,
+      cantidad: 1,
+    },{
+      id: 100012,
+      cantidad: 1,
     },
+
+    
   ]
 
   const biblioteca: Record<number, Weapon> = ARMORY;
@@ -170,12 +178,13 @@ function InventarioPage(
         }
       }
 
+      const rooms = props.playerStats.room
       let roomsFinal: EquipmentShipUser = {
-        r1: 0, 
-        r2: 0,
-        r3: 0,
-        r4: 0,
-        r5: 0,
+        r1: slot === 'habitacion-0'? biblioteca[inventarioReal[id].id].id : rooms.r1, 
+        r2: slot === 'habitacion-1'? biblioteca[inventarioReal[id].id].id : rooms.r2,
+        r3: slot === 'habitacion-2'? biblioteca[inventarioReal[id].id].id : rooms.r3,
+        r4: slot === 'habitacion-3'? biblioteca[inventarioReal[id].id].id : rooms.r4,
+        r5: slot === 'habitacion-4'? biblioteca[inventarioReal[id].id].id : rooms.r5,
       }
 
       if(['habitacion-0',
@@ -184,34 +193,16 @@ function InventarioPage(
         'habitacion-3',
         'habitacion-4'].includes(slot)){ 
           
-        setRoomsShips((val) => {
-  
-          const r01: number = slot === 'habitacion-0'? biblioteca[inventarioReal[id].id].id : val.r1
-          const r02: number = slot === 'habitacion-1'? biblioteca[inventarioReal[id].id].id : val.r2
-          const r03: number = slot === 'habitacion-2'? biblioteca[inventarioReal[id].id].id : val.r3
-          const r04: number = slot === 'habitacion-3'? biblioteca[inventarioReal[id].id].id : val.r4
-          const r05: number = slot === 'habitacion-4'? biblioteca[inventarioReal[id].id].id : val.r5
-          
-          roomsFinal = {
-            ...val,
-            r1: r01, 
-            r2: r02,
-            r3: r03,
-            r4: r04,
-            r5: r05,
-          }
-          
-          return roomsFinal;
-        }) 
+        setRoomsShips(roomsFinal) 
           
         props.setEquipment((val: PlayerStatsControl) => {
           const finalStatus:PlayerStatsControl = {
             ...val,
             room: roomsFinal
           }
-
           return finalStatus;
         })
+
       }
     }
   }
@@ -227,7 +218,21 @@ function InventarioPage(
         style={{maxWidth: '30rem'}}
         className="flex col background-inventario pad-05">
         <div>
-          <h3>Equipo Personaje</h3>
+          <h3 className="text-center">Equipo Personaje</h3>
+            <span>
+              Daño: {
+                ARMORY[props.playerStats.baseAttack].damage
+                + ARMORY[props.playerStats.equipment.idArmor || 0].damage
+                + ARMORY[props.playerStats.equipment.idShield || 0].damage
+                + ARMORY[props.playerStats.equipment.idWeapon || 0].damage}
+            </span>
+            <span>
+              Defensa: {
+                ARMORY[props.playerStats.baseAttack].defense
+                + ARMORY[props.playerStats.equipment.idArmor || 0].defense
+                + ARMORY[props.playerStats.equipment.idShield || 0].defense
+                + ARMORY[props.playerStats.equipment.idWeapon || 0].defense}
+            </span>
             <section className="flex">
               <SlotInvetario
                 id="inv-arma"
@@ -266,8 +271,24 @@ function InventarioPage(
 
           <h3>Equipo Nave Espacial</h3>
             <div className="flex col">
-              <span>Vida: ??</span>
-              <span>Daño: ??</span>
+              <span>
+              Daño: {
+                ARMORY[props.playerStats.room.r1 || 0].damage
+                + ARMORY[props.playerStats.room.r2 || 0].damage
+                + ARMORY[props.playerStats.room.r3 || 0].damage
+                + ARMORY[props.playerStats.room.r4 || 0].damage
+                + ARMORY[props.playerStats.room.r5 || 0].damage
+                }
+            </span>
+            <span>
+              Defensa: {
+                ARMORY[props.playerStats.room.r1 || 0].defense
+                + ARMORY[props.playerStats.room.r2 || 0].defense
+                + ARMORY[props.playerStats.room.r3 || 0].defense
+                + ARMORY[props.playerStats.room.r4 || 0].defense
+                + ARMORY[props.playerStats.room.r5 || 0].defense
+                }
+            </span>
             
               <section className="flex">
                 {[roomsShips.r1,

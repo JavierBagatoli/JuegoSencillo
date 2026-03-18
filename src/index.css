@@ -1,7 +1,11 @@
 #root,body{
   margin: 0rem;
-  padding: 1rem;
+  padding: 0rem;
   background-color: #272727;
+}
+
+.desktop{
+  padding: 1rem;
 }
 
 main{
@@ -195,6 +199,39 @@ button:disabled{
 .mapa-mundo{
   background-color: #272727;
   background-image: url(./assets/mapa/mapa-mundo.jpg);
+  background-repeat: no-repeat;
   width: 430px;
   height: 932px;
+  padding: 2rem;
+}
+
+.text-center{
+  text-align: center;
+  text-justify: center;
+}
+
+@media screen and (max-width: 431px) {
+  .mapa-mundo{
+    padding-top: 3rem;
+  }
+
+  #root{
+    scrollbar-width: none;
+    width: 100dvw;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .menu-acciones{
+    background-color: #272727cd;
+    height: 100dvh;
+  }
+
+  .center{
+    justify-content: center;
+  }
+
+  .max-w{
+    width: 100dvw;
+  }
 }

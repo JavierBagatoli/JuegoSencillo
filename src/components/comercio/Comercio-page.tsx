@@ -1,4 +1,6 @@
 import type { Mochila } from "../../App"
+import { ARMORY } from "../initialData/armory.init";
+import type { Weapon } from "../models/items-fight.interfaces";
 import "./comercio.css"
 
 function ComercioPage(
@@ -7,28 +9,8 @@ function ComercioPage(
     updateMochila: Function
   }
 ) {
-
-  function isDisableBuy(index: number):boolean{
-    let isDisable: boolean = false;
-
-    props.updateMochila((val: Mochila)=>{
-      const metalesFinal = val.metales - listaItems[index].metales;
-      const nucleFinal = val.nucleosEnergeticos - listaItems[index].nucleosEnergeticos;
-      const circuitoFinal = val.circuito - listaItems[index].cristales;
-      const cristalFinal = val.cristales - listaItems[index].cristales;
-
-      
-      if(metalesFinal > 0 && 
-        nucleFinal > 0 && 
-        circuitoFinal > 0 && 
-        cristalFinal > 0
-      ){
-        isDisable= true
-    }})
-    
-    return isDisable
-  }
-
+  const listaItems: Record<number, Weapon> = ARMORY
+  
   function handleBuy(index: number){
     props.updateMochila((val: Mochila)=>{
       const metalesFinal = val.metales - listaItems[index].metales;
@@ -57,7 +39,7 @@ function ComercioPage(
     })
   }
 
-  function spanTextoBuy(val: ItemCompra){
+  function spanTextoBuy(val: Weapon){
     const circuito: boolean = val.circuito <= props.mochila.circuito
     const nucleo:   boolean = val.nucleosEnergeticos <= props.mochila.nucleosEnergeticos
     const metales:  boolean = val.metales <= props.mochila.metales
@@ -93,7 +75,7 @@ function ComercioPage(
           </thead>
           <tbody>
               {
-                listaItems.map((obj) => <tr>
+                Object.values(listaItems).map((obj) => <tr>
                   {
                     spanTextoBuy(obj)
                   }
@@ -108,115 +90,3 @@ function ComercioPage(
 }
 
 export default ComercioPage
-
-interface ItemCompra extends Mochila{
-  nombre: string
-}
-
-const listaItems: ItemCompra[] = [
-  {
-    nombre: "Espada de Plasma",
-    metales: 12,
-    nucleosEnergeticos: 5,
-    circuito: 3,
-    cristales: 4,
-  },
-  {
-    nombre: "Blaster Orbital",
-    metales: 10,
-    nucleosEnergeticos: 6,
-    circuito: 4,
-    cristales: 2,
-  },
-  {
-    nombre: "Armadura de Titanio Estelar",
-    metales: 20,
-    nucleosEnergeticos: 2,
-    circuito: 3,
-    cristales: 1,
-  },
-  {
-    nombre: "Escudo Cinético",
-    metales: 8,
-    nucleosEnergeticos: 4,
-    circuito: 2,
-    cristales: 2,
-  },
-  {
-    nombre: "Lanza Fotónica",
-    metales: 14,
-    nucleosEnergeticos: 5,
-    circuito: 3,
-    cristales: 3,
-  },
-  {
-    nombre: "Guanteletes de Gravedad",
-    metales: 9,
-    nucleosEnergeticos: 4,
-    circuito: 4,
-    cristales: 2,
-  },
-  {
-    nombre: "Casco Neural de Combate",
-    metales: 6,
-    nucleosEnergeticos: 3,
-    circuito: 6,
-    cristales: 1,
-  },
-  {
-    nombre: "Armadura de Exotraje Mk-I",
-    metales: 18,
-    nucleosEnergeticos: 4,
-    circuito: 5,
-    cristales: 2,
-  },
-  {
-    nombre: "Rifle de Iones",
-    metales: 11,
-    nucleosEnergeticos: 5,
-    circuito: 4,
-    cristales: 2,
-  },
-  {
-    nombre: "Daga Láser",
-    metales: 6,
-    nucleosEnergeticos: 3,
-    circuito: 2,
-    cristales: 2,
-  },
-  {
-    nombre: "Generador de Escudo Personal",
-    metales: 7,
-    nucleosEnergeticos: 5,
-    circuito: 5,
-    cristales: 3,
-  },
-  {
-    nombre: "Arco de Energía Cósmica",
-    metales: 8,
-    nucleosEnergeticos: 4,
-    circuito: 3,
-    cristales: 5,
-  },
-  {
-    nombre: "Botas de Propulsión",
-    metales: 7,
-    nucleosEnergeticos: 3,
-    circuito: 4,
-    cristales: 2,
-  },
-  {
-    nombre: "Cañón de Antimateria",
-    metales: 16,
-    nucleosEnergeticos: 8,
-    circuito: 5,
-    cristales: 4,
-  },
-  {
-    nombre: "Armadura de Guardia Galáctico",
-    metales: 15,
-    nucleosEnergeticos: 4,
-    circuito: 4,
-    cristales: 2,
-  }
-];

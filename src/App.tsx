@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import {useEffect, useState } from 'react'
 import './index.css'
 import Dungeon from './components/Dungeon'
 import ToolTipAtributo from './components/ToolTipAtributo'
@@ -17,6 +17,8 @@ function App() {
     nucleosEnergeticos: 0
   })
   const [playerStats, setPlayerStats] = useState<PlayerStatsControl>(PLAYER_INITIAL_DUNGEON)
+  const [showAsidenav, setShowAsidenav] = useState<boolean>(false)
+  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 431)
 
   const showPage = () => {
     switch(page){
@@ -43,97 +45,122 @@ function App() {
 
   return (
     <>
-      <main>
-        <aside className='menu-acciones'>
-          <button
-            onClick={() => setPage('mapa')}
-          >
-            Mapa
-          </button>
-          <button
-            onClick={() => setPage('trabajar')}
-          >
-            Trabajar
-          </button>
-          <button className='active'
-            onClick={() => setPage('crear')}
-          >
-            Crear
-          </button>
-          <button
-            onClick={() => setPage('comercio')}
-          >
-            Comerciar
-          </button>
-          <button
-            onClick={() => setPage('dungeon')}
-            >
-            Dungeon
-          </button>
-          <button
-            onClick={() => setPage('inventario')}
-            >
-            Inventario
-          </button>
+      <main className={isMobile?'':'desktop'}>
+        {isMobile && !showAsidenav &&
 
-          
-          <div className='flex col stats-section'>
-            <h4 className='flex center'>Pociones:</h4>
-            <ToolTipAtributo
-              text='Velocidad'
-              actualValue={0}
-              maxValue={99}
-            />
-            <ToolTipAtributo
-              text='Curacion'
-              actualValue={0}
-              maxValue={99}
-            />
-            <ToolTipAtributo
-              text='Daño'
-              actualValue={0}
-              maxValue={99}
-            />
-          </div>
-          <div className='flex col stats-section'>
-            <h4 className='flex center'>Recusos</h4>
-            <ToolTipAtributo
-              text='Circuitos'
-              actualValue={mochila.circuito}
-              maxValue={999}
-            />
-            <ToolTipAtributo
-              text='Nucleos'
-              actualValue={mochila.nucleosEnergeticos}
-              maxValue={999}
-            />
-            <ToolTipAtributo
-              text='Metales'
-              actualValue={mochila.metales}
-              maxValue={999}
-            />
-            <ToolTipAtributo
-              text='Cristales'
-              actualValue={mochila.cristales}
-              maxValue={999}
-            />
+        <button
+          style={{position: 'absolute', zIndex: 1}}
+          onClick={() => setShowAsidenav(val => !val)}>
+          ➥
+        </button>
+        }
 
-            <div>
+        {((showAsidenav && isMobile) ||!isMobile) &&
+          <aside 
+            style={{position: 'absolute', zIndex: 1}}
+            className='menu-acciones'>
+              {isMobile &&
+              <button
+                onClick={() => setShowAsidenav(val => !val)}>
+                ➥
+              </button>
+              }
+            <button
+              className={'mapa' === page? 'active' : ''}
+              onClick={() => setPage('mapa')}
+            >
+              Mapa
+            </button>
+            <button
+              className={'trabajar' === page? 'active' : ''}
+              onClick={() => setPage('trabajar')}
+            >
+              Trabajar
+            </button>
+            <button
+              className={'crear' === page? 'active' : ''}
+              onClick={() => setPage('crear')}
+            >
+              Crear
+            </button>
+            <button
+              className={'comercio' === page? 'active' : ''}
+              onClick={() => setPage('comercio')}
+            >
+              Comerciar
+            </button>
+            <button
+              className={'dungeon' === page? 'active' : ''}
+              onClick={() => setPage('dungeon')}
+              >
+              Dungeon
+            </button>
+            <button
+              className={'inventario' === page? 'active' : ''}
+              onClick={() => setPage('inventario')}
+              >
+              Inventario
+            </button>
+
+            
+            <div className='flex col stats-section'>
+              <h4 className='flex center'>Pociones:</h4>
               <ToolTipAtributo
-                text='Atk'
-                actualValue={playerStats.baseAttack + playerStats.bonos.attack}
-                maxValue={999}
+                text='Velocidad'
+                actualValue={0}
+                maxValue={99}
               />
               <ToolTipAtributo
-                text='Defense'
-                actualValue={playerStats.bonos.defense}
-                maxValue={999}
+                text='Curacion'
+                actualValue={0}
+                maxValue={99}
+              />
+              <ToolTipAtributo
+                text='Daño'
+                actualValue={0}
+                maxValue={99}
               />
             </div>
-            
-          </div>
-        </aside>
-        <section className='pad-1'>
+            <div className='flex col stats-section'>
+              <h4 className='flex center'>Recusos</h4>
+              <ToolTipAtributo
+                text='Circuitos'
+                actualValue={mochila.circuito}
+                maxValue={999}
+              />
+              <ToolTipAtributo
+                text='Nucleos'
+                actualValue={mochila.nucleosEnergeticos}
+                maxValue={999}
+              />
+              <ToolTipAtributo
+                text='Metales'
+                actualValue={mochila.metales}
+                maxValue={999}
+              />
+              <ToolTipAtributo
+                text='Cristales'
+                actualValue={mochila.cristales}
+                maxValue={999}
+              />
+
+              <div>
+                <ToolTipAtributo
+                  text='Atk'
+                  actualValue={playerStats.baseAttack + playerStats.bonos.attack}
+                  maxValue={999}
+                />
+                <ToolTipAtributo
+                  text='Defense'
+                  actualValue={playerStats.bonos.defense}
+                  maxValue={999}
+                />
+              </div>
+              
+            </div>
+          </aside>
+        }
+        <section>
           {
             showPage()
           }
