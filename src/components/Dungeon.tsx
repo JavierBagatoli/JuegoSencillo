@@ -46,7 +46,7 @@ function Dungeon(
     setplayerStats(val => {
       return {
         ...val,
-        acciones: val.actions+1
+        actions: val.actions+1
       }
     })
 
@@ -124,7 +124,7 @@ function Dungeon(
           ...val.bonos,
           defensa: val.bonos.defense+1
         },
-        acciones: val.actions++
+        acciones: val.actions+1
       }
     })
 
@@ -201,7 +201,7 @@ function Dungeon(
                 playerStats={playerStats}
                 statusEnemy={enemy}
                 startMission={(val: boolean) => handleSelectLevel(val)}
-                />
+              />
                 <div className='flex col pad-05 buttons'>
                 
                 <div className='flex row buttons'>
