@@ -44,10 +44,11 @@ function Dungeon(
     setShowAttack(true)
 
     setplayerStats(val => {
-      return {
+      const final: PlayerStatsControl = {
         ...val,
         actions: val.actions+1
       }
+      return final
     })
 
     setEnemy((val) => {
@@ -105,10 +106,11 @@ function Dungeon(
      setEnemy((val: EnemyStatscontrol) => {
       const life: number = val.life - val.debuf.poison
       const lifeFinal: number = life > 0? life: 0
-      return {
+      const final: EnemyStatscontrol = {
         ...val,
         life: lifeFinal
       }
+      return final;
     })
 
     if(playerStats.actions+1 >= playerStats.actionsMax + playerStats.bonos.actions){
@@ -118,14 +120,16 @@ function Dungeon(
 
   function handleShield(){
     setplayerStats((val) => {
-      return {
+      const final: PlayerStatsControl = {
         ...val,
         bonos:{
           ...val.bonos,
-          defensa: val.bonos.defense+1
+          defense: val.bonos.defense+1
         },
-        acciones: val.actions+1
+        actions: val.actions+1
       }
+
+      return final
     })
 
     markEndOfTurn();
