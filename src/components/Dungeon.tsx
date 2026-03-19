@@ -43,6 +43,13 @@ function Dungeon(
   function handleAttack(){
     setShowAttack(true)
 
+    setplayerStats(val => {
+      return {
+        ...val,
+        acciones: val.actions+1
+      }
+    })
+
     setEnemy((val) => {
       const lifeRest: number = val.life - (1*(playerStats.baseAttack+playerStats.bonos.attack))
       const finalLifeEnemy: number = lifeRest > 0? lifeRest : 0;
@@ -69,12 +76,7 @@ function Dungeon(
       return enemy;
     })
 
-    setplayerStats(val => {
-      return {
-        ...val,
-        acciones: val.actions++
-      }
-    })
+    
 
     prop.updateMochila((val:Mochila) => {
       const suerte: number = 1
@@ -206,22 +208,18 @@ function Dungeon(
                   <button
                     disabled={!isTurnoJugador()}
                     onClick={() => handleAttack()}
-                    onTouchEnd={() => handleAttack()}
                   >Golpear</button>
                   <button
                     disabled={!isTurnoJugador()}
                     onClick={() => handleShield()}
-                    onTouchEnd={() => handleShield()}
                     >Defender</button>
                   <button
                     disabled={!isTurnoJugador()}
-                    onTouchEnd={() => isTurnoJugador()}
                     >Pocion c</button>
                 </div>
                 <button
                   disabled={isTurnoJugador()}
                   onClick={() => handleEndTurno()}
-                  onTouchEnd={() => handleEndTurno()}
                 >Terminar Turno</button>
               </div>
             </>
