@@ -211,16 +211,17 @@ function Dungeon(
                   <button
                     disabled={!isTurnoJugador()}
                     onClick={() => handleShield()}
-                    onTouchEnd={() => handleAttack()}
+                    onTouchEnd={() => handleShield()}
                     >Defender</button>
                   <button
                     disabled={!isTurnoJugador()}
-                    onTouchEnd={() => handleAttack()}
-                    >Pocion cel</button>
+                    onTouchEnd={() => isTurnoJugador()}
+                    >Pocion c</button>
                 </div>
                 <button
+                  disabled={isTurnoJugador()}
                   onClick={() => handleEndTurno()}
-                  onTouchEnd={() => handleAttack()}
+                  onTouchEnd={() => handleEndTurno()}
                 >Terminar Turno</button>
               </div>
             </>
