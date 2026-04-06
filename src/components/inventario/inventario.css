@@ -1,0 +1,12 @@
+.background-inventario{
+    background-color: rgba(68, 68, 111, 0.403);
+    padding: 0.5rem;
+    color: white;
+    justify-content: center;
+    align-content: center;
+}
+
+h3{
+    padding-top: 0rem;
+    margin-top: 0rem;
+}

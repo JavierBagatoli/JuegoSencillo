@@ -1,0 +1,33 @@
+table{
+    border-collapse: collapse;
+    color: rgb(224, 235, 225);
+}
+
+
+td.left{
+    text-align: left;
+    padding-left: 1rem;
+}
+
+tr{
+    background-color: rgb(78, 103, 103);
+}
+tr:nth-child(2n){
+    background-color: rgb(94, 112, 112);
+}
+
+td{
+    text-align: center;
+    padding: 0.25rem;
+}
+
+thead tr{
+    background-color: rgb(57, 78, 73);
+    color: rgb(220, 228, 215);
+}
+
+thead tr th{
+    padding: 0.25rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}

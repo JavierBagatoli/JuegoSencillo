@@ -1,7 +1,11 @@
 #root,body{
   margin: 0rem;
-  padding: 1rem;
+  padding: 0rem;
   background-color: #272727;
+}
+
+.desktop{
+  padding: 1rem;
 }
 
 main{
@@ -28,6 +32,7 @@ main{
   width: 20rem;
   height: 20rem;
   background-color: rgb(196, 159, 159);
+  background-image: url(assets/mapa/dungeon-level-1.jpg);
   justify-content: center;
   align-content: center;
   display: flex;
@@ -36,6 +41,7 @@ main{
 .flex{
   display: flex;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .row{
@@ -47,10 +53,10 @@ main{
 }
 
 .pad-05{
-  padding: 0.5rem
+  padding: 0.25rem
 } 
 .pad-1{
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 img{
@@ -69,9 +75,163 @@ img{
 }
 
 .background-texto{
-  background-color: rgb(197, 204, 218);
+  background-color: rgb(255, 255, 255);
 }
 
 .green{
-  color: green;
+  color: rgb(132, 248, 132);
+}
+
+#dungeon-selector-level{
+  width: 20rem;
+  height: 20rem;
+  background-color: rgb(78, 107, 107);
+}
+
+.dungeon-selector-buttons{
+  button{
+    height: 2rem;
+    background-color: #404040;
+    border: 0rem;
+    color: rgb(236, 229, 229);
+  }
+}
+
+
+button{
+  height: 2rem;
+  background-color: rgb(55, 91, 91);
+  border: none;
+  color: rgb(205, 235, 235);
+}
+
+button:hover{
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+button:disabled:hover{
+  transform: scale(1);
+  cursor: pointer;
+}
+
+button.active{
+  background-color: rgb(25, 59, 59);
+  color: rgb(147, 203, 203);
+}
+
+button:disabled{
+  background-color: rgb(66, 76, 76);
+  color: rgb(192, 210, 210);
+}
+
+
+.slot-item{
+  width: 4rem;
+  height: 4rem;
+  background-color: #272727a3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  position: relative;
+}
+
+.slot-item .tooltip-count{
+  position: absolute;
+  bottom: 0rem;
+  right: 0rem; 
+
+  position: absolute;
+  right: 0rem;
+  bottom: 0rem;
+  align-items: center;
+  background-color: #b59191;
+  width: 1rem; 
+  height: 1rem; 
+  text-align: center;
+  color: black;
+}
+
+.slot-item-selected{
+  box-sizing: border-box;
+  border: 5px solid rgb(51, 133, 51);
+}
+
+.mapa-mundo{
+  background-color: #272727;
+  background-image: url(./assets/mapa/mapa-mundo.jpg);
+  background-repeat: repeat;
+  width: 100%;
+  height: 100dvh !important;
+  padding: 2rem;
+  img{
+    width: 4rem;
+    height: 4rem;
+    animation: animationShip 5s ease-in-out infinite;
+  }
+}
+
+@keyframes animationShip {
+  0% {
+    transform: scale(1) translateY(-0rem);
+  }
+  50% {
+    transform: scale(1.05) translateY(-1rem);
+  }
+  100% {
+    transform: scale(1) translateY(-0rem);
+  }
+}
+
+.tooltip-info{
+  background-color: rgba(138, 104, 104, 0.403);
+  height: 6rem;
+  width: 10rem;
+  padding: 0.5rem;
+}
+
+.stats-section{
+  color: rgb(230, 230, 230);
+}
+
+.background-comercio{
+  background-color: #373535;
+}
+
+.text-center{
+  text-align: center;
+  text-justify: center;
+}
+
+@media screen and (max-width: 431px) {
+  .mapa-mundo{
+    width: 100vw;
+    padding-top: 3rem;
+  }
+
+  #root{
+    scrollbar-width: none;
+    width: 100dvw;
+    height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  .menu-acciones{
+    background-color: #272727cd;
+    height: 100dvh;
+  }
+
+  .center{
+    justify-content: center;
+  }
+
+  .max-w{
+    width: 100dvw;
+  }
+
+  .max-h{
+    height: 100%;
+  }
 }
