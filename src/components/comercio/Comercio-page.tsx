@@ -61,7 +61,7 @@ function ComercioPage(
 
   return (
     <>
-      <section className="section-tienda background-comercio">
+      <section className="background-comercio">
         <table>
           <thead>
             <tr>

@@ -7,9 +7,10 @@ import InventarioPage from './components/inventario/Inventario-page'
 import MapaGlobal from './components/mapa/Mapa-page'
 import { PLAYER_INITIAL_DUNGEON } from './components/initialData/player.init'
 import type { PlayerStatsControl } from './components/models/player.interfaces'
+import ScreenInvasionBattle from './components/invasion-battle/ScreenInvasionBattel'
 
 function App() {
-  const [page, setPage] = useState<'crear' | 'mapa' | 'dungeon' | 'comercio' | 'inventario' | 'trabajar'>('mapa')
+  const [page, setPage] = useState<'crear' | 'mapa' | 'dungeon' | 'invasion' | 'comercio' | 'inventario' | 'trabajar'>('mapa')
   const [mochila, setMochila] = useState<Mochila>({
     circuito: 0,
     metales: 0,
@@ -30,6 +31,8 @@ function App() {
           updateMochila={setMochila}
           playerStats={playerStats}
           />
+      case 'invasion':
+        return <ScreenInvasionBattle/>
       case 'crear':
         return <ComercioPage
             mochila={mochila}
@@ -94,6 +97,12 @@ function App() {
               onClick={() => setPage('dungeon')}
               >
               Dungeon
+            </button>
+            <button
+              className={'invasion' === page? 'active' : ''}
+              onClick={() => setPage('invasion')}
+              >
+              Invasion
             </button>
             <button
               className={'inventario' === page? 'active' : ''}
