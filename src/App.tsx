@@ -3,7 +3,6 @@ import './index.css'
 import Dungeon from './components/Dungeon'
 import ToolTipAtributo from './components/ToolTipAtributo'
 import ComercioPage from './components/comercio/Comercio-page'
-import { ToastContainer, toast } from 'react-toastify';
 import InventarioPage from './components/inventario/Inventario-page'
 import MapaGlobal from './components/mapa/Mapa-page'
 function App() {
@@ -14,8 +13,6 @@ function App() {
     cristales: 0,
     nucleosEnergeticos: 0
   })
-
-  const notify = () => toast('Wow so easy !');
 
   const showPage = () => {
     switch(page){
