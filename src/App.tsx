@@ -8,9 +8,10 @@ import MapaGlobal from './components/mapa/Mapa-page'
 import { PLAYER_INITIAL_DUNGEON } from './components/initialData/player.init'
 import type { PlayerStatsControl } from './components/models/player.interfaces'
 import ScreenInvasionBattle from './components/invasion-battle/ScreenInvasionBattel'
+import ConfigPerfilPage from './components/config-perfil-page/ConfigPerfilPage'
 
 function App() {
-  const [page, setPage] = useState<'crear' | 'mapa' | 'dungeon' | 'invasion' | 'comercio' | 'inventario' | 'trabajar'>('mapa')
+  const [page, setPage] = useState<'configPerfil' | 'crear' | 'mapa' | 'dungeon' | 'invasion' | 'comercio' | 'inventario' | 'trabajar'>('mapa')
   const [mochila, setMochila] = useState<Mochila>({
     circuito: 0,
     metales: 0,
@@ -23,6 +24,8 @@ function App() {
 
   const showPage = () => {
     switch(page){
+      case 'configPerfil':
+        return <ConfigPerfilPage/>
       case 'mapa':
         return <MapaGlobal/>
       case 'dungeon':
@@ -68,11 +71,19 @@ function App() {
                 ➥
               </button>
               }
+              
+            
             <button
               className={'mapa' === page? 'active' : ''}
               onClick={() => setPage('mapa')}
             >
               Mapa
+            </button>
+            <button
+              className={'configPerfil' === page? 'active' : ''}
+              onClick={() => setPage('configPerfil')}
+            >
+              Perfil
             </button>
             <button
               className={'trabajar' === page? 'active' : ''}
