@@ -2,7 +2,7 @@ import spaceShip from '../../assets/mapa/space-ship.webp'
 import ufoShip from '../../assets/mapa/ufo.png'
 import './mapa-mundo.css'
 
-function MapaGlobal() {
+function MapaGlobalPage() {
   return (
     <>
       <section 
@@ -36,4 +36,4 @@ function MapaGlobal() {
   )
 }
 
-export default MapaGlobal
+export default MapaGlobalPage

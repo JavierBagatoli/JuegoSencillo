@@ -1,7 +1,7 @@
-import type { PlayerStatsControl } from "../models/player.interfaces"
-import ToolTipAtributo from "../ToolTipAtributo"
 import bestiario from '../../assets/monster/monsters'
-import type { EnemyStatscontrol } from "../models/enemy.interfaces"
+import type { EnemyStatscontrol } from '../../components/models/enemy.interfaces'
+import type { PlayerStatsControl } from '../../components/models/player.interfaces'
+import ToolTipAtributo from '../../components/ToolTipAtributo'
 
 function PantallaDungeon(
   props: {

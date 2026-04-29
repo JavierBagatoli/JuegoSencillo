@@ -1,17 +1,17 @@
 import { useState } from 'react'
 import type { Mochila } from '../../App'
 import PantallaDungeon from './PantallaDungeon'
-import type { EnemyStatscontrol } from '../models/enemy.interfaces'
-import { EMPTY_ENEMY, SLIME_HARD, SLIME_ROCK, SLIME_SOFT } from '../initialData/enemys.init'
-import type { PlayerStatsControl } from '../models/player.interfaces'
 import attackAnimation from '../assets/gif/ataque.gif'
-import Animation1sec from '../generics/Animation1Sec'
-import { ARMORY } from '../initialData/armory.init'
 import fireDebuf from '../assets/debuf/fire.png'
 import slowDebuf from '../assets/debuf/snail.png'
 import SeleccionNivelPage from './SeleccionNivelPage'
+import type { PlayerStatsControl } from '../../components/models/player.interfaces'
+import type { EnemyStatscontrol } from '../../components/models/enemy.interfaces'
+import { EMPTY_ENEMY, SLIME_HARD, SLIME_ROCK, SLIME_SOFT } from '../../components/initialData/enemys.init'
+import Animation1sec from '../../components/generics/Animation1Sec'
+import { ARMORY } from '../../components/initialData/armory.init'
 
-function Dungeon(
+function DungeonPage(
   prop: {
     mochilla: Mochila,
     updateMochila: Function,
@@ -239,4 +239,4 @@ function Dungeon(
   )
 }
 
-export default Dungeon;
+export default DungeonPage;

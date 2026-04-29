@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import './index.css'
-import Dungeon from './components/dungeon/DungeonPage'
-import ToolTipAtributo from './components/ToolTipAtributo'
-import ComercioPage from './components/comercio/ComercioPage'
-import InventarioPage from './components/inventario/InventarioPage'
-import MapaGlobal from './components/mapa/MapaMundoPage'
 import { PLAYER_INITIAL_DUNGEON } from './components/initialData/player.init'
 import type { PlayerStatsControl } from './components/models/player.interfaces'
-import ScreenInvasionBattle from './components/invasion-battle/BatallaInvasionPage'
+import MapaGlobalPage from './moduls/mapa/MapaMundoPage'
+import DungeonPage from './moduls/dungeon/DungeonPage'
+import ScreenInvasionBattlePage from './moduls/invasion-battle/BatallaInvasionPage'
+import ComercioPage from './moduls/comercio/ComercioPage'
+import InventarioPage from './moduls/inventario/InventarioPage'
+import ToolTipAtributo from './components/ToolTipAtributo'
 
 function App() {
   const [page, setPage] = useState<'crear' | 'mapa' | 'dungeon' | 'invasion' | 'comercio' | 'inventario' | 'trabajar'>('mapa')
@@ -24,15 +24,15 @@ function App() {
   const showPage = () => {
     switch(page){
       case 'mapa':
-        return <MapaGlobal/>
+        return <MapaGlobalPage/>
       case 'dungeon':
-        return <Dungeon 
+        return <DungeonPage 
           mochilla={mochila}
           updateMochila={setMochila}
           playerStats={playerStats}
           />
       case 'invasion':
-        return <ScreenInvasionBattle/>
+        return <ScreenInvasionBattlePage/>
       case 'crear':
         return <ComercioPage
             mochila={mochila}

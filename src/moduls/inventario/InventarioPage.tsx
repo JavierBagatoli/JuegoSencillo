@@ -1,10 +1,11 @@
 import { useState } from "react"
 import SlotInvetario from "./SlotInventario"
-import { ARMORY } from "../initialData/armory.init"
-import type { Weapon } from "../models/items-fight.interfaces"
-import type { EquipmentShipUser, EquipmentUser, PlayerStatsControl } from "../models/player.interfaces"
-import "./inventario.css"
-import { INVENTARY } from "../initialData/inventary.init"
+import "./InventarioPage.css"
+import type { EquipmentShipUser, EquipmentUser, PlayerStatsControl } from "../../components/models/player.interfaces"
+import { INVENTARY } from "../../components/initialData/inventary.init"
+import { ARMORY } from "../../components/initialData/armory.init"
+import type { Weapon } from "../../components/models/items-fight.interfaces"
+
 
 function InventarioPage(
   props: {

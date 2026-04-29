@@ -3,7 +3,7 @@ import jefe from "../../assets/monster/slime.png"
 import "../../index.css"
 
 
-function ScreenInvasionBattle() {
+function ScreenInvasionBattlePage() {
   return (
     <section 
         style={{maxWidth: '30rem', width: '30rem', backgroundColor: 'gray'}}
@@ -24,4 +24,4 @@ function ScreenInvasionBattle() {
   )
 }
 
-export default ScreenInvasionBattle
+export default ScreenInvasionBattlePage

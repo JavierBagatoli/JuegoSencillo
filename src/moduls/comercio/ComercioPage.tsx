@@ -1,7 +1,7 @@
 import type { Mochila } from "../../App"
-import { ARMORY } from "../initialData/armory.init";
-import type { Weapon } from "../models/items-fight.interfaces";
-import "./comercio.css"
+import { ARMORY } from "../../components/initialData/armory.init"
+import type { Weapon } from "../../components/models/items-fight.interfaces"
+import "./ComercioPage.css"
 
 function ComercioPage(
   props: {
