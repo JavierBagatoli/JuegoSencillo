@@ -4,11 +4,12 @@ import { PLAYER_INITIAL_DUNGEON } from './components/initialData/player.init'
 import type { PlayerStatsControl } from './components/models/player.interfaces'
 import MapaGlobalPage from './moduls/mapa/MapaMundoPage'
 import DungeonPage from './moduls/dungeon/DungeonPage'
-import ScreenInvasionBattlePage from './moduls/invasion-battle/BatallaInvasionPage'
 import ComercioPage from './moduls/comercio/ComercioPage'
 import InventarioPage from './moduls/inventario/InventarioPage'
 import ToolTipAtributo from './components/ToolTipAtributo'
 import type { MenuOptions } from './components/models/menu.interfaces'
+import ConfigPerfilPage from './moduls/configPerfil/ConfigPerfilPage'
+import BatallaInvasionPage from './moduls/invasion-battle/BatallaInvasionPage'
 
 function App() {
   const [page, setPage] = useState<MenuOptions>('mapa')
@@ -22,7 +23,7 @@ function App() {
   const [showAsidenav, setShowAsidenav] = useState<boolean>(false)
   const isMobile: boolean =window.innerWidth < 431
 
-  const menuOptions: MenuOptions[] = ['mapa', 'trabajar', 'crear', 'comercio', 'dungeon', 'invasion', 'inventario']
+  const menuOptions: MenuOptions[] = ['mapa', 'trabajar', 'crear', 'comercio', 'dungeon', 'invasion', 'inventario', 'configPerfil']
 
   const showPage = () => {
     switch(page){
@@ -37,7 +38,7 @@ function App() {
           playerStats={playerStats}
           />
       case 'invasion':
-        return <ScreenInvasionBattlePage/>
+        return <BatallaInvasionPage/>
       case 'crear':
         return <ComercioPage
             mochila={mochila}
