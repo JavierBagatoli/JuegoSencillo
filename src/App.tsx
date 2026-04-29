@@ -8,9 +8,10 @@ import ScreenInvasionBattlePage from './moduls/invasion-battle/BatallaInvasionPa
 import ComercioPage from './moduls/comercio/ComercioPage'
 import InventarioPage from './moduls/inventario/InventarioPage'
 import ToolTipAtributo from './components/ToolTipAtributo'
+import type { MenuOptions } from './components/models/menu.interfaces'
 
 function App() {
-  const [page, setPage] = useState<'crear' | 'mapa' | 'dungeon' | 'invasion' | 'comercio' | 'inventario' | 'trabajar'>('mapa')
+  const [page, setPage] = useState<MenuOptions>('mapa')
   const [mochila, setMochila] = useState<Mochila>({
     circuito: 0,
     metales: 0,
@@ -20,6 +21,8 @@ function App() {
   const [playerStats, setPlayerStats] = useState<PlayerStatsControl>(PLAYER_INITIAL_DUNGEON)
   const [showAsidenav, setShowAsidenav] = useState<boolean>(false)
   const isMobile: boolean =window.innerWidth < 431
+
+  const menuOptions: MenuOptions[] = ['mapa', 'trabajar', 'crear', 'comercio', 'dungeon', 'invasion', 'inventario']
 
   const showPage = () => {
     switch(page){
@@ -68,49 +71,18 @@ function App() {
                 ➥
               </button>
               }
-            <button
-              className={'mapa' === page? 'active' : ''}
-              onClick={() => setPage('mapa')}
-            >
-              Mapa
-            </button>
-            <button
-              className={'trabajar' === page? 'active' : ''}
-              onClick={() => setPage('trabajar')}
-            >
-              Trabajar
-            </button>
-            <button
-              className={'crear' === page? 'active' : ''}
-              onClick={() => setPage('crear')}
-            >
-              Crear
-            </button>
-            <button
-              className={'comercio' === page? 'active' : ''}
-              onClick={() => setPage('comercio')}
-            >
-              Comerciar
-            </button>
-            <button
-              className={'dungeon' === page? 'active' : ''}
-              onClick={() => setPage('dungeon')}
-              >
-              Dungeon
-            </button>
-            <button
-              className={'invasion' === page? 'active' : ''}
-              onClick={() => setPage('invasion')}
-              >
-              Invasion
-            </button>
-            <button
-              className={'inventario' === page? 'active' : ''}
-              onClick={() => setPage('inventario')}
-              >
-              Inventario
-            </button>
 
+            {
+              menuOptions.map(text => 
+                <button
+                  className={`${text}` === page? 'active' : ''}
+                  onClick={() => setPage(text)}
+                >
+                  {text}
+                </button>
+
+              )
+            }
             
             <div className='flex col stats-section'>
               <h4 className='flex center'>Pociones:</h4>

@@ -1,0 +1,1 @@
+export type MenuOptions = 'crear' | 'mapa' | 'dungeon' | 'invasion' | 'comercio' | 'inventario' | 'trabajar';

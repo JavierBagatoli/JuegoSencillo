@@ -1,6 +1,6 @@
 import spaceShip from '../../assets/mapa/space-ship.webp'
 import ufoShip from '../../assets/mapa/ufo.png'
-import './mapa-mundo.css'
+import './MapaMundo.css'
 
 function MapaGlobalPage() {
   return (

@@ -103,6 +103,7 @@ button{
   background-color: rgb(55, 91, 91);
   border: none;
   color: rgb(205, 235, 235);
+  text-transform: capitalize;
 }
 
 button:hover{
