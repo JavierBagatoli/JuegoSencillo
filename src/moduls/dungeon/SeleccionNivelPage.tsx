@@ -30,7 +30,6 @@ function SeleccionNivelPage(
           style={{justifyContent: 'space-between', height: '95%'}}
           >
           <div 
-           
             className="flex col">
             <button onClick={() => handleLevel(0)}>
               <span>Minas</span>
@@ -40,7 +39,6 @@ function SeleccionNivelPage(
             <button onClick={() => handleLevel(1)}>
               <span>Laberinto</span>
               <img src={buttonLaberinto}/>
-              
             </button>
 
             <button onClick={() => handleLevel(2)}>

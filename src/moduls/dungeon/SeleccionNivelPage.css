@@ -4,7 +4,6 @@ button img{
 
 button span{
     position: absolute;
-    z-index: 1;
     padding: 0.5rem;
     color: black;
 }
