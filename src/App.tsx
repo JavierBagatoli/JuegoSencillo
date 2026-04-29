@@ -26,6 +26,8 @@ function App() {
 
   const showPage = () => {
     switch(page){
+      case 'configPerfil':
+        return <ConfigPerfilPage/>
       case 'mapa':
         return <MapaGlobalPage/>
       case 'dungeon':
