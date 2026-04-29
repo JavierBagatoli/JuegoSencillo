@@ -1,4 +1,4 @@
-function SeleccionNivelpage(
+function SeleccionNivelPage(
   props: {
     level: number,
     updateLevel: Function
@@ -45,4 +45,4 @@ function SeleccionNivelpage(
   )
 }
 
-export default SeleccionNivelpage
+export default SeleccionNivelPage

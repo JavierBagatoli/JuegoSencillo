@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import './index.css'
-import Dungeon from './components/Dungeon'
+import Dungeon from './components/dungeon/DungeonPage'
 import ToolTipAtributo from './components/ToolTipAtributo'
-import ComercioPage from './components/comercio/Comercio-page'
-import InventarioPage from './components/inventario/Inventario-page'
-import MapaGlobal from './components/mapa/Mapa-page'
+import ComercioPage from './components/comercio/ComercioPage'
+import InventarioPage from './components/inventario/InventarioPage'
+import MapaGlobal from './components/mapa/MapaMundoPage'
 import { PLAYER_INITIAL_DUNGEON } from './components/initialData/player.init'
 import type { PlayerStatsControl } from './components/models/player.interfaces'
-import ScreenInvasionBattle from './components/invasion-battle/ScreenInvasionBattel'
+import ScreenInvasionBattle from './components/invasion-battle/BatallaInvasionPage'
 
 function App() {
   const [page, setPage] = useState<'crear' | 'mapa' | 'dungeon' | 'invasion' | 'comercio' | 'inventario' | 'trabajar'>('mapa')

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import SlotInvetario from "./slot-inventario-component"
+import SlotInvetario from "./SlotInventario"
 import { ARMORY } from "../initialData/armory.init"
 import type { Weapon } from "../models/items-fight.interfaces"
 import type { EquipmentShipUser, EquipmentUser, PlayerStatsControl } from "../models/player.interfaces"

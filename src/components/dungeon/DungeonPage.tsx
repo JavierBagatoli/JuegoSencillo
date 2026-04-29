@@ -1,15 +1,15 @@
 import { useState } from 'react'
-import type { Mochila } from '../App'
-import SeleccionNivelpage from './dungeon/SeleccionNivelpage'
-import PantallaDungeon from './dungeon/PantallaDungeon'
-import type { EnemyStatscontrol } from './models/enemy.interfaces'
-import { EMPTY_ENEMY, SLIME_HARD, SLIME_ROCK, SLIME_SOFT } from './initialData/enemys.init'
-import type { PlayerStatsControl } from './models/player.interfaces'
+import type { Mochila } from '../../App'
+import PantallaDungeon from './PantallaDungeon'
+import type { EnemyStatscontrol } from '../models/enemy.interfaces'
+import { EMPTY_ENEMY, SLIME_HARD, SLIME_ROCK, SLIME_SOFT } from '../initialData/enemys.init'
+import type { PlayerStatsControl } from '../models/player.interfaces'
 import attackAnimation from '../assets/gif/ataque.gif'
-import Animation1sec from './generics/Animation-1sec'
-import { ARMORY } from './initialData/armory.init'
+import Animation1sec from '../generics/Animation1Sec'
+import { ARMORY } from '../initialData/armory.init'
 import fireDebuf from '../assets/debuf/fire.png'
 import slowDebuf from '../assets/debuf/snail.png'
+import SeleccionNivelPage from './SeleccionNivelPage'
 
 function Dungeon(
   prop: {
@@ -228,7 +228,7 @@ function Dungeon(
               </div>
             </>
           :
-            <SeleccionNivelpage
+            <SeleccionNivelPage
               level={level}
               updateLevel={(val: number) => setLevel(val)}
               startMission={(val: boolean) => handleSelectLevel(val)}
