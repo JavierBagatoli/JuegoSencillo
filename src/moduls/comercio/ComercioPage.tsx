@@ -1,3 +1,4 @@
+import { useState } from "react"
 import type { Mochila } from "../../App"
 import { ARMORY } from "../../components/initialData/armory.init"
 import type { Weapon } from "../../components/models/items-fight.interfaces"
@@ -10,6 +11,7 @@ function ComercioPage(
   }
 ) {
   const listaItems: Record<number, Weapon> = ARMORY
+  const [extendText, setExtendText] = useState<string>('')
   
   function handleBuy(index: number){
     props.updateMochila((val: Mochila)=>{
@@ -59,17 +61,33 @@ function ComercioPage(
     </>
   }
 
+  const handleExtend = (text: 'circuito' | 'nucleo' | 'metal' | 'cristal') => {
+    if(!['circuito','nucleo','metal','cristal'].includes(text)){return}
+    setExtendText((val: string) => val !== text? text: '')
+  }
+  
+
   return (
     <>
-      <section className="background-comercio">
-        <table>
+      <section className="max-w background-comercio">
+        <table className="max-w">
           <thead>
             <tr>
               <th>Objeto</th>
-              <th>Circuitos</th>
-              <th>Nucleos</th>
-              <th>Metales</th>
-              <th>Cristales</th>
+
+              <th className="isCompact">Circuitos</th>
+              <th className="isCompactOff" onClick={() => handleExtend('circuito')}>{extendText === 'circuito'? 'Circuitos':'Cir'}</th>
+              
+              <th className="isCompact">Nucleos</th>
+              <th className="isCompactOff" onClick={() => handleExtend('nucleo')}>{extendText === 'nucleo'? 'nucleo':'nuc'}</th>
+              
+              <th className="isCompact">Metales</th>
+              <th className="isCompactOff" onClick={() => handleExtend('metal')}>{extendText === 'metal'? 'metal':'met'}</th>
+              
+              <th className="isCompact">Cristales</th>
+              <th className="isCompactOff" onClick={() => handleExtend('cristal')}>{extendText === 'cristal'? 'cristal':'cri'}</th>
+
+
               <th></th>
             </tr>
           </thead>

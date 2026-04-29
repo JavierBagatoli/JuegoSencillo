@@ -1,0 +1,14 @@
+button img{
+    width: 100%;
+}
+
+button span{
+    position: absolute;
+    z-index: 1;
+    padding: 0.5rem;
+    color: black;
+}
+
+button{
+    position: relative;
+}

@@ -1,3 +1,7 @@
+*{
+  transition: all ease 0.1s;
+}
+
 #root,body{
   margin: 0rem;
   padding: 0rem;
@@ -25,7 +29,7 @@ main{
 .dungeon-port{
   padding: 1rem;
   width: 20rem;
-  height: 100px;
+  height: 100%;
 }
 
 .dungeon-view{
@@ -230,9 +234,14 @@ button:disabled{
 
   .max-w{
     width: 100dvw;
+    overflow-x: hidden;
   }
 
   .max-h{
     height: 100%;
   }
+}
+
+th{
+  text-transform: capitalize;
 }
