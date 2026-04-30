@@ -2,12 +2,19 @@ import { useState } from "react"
 import naveTeamOne from "../../assets/mapa/ufo.png"
 import naveTeamTwo from "../../assets/mapa/ufo.png"
 import jefe from "../../assets/monster/slime.png"
+import ToolTipAtributo from "../../components/ToolTipAtributo"
 import "../../index.css"
-import ToolTipAtributo from "../ToolTipAtributo"
-import ColumnaDeBatalla from "./ColumnaDeBatalla"
+import ColumnaDeBatalla from "./component/ColumnaDeBatalla"
 
+type HousesAvalibles = 'team1' | 'team2' | 'none'
 
-function ScreenInvasionBattlePage() {
+function BatallaInvasionPage() {
+  const [showTeam, setShowTeam] = useState<HousesAvalibles>('none')
+
+  const handleSetShowTeam = (team: HousesAvalibles) => {
+    setShowTeam((val) => val !== team? team: 'none')
+  }
+
   return (
     <section 
         style={{maxWidth: '30rem', width: '30rem', backgroundColor: 'gray'}}
@@ -16,8 +23,8 @@ function ScreenInvasionBattlePage() {
         <h3 className="flex center">Invasion</h3>
         <section className="flex col pad-1 center">
           <div className="flex row">
-            <button onClick={() => handleSetShowTeam('one')}>Team 1</button>
-            <button onClick={() => handleSetShowTeam('two')}>Team 2</button>
+            <button onClick={() => handleSetShowTeam('team1')}>Team 1</button>
+            <button onClick={() => handleSetShowTeam('team2')}>Team 2</button>
           </div>
           {
             showTeam === 'none' ? <div className="flex col">
@@ -59,4 +66,4 @@ function ScreenInvasionBattlePage() {
   )
 }
 
-export default ScreenInvasionBattlePage
+export default BatallaInvasionPage
