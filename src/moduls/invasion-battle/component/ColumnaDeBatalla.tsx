@@ -1,3 +1,6 @@
+import "../../index.css"
+
+
 function ColumnaDeBatalla(props: {vectPos: number[]}) {
   return (
     <section>
