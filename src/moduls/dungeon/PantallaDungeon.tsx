@@ -19,6 +19,7 @@ function PantallaDungeon(
               <div className='flex col'>
                 <ToolTipAtributo
                   text='Vida'
+                  highContrast={true}
                   actualValue={props.statusEnemy.life}
                   maxValue={props.statusEnemy.lifeMax}
                 />
@@ -34,16 +35,19 @@ function PantallaDungeon(
             <div>
               <ToolTipAtributo
                 text='Vida'
+                highContrast={true}
                 actualValue={props.playerStats.life}
                 maxValue={props.playerStats.lifeMax}
               />
               <ToolTipAtributo
                 text='Acciones'
+                highContrast={true}
                 actualValue={props.playerStats.actions}
                 maxValue={props.playerStats.actionsMax + props.playerStats.bonos.actions}
               />
               <ToolTipAtributo
                 text='Defensa'
+                highContrast={true}
                 actualValue={props.playerStats.bonos.defense}
                 maxValue={99}
               />

@@ -2,8 +2,11 @@ import buttonMina from '../../assets/buttons/button-mina-level-dungeon.jpg'
 import buttonLaberinto from '../../assets/buttons/button-laberinto-level-dungeon.jpg'
 import buttonAscensor from '../../assets/buttons/button-ascensor-level-dungeon.jpg'
 import buttonPecio from '../../assets/buttons/button-pecio-level-dungeon.jpg'
+import buttonStart from '../../assets/buttons/button-start-dungeon.jpg'
+
 
 import "./SeleccionNivelPage.css"
+import { useState } from 'react'
 function SeleccionNivelPage(
   props: {
     level: number,
@@ -11,8 +14,10 @@ function SeleccionNivelPage(
     startMission: Function
   }
 ) {
+  const [idLevelSected, updateIdLevelSelected] = useState<number>(-1)
 
   const handleLevel = (val: number) =>{
+    updateIdLevelSelected(val)
     props.updateLevel(val)
   }
 
@@ -31,29 +36,45 @@ function SeleccionNivelPage(
           >
           <div 
             className="flex col">
-            <button onClick={() => handleLevel(0)}>
-              <span>Minas</span>
-              <img src={buttonMina}/>
+            <button className='invisible' onClick={() => handleLevel(0)}>
+              <span className='high-contrast'>Minas</span>
+              <img
+                className={`${idLevelSected !== 0? 'unselected': ''}`}
+                src={buttonMina}/>
             </button>
 
-            <button onClick={() => handleLevel(1)}>
-              <span>Laberinto</span>
-              <img src={buttonLaberinto}/>
+            <button className='invisible'  onClick={() => handleLevel(1)}>
+              <span className='high-contrast'>Laberinto</span>
+              <img
+                className={`${idLevelSected !== 1? 'unselected': ''}`}
+                src={buttonLaberinto}/>
             </button>
 
-            <button onClick={() => handleLevel(2)}>
-              <span>Ascensor</span>
-              <img src={buttonAscensor}/>
+            <button className='invisible' onClick={() => handleLevel(2)}>
+              <span className='high-contrast'>Ascensor</span>
+              <img 
+                className={`${idLevelSected !== 2? 'unselected': ''}`}
+                src={buttonAscensor}/>
             </button>
 
-            <button onClick={() => handleLevel(3)}>
-              <span>Pecio espacial</span>
-              <img src={buttonPecio}/>
+            <button
+              className='invisible' 
+              onClick={() => handleLevel(3)}>
+              <span className='high-contrast'>Pecio espacial</span>
+              <img
+                className={`${idLevelSected !== 3? 'unselected': ''}`}
+                src={buttonPecio}/>
             </button>
           </div>
 
-          <button onClick={() => handleStartMission()}>
-            Iniciar Exploracion
+          <button 
+            className='invisible'
+            disabled={idLevelSected === -1}
+            onClick={() => handleStartMission()}>
+              <span className='high-contrast'>Iniciar Exploración</span>
+              <img 
+              className={`${idLevelSected === -1? 'disabled': ''} no-shadow`}
+              src={buttonStart}/>
           </button>
         </div>
       </section>

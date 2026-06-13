@@ -3,11 +3,17 @@ button img{
 }
 
 button span{
+    width: 100%;
     position: absolute;
     padding: 0.5rem;
     color: black;
+    z-index: 10;
 }
 
 button{
     position: relative;
+}
+
+.invisible{
+    background-color: rgba(240, 248, 255, 0) !important;
 }

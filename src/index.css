@@ -37,6 +37,7 @@ main{
   height: 20rem;
   background-color: rgb(196, 159, 159);
   background-image: url(assets/mapa/dungeon-level-1.jpg);
+  background-size: cover;
   justify-content: center;
   align-content: center;
   display: flex;
@@ -89,7 +90,7 @@ img{
 #dungeon-selector-level{
   width: 20rem;
   height: 20rem;
-  background-color: rgb(78, 107, 107);
+  background-color: #374556;
 }
 
 .dungeon-selector-buttons{
@@ -100,7 +101,6 @@ img{
     color: rgb(236, 229, 229);
   }
 }
-
 
 button{
   height: 2rem;
@@ -244,4 +244,21 @@ button:disabled{
 
 th{
   text-transform: capitalize;
+}
+
+.disabled{
+  filter: grayscale(1);
+}
+
+.unselected{
+  filter: grayscale(0.8);
+}
+
+.no-shadow{
+  filter: none;
+}
+
+.high-contrast{
+    text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+               1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
 }
