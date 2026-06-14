@@ -153,8 +153,14 @@ button:disabled{
   display: flex;
   justify-content: center;
   align-items: center;
-  
   position: relative;
+  border: #b59191 0px solid;
+  box-sizing: border-box;
+}
+
+.slot-item:hover{
+  border: #b59191 2px solid;
+  box-sizing: border-box;
 }
 
 .slot-item .tooltip-count{

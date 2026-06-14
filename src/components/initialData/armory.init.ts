@@ -2,9 +2,12 @@ import escopeta from "../../assets/icons/escopeta.png"
 import escopetaFuego from "../../assets/icons/escopeta-fuego.png"
 
 import armadura from "../../assets/icons/armadura.png"
-import shield from "../../assets/icons/shield.png"
 import dagas from "../../assets/icons/dagas.png"
 
+import shield from "../../assets/icons/shield.png"
+import shieldEnergy from "../../assets/icons/shield-energy.png"
+import shieldFire from "../../assets/icons/shield-fire.png"
+import shieldSpikes from "../../assets/icons/shield-spykes.png"
 
 import armor1 from "../../assets/icons/room_armor/armor1.png";
 import armor2 from "../../assets/icons/room_armor/armor2.png";
@@ -113,6 +116,48 @@ export const ARMORY: Record<number, Weapon> ={
       cristales: 4,
       special: 'slowness',
       prop: 1
+    },
+    5: {
+      nombre: 'Escudo de Energia',
+      descripcion: 'Escudo',
+      id: 3,
+      type: 'shield',
+      icon: shieldEnergy,
+      damage: 0,
+      defense: 1,
+      uses: 0,
+      metales: 12,
+      nucleosEnergeticos: 5,
+      circuito: 3,
+      cristales: 4,
+    },
+    6: {
+      nombre: 'Escudo de Fuego',
+      descripcion: 'Escudo',
+      id: 3,
+      type: 'shield',
+      icon: shieldFire,
+      damage: 0,
+      defense: 1,
+      uses: 0,
+      metales: 12,
+      nucleosEnergeticos: 5,
+      circuito: 3,
+      cristales: 4,
+    },
+    7: {
+      nombre: 'Escudo de Puas',
+      descripcion: 'Escudo',
+      id: 3,
+      type: 'shield',
+      icon: shieldSpikes,
+      damage: 0,
+      defense: 1,
+      uses: 0,
+      metales: 12,
+      nucleosEnergeticos: 5,
+      circuito: 3,
+      cristales: 4,
     },
     // Habitaciones nave espacialCIVIL (5)
     100001:{

@@ -20,6 +20,18 @@ export const INVENTARY: {id:number, cantidad: number}[] = [
       cantidad: 1,
     },
     {
+      id: 5,
+      cantidad: 1,
+    },
+    {
+      id: 6,
+      cantidad: 1,
+    },
+    {
+      id: 7,
+      cantidad: 1,
+    },
+    {
       id: 100001,
       cantidad: 1,
     },{
