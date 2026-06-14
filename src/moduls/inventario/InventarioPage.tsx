@@ -1,7 +1,7 @@
 import { useState } from "react"
 import SlotInvetario from "./SlotInventario"
 import "./InventarioPage.css"
-import type { EquipmentShipUser, EquipmentUser, PlayerStatsControl } from "../../components/models/player.interfaces"
+import type { EquipmentUser, PlayerStatsControl } from "../../components/models/player.interfaces"
 import { INVENTARY } from "../../components/initialData/inventary.init"
 import { ARMORY } from "../../components/initialData/armory.init"
 import type { Weapon } from "../../components/models/items-fight.interfaces"
@@ -259,7 +259,7 @@ function InventarioPage(
                     key={index}
                     id={`habitacion-${index}`}
                     slotSlected={slot}
-                    icon={selectIcon(`r${index}`)}
+                    icon={selectIcon(`r${index as 0 | 1 | 2 | 3 | 4}`)}
                     selected={(val:string) => handleSetSlot(val)}
                     cant={null}
                     />
