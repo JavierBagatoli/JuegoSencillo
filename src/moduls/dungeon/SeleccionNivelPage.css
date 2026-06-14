@@ -17,3 +17,8 @@ button{
 .invisible{
     background-color: rgba(240, 248, 255, 0) !important;
 }
+
+.b2{
+    height: 46.2rem;
+    width: 30rem;
+}

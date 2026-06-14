@@ -16,7 +16,7 @@ h3{
         1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
 }
 
-span,h3{
+.tooltip-player-stats span, .tooltip-info span,.background-inventario h3{
     color: rgb(196, 196, 206);
 }
 

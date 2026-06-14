@@ -10,6 +10,7 @@ import { EMPTY_ENEMY, SLIME_HARD, SLIME_ROCK, SLIME_SOFT } from '../../component
 import Animation1sec from '../../components/generics/Animation1Sec'
 import { ARMORY } from '../../components/initialData/armory.init'
 import attackAnimation from '../../assets/gif/ataque.gif'
+import type { levelsAvalibles } from '../../components/models/levels-avalibles.interfaces'
 
 function DungeonPage(
   prop: {
@@ -19,7 +20,7 @@ function DungeonPage(
   }
 ) {
   const [enemy, setEnemy] = useState<EnemyStatscontrol>(EMPTY_ENEMY)
-  const [level, setLevel] = useState<number>(0)
+  const [level, setLevel] = useState<levelsAvalibles>(0)
   const [startMission, setStartMission] = useState<boolean>(false)
   const [playerStats, setplayerStats] = useState<PlayerStatsControl>(prop.playerStats)
   const [turno, setTurno] = useState<'Jugador' | 'Oponente'>('Jugador');
@@ -175,7 +176,7 @@ function DungeonPage(
 
   return (
     <section className='flex center max-w'> 
-      <section className='dungeon-port'>
+      <section className='dungeon-port b2 background-inventario'>
         <span style={{color: 'white'}}>
           </span>
         {
@@ -231,7 +232,7 @@ function DungeonPage(
           :
             <SeleccionNivelPage
               level={level}
-              updateLevel={(val: number) => setLevel(val)}
+              updateLevel={(val: levelsAvalibles) => setLevel(val)}
               startMission={(val: boolean) => handleSelectLevel(val)}
             />
         }

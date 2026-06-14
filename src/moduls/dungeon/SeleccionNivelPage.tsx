@@ -7,9 +7,11 @@ import buttonStart from '../../assets/buttons/button-start-dungeon.jpg'
 
 import "./SeleccionNivelPage.css"
 import { useState } from 'react'
+import type { levelsAvalibles } from '../../components/models/levels-avalibles.interfaces'
+
 function SeleccionNivelPage(
   props: {
-    level: number,
+    level: levelsAvalibles,
     updateLevel: Function
     startMission: Function
   }
@@ -29,13 +31,15 @@ function SeleccionNivelPage(
 
   return (
     <>
-      <section id="dungeon-selector-level">
+      <section className='background-inventario b2'>
         <div 
-          className="flex col pad-1 dungeon-selector-buttons"
+          className="flex col pad-1 center dungeon-selector-buttons"
           style={{justifyContent: 'space-between', height: '95%'}}
           >
           <div 
-            className="flex col">
+            className="flex col"
+            style={{width: '20rem'}}
+            >
             <button className='invisible' onClick={() => handleLevel(0)}>
               <span className='high-contrast'>Minas</span>
               <img

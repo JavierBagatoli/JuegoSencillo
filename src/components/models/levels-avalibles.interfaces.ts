@@ -1,0 +1,1 @@
+export type levelsAvalibles = 0 | 1 | 2 | 3

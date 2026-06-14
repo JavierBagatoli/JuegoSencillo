@@ -28,12 +28,14 @@ main{
   flex-direction: column;
   gap: 0.5rem;
   padding: 0.5rem;
+  background-image: url("./assets/background/background-uniform.jpg");
+  border: 16px solid transparent;
+  border-image: url("./assets/background/border.jpg") 16 repeat;
 }
 
 .dungeon-port{
-  padding: 1rem;
-  width: 20rem;
-  height: 100%;
+  min-height: 18rem;
+  max-width: 30rem;
 }
 
 .dungeon-view{
@@ -103,7 +105,7 @@ img{
 }
 
 .green{
-  color: rgb(132, 248, 132);
+  color: #ad7253;
 }
 
 #dungeon-selector-level{
@@ -123,9 +125,9 @@ img{
 
 button{
   height: 2rem;
-  background-color: rgb(55, 91, 91);
+  background-color: #12171e;
   border: none;
-  color: rgb(205, 235, 235);
+  color: rgb(205, 210, 235);
   text-transform: capitalize;
 }
 
@@ -145,7 +147,7 @@ button.active{
 }
 
 button:disabled{
-  background-color: rgb(66, 76, 76);
+  background-color: rgb(55, 55, 61);
   color: rgb(192, 210, 210);
 }
 

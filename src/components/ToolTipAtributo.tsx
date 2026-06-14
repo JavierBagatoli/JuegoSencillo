@@ -12,7 +12,6 @@ function ToolTipAtributo(
       <div className="flex row center">
         <span className={`${props.highContrast?'high-contrast': ''}`}>{props.text} : {props.actualValue} / {props.maxValue}</span>
       </div>
-
     </>
   )
 }

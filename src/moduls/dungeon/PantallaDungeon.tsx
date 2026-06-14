@@ -1,5 +1,6 @@
 import bestiario from '../../assets/monster/monsters'
 import type { EnemyStatscontrol } from '../../components/models/enemy.interfaces'
+import type { levelsAvalibles } from '../../components/models/levels-avalibles.interfaces'
 import type { PlayerStatsControl } from '../../components/models/player.interfaces'
 import ToolTipAtributo from '../../components/ToolTipAtributo'
 
@@ -8,14 +9,26 @@ function PantallaDungeon(
     playerStats: PlayerStatsControl,
     statusEnemy: EnemyStatscontrol,
     startMission: Function,
-    levelSelected: number,
+    levelSelected: levelsAvalibles,
   }
 ) {
+  const selectMonster = () => {
+    if(props.levelSelected === 0){
+      return bestiario.monsterT1[0]
+    }else if(props.levelSelected === 1){
+      return bestiario.monsterT2[0]
+    }else if(props.levelSelected === 2){
+      return bestiario.monsterT3[0]
+    }else if(props.levelSelected === 3){
+      return bestiario.monsterT4[0]
+    }
+  }
+
   return (
     <>
       {
         props.playerStats.life > 0? 
-          <div className={`back-${props.levelSelected+1} dungeon-view flex col`}>
+          <div className={`back-${props.levelSelected+1} center dungeon-view flex col`}>
             <div className='flex row center'>
               <div className='flex col'>
                 <ToolTipAtributo
@@ -28,7 +41,7 @@ function PantallaDungeon(
               {props.statusEnemy.life > 0 ?
                 <img 
                   className='monster'
-                  src={bestiario.monsterT1[0]}/>
+                  src={selectMonster()}/>
                 : <div className='monster'></div>
               }
               </div>
