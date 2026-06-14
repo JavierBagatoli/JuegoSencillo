@@ -162,82 +162,98 @@ function InventarioPage(
     return selectId !== null? biblioteca[selectId].icon ?? null : null
   }
 
+  const TotalDamagePlayer = () => {
+    return ARMORY[props.playerStats.baseAttack].damage
+            + ARMORY[props.playerStats.equipment.idArmor || 0].damage
+            + ARMORY[props.playerStats.equipment.idShield || 0].damage
+            + ARMORY[props.playerStats.equipment.idWeapon || 0].damage
+  }
+
+  const TotalDefensePlayer = () => {
+    return ARMORY[props.playerStats.baseAttack].defense
+      + ARMORY[props.playerStats.equipment.idArmor || 0].defense
+      + ARMORY[props.playerStats.equipment.idShield || 0].defense
+      + ARMORY[props.playerStats.equipment.idWeapon || 0].defense
+  }
+
+  const TotalActionsPlayer = () => {
+    return props.playerStats.actionsMax + props.playerStats.bonos.actions
+  }
 
   return (
     <>
       <section 
         style={{maxWidth: '30rem'}}
         className="flex col background-inventario pad-05 max-h">
-        <div>
-          <h3 className="text-center">Equipo Personaje</h3>
+          <h3 className="text-center">Equipo de Personaje</h3>
+        <div className="flex col gap-15">
+          <div className="flex">
+            <div className="flex center">
+
             <div
-              style={{paddingBottom: '0.5rem'}}
-             className="flex col">
+              className="flex col tooltip-player-stats">
               <span>
-                Daño: {
-                  ARMORY[props.playerStats.baseAttack].damage
-                  + ARMORY[props.playerStats.equipment.idArmor || 0].damage
-                  + ARMORY[props.playerStats.equipment.idShield || 0].damage
-                  + ARMORY[props.playerStats.equipment.idWeapon || 0].damage}
+                Daño: {TotalDamagePlayer()}
               </span>
               <span>
-                Defensa: {
-                  ARMORY[props.playerStats.baseAttack].defense
-                  + ARMORY[props.playerStats.equipment.idArmor || 0].defense
-                  + ARMORY[props.playerStats.equipment.idShield || 0].defense
-                  + ARMORY[props.playerStats.equipment.idWeapon || 0].defense}
+                Defensa: {TotalDefensePlayer()}
               </span>
               <span>
-                Acciones: {props.playerStats.actionsMax + props.playerStats.bonos.actions}
+                Acciones: {TotalActionsPlayer()}
               </span>
             </div>
 
-            <section className="flex">
-              <SlotInvetario
-                id="inv-arma"
-                slotSlected={slot}
-                icon={selectIcon("weapon")}
-                selected={(val:string) => handleSetSlot(val)}
-                cant={null}
+          <section className="flex">
+            <SlotInvetario
+              id="inv-arma"
+              slotSlected={slot}
+              icon={selectIcon("weapon")}
+              selected={(val:string) => handleSetSlot(val)}
+              cant={null}
               />
-              <SlotInvetario
-                id="inv-armadura"
-                slotSlected={slot}
-                icon={selectIcon("armor")}
-                selected={(val:string) => handleSetSlot(val)}
-                cant={null}
-              />
+            <SlotInvetario
+              id="inv-armadura"
+              slotSlected={slot}
+              icon={selectIcon("armor")}
+              selected={(val:string) => handleSetSlot(val)}
+              cant={null}
+            />
 
-              <SlotInvetario
-                id="inv-shield"
-                slotSlected={slot}
-                icon={selectIcon("shield")}
-                selected={(val:string) => handleSetSlot(val)}
-                cant={null}
-              />
-              <div className="tooltip-info flex col pad-05">
-                <span>
-                  <b>Nombre:</b> {biblioteca[idShowInfo]?.nombre}
-                </span>
-                <span>
-                  Descripcion: {biblioteca[idShowInfo]?.descripcion}
-                </span>
-                <span>
-                  Usos: {biblioteca[idShowInfo]?.uses}
-                </span>
-              </div>
-            </section>
+            <SlotInvetario
+              id="inv-shield"
+              slotSlected={slot}
+              icon={selectIcon("shield")}
+              selected={(val:string) => handleSetSlot(val)}
+              cant={null}
+            />
+          </section>
+            </div>
+            <div className="tooltip-info flex col pad-05">
+              <span>
+                <b>Nombre:</b> {biblioteca[idShowInfo]?.nombre}
+              </span>
+              <span>
+                Descripcion: {biblioteca[idShowInfo]?.descripcion}
+              </span>
+              <span>
+                Usos: {biblioteca[idShowInfo]?.uses}
+              </span>
+            </div>
+          </div>
+
+
 
           <h3>Equipo Nave Espacial</h3>
-            <div className="flex col">
+          <div className="flex col">
+            <div className="flex col tooltip-info">
               <span>
-              Daño: {
-                ARMORY[props.playerStats.room.r0 || 0].damage
-                + ARMORY[props.playerStats.room.r1 || 0].damage
-                + ARMORY[props.playerStats.room.r2 || 0].damage
-                + ARMORY[props.playerStats.room.r3 || 0].damage
-                + ARMORY[props.playerStats.room.r4 || 0].damage
-                }
+                Daño: {
+                  ARMORY[props.playerStats.room.r0 || 0].damage
+                  + ARMORY[props.playerStats.room.r1 || 0].damage
+                  + ARMORY[props.playerStats.room.r2 || 0].damage
+                  + ARMORY[props.playerStats.room.r3 || 0].damage
+                  + ARMORY[props.playerStats.room.r4 || 0].damage
+                  }
             </span>
             <span>
               Defensa: {
@@ -248,45 +264,46 @@ function InventarioPage(
                 + ARMORY[props.playerStats.room.r4 || 0].defense
                 }
             </span>
-            
-              <section className="flex">
-                {[props.playerStats.room.r0,
-                  props.playerStats.room.r1,
-                  props.playerStats.room.r2,
-                  props.playerStats.room.r3,
-                  props.playerStats.room.r4,
-                ].map((_val, index) => <SlotInvetario
-                    key={index}
-                    id={`habitacion-${index}`}
-                    slotSlected={slot}
-                    icon={selectIcon(`r${index as 0 | 1 | 2 | 3 | 4}`)}
-                    selected={(val:string) => handleSetSlot(val)}
-                    cant={null}
-                    />
-                )
-                }
-              </section>
             </div>
+          
+            <section className="flex">
+              {[props.playerStats.room.r0,
+                props.playerStats.room.r1,
+                props.playerStats.room.r2,
+                props.playerStats.room.r3,
+                props.playerStats.room.r4,
+              ].map((_val, index) => <SlotInvetario
+                  key={index}
+                  id={`habitacion-${index}`}
+                  slotSlected={slot}
+                  icon={selectIcon(`r${index as 0 | 1 | 2 | 3 | 4}`)}
+                  selected={(val:string) => handleSetSlot(val)}
+                  cant={null}
+                  />
+              )
+              }
+            </section>
+          </div>
               
             
           <h3 style={{paddingTop: '0.5rem'}}>Inventario</h3>
-           <section className="flex wrap">
-            {
-            ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19'].map((val) => 
-                <div>
-                  <SlotInvetario
-                    key={val}
-                    id={val}
-                    slotSlected={slotInventory}
-                    unselected={biblioteca[inventarioReal[Number(val)]?.id]?.type.split('_')[0] === typeItem || typeItem === null}
-                    icon={biblioteca[inventarioReal[Number(val)]?.id]?.icon}
-                    selected={(val:string) => handleSetSlotInventory2(val)}
-                    cant={inventarioReal[Number(val)]?.cantidad}
-                  />
-                </div>
-              )
-            }
-            </section>
+          <section className="flex wrap">
+          {
+          ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19'].map((val) => 
+              <div>
+                <SlotInvetario
+                  key={val}
+                  id={val}
+                  slotSlected={slotInventory}
+                  unselected={biblioteca[inventarioReal[Number(val)]?.id]?.type.split('_')[0] === typeItem || typeItem === null}
+                  icon={biblioteca[inventarioReal[Number(val)]?.id]?.icon}
+                  selected={(val:string) => handleSetSlotInventory2(val)}
+                  cant={inventarioReal[Number(val)]?.cantidad}
+                />
+              </div>
+            )
+          }
+          </section>
         </div>
 
       </section>
