@@ -37,15 +37,16 @@ function BatallaInvasionPage() {
                 <span>Vista del equipo: {showTeam}</span>
                 <div className="flex row">
                   <ColumnaDeBatalla
-                    vectPos={[0,1,2]}
+
                   />
 
                   <ColumnaDeBatalla
-                    vectPos={[3,4,5]}
+
                   />
 
+
                   <ColumnaDeBatalla
-                    vectPos={[6,7,8]}
+
                   />
               
                 </div>

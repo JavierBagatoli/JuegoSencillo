@@ -1,4 +1,4 @@
-function ColumnaDeBatalla(props: {vectPos: number[]}) {
+function ColumnaDeBatalla() {
   return (
     <section>
 
