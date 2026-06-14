@@ -120,7 +120,7 @@ export const ARMORY: Record<number, Weapon> ={
     5: {
       nombre: 'Escudo de Energia',
       descripcion: 'Escudo',
-      id: 3,
+      id: 5,
       type: 'shield',
       icon: shieldEnergy,
       damage: 0,
@@ -134,7 +134,7 @@ export const ARMORY: Record<number, Weapon> ={
     6: {
       nombre: 'Escudo de Fuego',
       descripcion: 'Escudo',
-      id: 3,
+      id: 6,
       type: 'shield',
       icon: shieldFire,
       damage: 0,
@@ -148,7 +148,7 @@ export const ARMORY: Record<number, Weapon> ={
     7: {
       nombre: 'Escudo de Puas',
       descripcion: 'Escudo',
-      id: 3,
+      id: 7,
       type: 'shield',
       icon: shieldSpikes,
       damage: 0,

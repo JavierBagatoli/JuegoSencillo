@@ -25,9 +25,9 @@ export interface EquipmentUser{
 }
 
 export interface EquipmentShipUser{
+  r0: number,
   r1: number,
   r2: number,
   r3: number,
   r4: number,
-  r5: number,
 }
