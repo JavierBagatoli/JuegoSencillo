@@ -7,14 +7,15 @@ function PantallaDungeon(
   props: {
     playerStats: PlayerStatsControl,
     statusEnemy: EnemyStatscontrol,
-    startMission: Function
+    startMission: Function,
+    levelSelected: number,
   }
 ) {
   return (
     <>
       {
         props.playerStats.life > 0? 
-          <div className='dungeon-view flex col'>
+          <div className={`back-${props.levelSelected+1} dungeon-view flex col`}>
             <div className='flex row center'>
               <div className='flex col'>
                 <ToolTipAtributo

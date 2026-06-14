@@ -204,6 +204,7 @@ function DungeonPage(
               <PantallaDungeon
                 playerStats={playerStats}
                 statusEnemy={enemy}
+                levelSelected={level}
                 startMission={(val: boolean) => handleSelectLevel(val)}
               />
                 <div className='flex col pad-05 buttons'>

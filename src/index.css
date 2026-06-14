@@ -36,11 +36,26 @@ main{
   width: 20rem;
   height: 20rem;
   background-color: rgb(196, 159, 159);
-  background-image: url(assets/mapa/dungeon-level-1.jpg);
   background-size: cover;
   justify-content: center;
   align-content: center;
   display: flex;
+}
+
+.back-1{
+  background-image: url(assets/mapa/dungeon-level-1.jpg);
+}
+
+.back-2{
+  background-image: url(assets/mapa/dungeon-level-2.jpg);
+}
+
+.back-3{
+  background-image: url(assets/mapa/dungeon-level-3.jpg);
+}
+
+.back-4{
+  background-image: url(assets/mapa/dungeon-level-4.jpg);
 }
 
 .flex{
@@ -75,8 +90,8 @@ img{
 }
 
 .monster{
-  width: 10rem;
-  height: 10rem;
+  width: 7rem;
+  height: 7rem;
 }
 
 .background-texto{
