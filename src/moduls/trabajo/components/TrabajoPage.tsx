@@ -5,36 +5,36 @@ import fuelStation from '../../../assets/works/Fuel-Spaceship.png'
 
 import './TrabajoPage.css'
 
-function TrabajoPage() {
+function TrabajoPage(props: {updateWork: Function}) {
+  const infoWork = [{
+    img: mechanicalStation,
+    text: 'Reparar nave a otro jugador'
+  },{
+    img: architecStation,
+    text: 'Crear planos para nuevas salas'
+  },{
+    img: fuelStation,
+    text: 'Suministrar combustible'
+  },
+]
+  const handleWork = () =>{
+    props.updateWork()
+  }
+
   return (
     <>
       <section 
         style={{flexWrap: 'nowrap'}}
         className="flex col background-texto mapa-mundo max-h">
-          <div className='detail-job flex row'>
-            <img src={mechanicalStation}></img>
-            <div className='flex col'>
-                <p style={{color: 'white'}} className='flex row wrap'>Reparar nave a otro jugador</p>
-                <button>Trabajar</button>
+          {infoWork.map((val) => 
+            <div className='detail-job flex row'>
+              <img src={val.img}></img>
+              <div className='flex col'>
+                  <p style={{color: 'white'}} className='flex row wrap'>{val.text}</p>
+                  <button onClick={() => handleWork()}>Trabajar</button>
+              </div>
             </div>
-          </div>
-
-          <div className='detail-job flex row'>
-            <img src={architecStation}></img>
-            <div className='flex col'>
-                <span style={{color: 'white'}}>Crear planos para nuevas salas</span>
-                <button>Trabajar</button>
-            </div>
-          </div>
-
-          <div className='detail-job flex row'>
-            <img src={fuelStation}></img>
-            <div className='flex col'>
-                <span style={{color: 'white'}}>Suministrar combustible</span>
-                <button>Trabajar</button>
-            </div>
-          </div>
-          
+          )}          
       </section>
     </>
   )

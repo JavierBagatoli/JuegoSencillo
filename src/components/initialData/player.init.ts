@@ -23,5 +23,7 @@ export const PLAYER_INITIAL_DUNGEON: PlayerStatsControl = {
         r2:0,
         r3:0,
         r4:0,
-    }
+    },
+    money: 100,
+    platimun: 10,
 }

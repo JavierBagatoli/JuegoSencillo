@@ -11,6 +11,7 @@ import type { MenuOptions } from './components/models/menu.interfaces'
 import ConfigPerfilPage from './moduls/configPerfil/ConfigPerfilPage'
 import BatallaInvasionPage from './moduls/invasion-battle/BatallaInvasionPage'
 import TrabajoPage from './moduls/trabajo/components/TrabajoPage'
+import CrearPage from './moduls/crear/CrearPage'
 
 function App() {
   const [page, setPage] = useState<MenuOptions>('mapa')
@@ -26,14 +27,29 @@ function App() {
 
   const menuOptions: MenuOptions[] = ['mapa', 'trabajar', 'crear', 'comercio', 'dungeon', 'invasion', 'inventario', 'configPerfil']
 
+  const updateMoney = () => {
+    setPlayerStats((val) => {
+      return {...val,
+        money: val.money+10
+      }
+    })
+  }
+
+
   const showPage = () => {
     switch(page){
       case 'trabajar':
-        return <TrabajoPage/>
+        return <TrabajoPage
+          updateWork={() => updateMoney()}
+        />
       case 'configPerfil':
         return <ConfigPerfilPage/>
       case 'mapa':
         return <MapaGlobalPage/>
+      case 'crear':
+        return <CrearPage
+          mochila={mochila}
+          updateMochila={setMochila}/>
       case 'dungeon':
         return <DungeonPage 
           mochilla={mochila}
@@ -42,11 +58,8 @@ function App() {
           />
       case 'invasion':
         return <BatallaInvasionPage/>
-      case 'crear':
-        return <ComercioPage
-            mochila={mochila}
-            updateMochila={setMochila}
-          />
+      case 'comercio':
+        return <ComercioPage/>
       case 'inventario':
         return <InventarioPage
           playerStats={playerStats}
@@ -89,7 +102,14 @@ function App() {
 
               )
             }
-            
+            <div className='flex col stats-section'>
+              <h4 className='flex center'>
+                Dinero:
+              </h4>
+              <span>Creditos: {playerStats.money}</span>
+              <span>Platinos: {playerStats.platimun}</span>
+            </div>
+
             <div className='flex col stats-section'>
               <h4 className='flex center'>Pociones:</h4>
               <ToolTipAtributo

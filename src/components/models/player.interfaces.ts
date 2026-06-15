@@ -12,10 +12,11 @@ export default interface StatsControl{
   actionsMax: number,
 }
 
-
 export interface PlayerStatsControl extends StatsControl{
   equipment: EquipmentUser,
   room: EquipmentShipUser,
+  money: number,
+  platimun: number,
 }
 
 export interface EquipmentUser{
