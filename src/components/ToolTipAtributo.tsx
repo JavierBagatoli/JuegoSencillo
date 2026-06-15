@@ -9,7 +9,7 @@ function ToolTipAtributo(
 
   return (
     <>
-      <div className="flex row center">
+      <div className="flex row center" style={{justifyContent: 'start'}}>
         <span className={`${props.highContrast?'high-contrast': ''}`}>{props.text} : {props.actualValue} / {props.maxValue}</span>
       </div>
     </>

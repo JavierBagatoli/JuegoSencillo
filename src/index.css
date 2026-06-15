@@ -196,11 +196,15 @@ button:disabled{
 
 .mapa-mundo{
   background-color: #272727;
-  background-image: url(./assets/mapa/mapa-mundo.jpg);
+  background-image: url(./assets/background/galaxy.png);
   background-repeat: repeat;
-  width: 100%;
+  width: 30rem;
   height: 100dvh !important;
   padding: 2rem;
+  border: 16px solid transparent;
+  border-left: none;
+  border-image: url("./assets/background/border.jpg") 16 repeat;
+
   img{
     width: 4rem;
     height: 4rem;
@@ -283,8 +287,9 @@ th{
 }
 
 .high-contrast{
-    text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
-               1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+  color: black;
+  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+    1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
 }
 
 .gap-05{
@@ -297,4 +302,8 @@ th{
 
 .gap-15{
   gap: 1.5rem;
+}
+
+.wrap{
+  flex-wrap: wrap;
 }

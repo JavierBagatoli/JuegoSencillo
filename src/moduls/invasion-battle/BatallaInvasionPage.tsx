@@ -1,6 +1,6 @@
 import { useState } from "react"
-import naveTeamOne from "../../assets/mapa/ufo.png"
-import naveTeamTwo from "../../assets/mapa/ufo.png"
+import naveTeamOne from "../../assets/ships/Humans.png"
+import naveTeamTwo from "../../assets/ships/Humans_2.png"
 import jefe from "../../assets/monster/slime.png"
 import ToolTipAtributo from "../../components/ToolTipAtributo"
 import "../../index.css"
@@ -18,7 +18,7 @@ function BatallaInvasionPage() {
   return (
     <section 
         style={{maxWidth: '30rem', width: '30rem', backgroundColor: 'gray'}}
-        className="flex col pad-05 max-h">
+        className="flex col pad-05 max-h mapa-mundo">
       <div className="flex col w-full">
         <h3 className="flex center">Invasion</h3>
         <section className="flex col pad-1 center">
@@ -30,31 +30,30 @@ function BatallaInvasionPage() {
             showTeam === 'none' ? <div className="flex col">
               <span>Vista General</span>
               <div className="flex row">
-                <img style={{width: '50%', height: '50%'}} src={naveTeamOne}></img>
-                <img style={{width: '50%', height: '50%'}} src={naveTeamTwo}></img>
+                <img src={naveTeamOne}></img>
+                <img src={naveTeamTwo}></img>
+              </div>
+              <div className="flex row">
+                <img src={naveTeamOne}></img>
+                <img src={naveTeamTwo}></img>
               </div>
             </div>: <div className="flex col">
                 <span>Vista del equipo: {showTeam}</span>
                 <div className="flex row">
                   <ColumnaDeBatalla
-
-                  />
-
-                  <ColumnaDeBatalla
-
-                  />
-
+                    />
 
                   <ColumnaDeBatalla
+                    />
 
-                  />
-              
+                  <ColumnaDeBatalla
+                    />
                 </div>
               </div>
           }
         </section>
         <section className="flex col center w-full">
-          <img style={{width: '50%', height: '50%'}}  src={jefe}></img>
+          <img src={jefe}></img>
           <ToolTipAtributo
             text='Invasor del Espacio'
             actualValue={10}

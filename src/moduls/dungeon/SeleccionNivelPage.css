@@ -22,3 +22,10 @@ button{
     height: 46.2rem;
     width: 30rem;
 }
+
+@media screen and (max-width: 431px) {
+    .b2{
+        width: auto;
+    }
+    
+}

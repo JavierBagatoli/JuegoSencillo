@@ -38,7 +38,6 @@ function SeleccionNivelPage(
           >
           <div 
             className="flex col"
-            style={{width: '20rem'}}
             >
             <button className='invisible' onClick={() => handleLevel(0)}>
               <span className='high-contrast'>Minas</span>

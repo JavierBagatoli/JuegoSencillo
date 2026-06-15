@@ -1,3 +1,9 @@
-.back-fondo{
-    background-color: aquamarine;
+.pfp_option{
+    border-radius: 1rem;
+    background-color: rgba(21, 21, 44, 0.818);
+    padding: 1rem;
+}
+
+.pfp_option img{
+    aspect-ratio: initial;
 }
