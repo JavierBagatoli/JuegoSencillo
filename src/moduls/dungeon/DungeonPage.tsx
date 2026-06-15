@@ -26,6 +26,7 @@ function DungeonPage(
   const [turno, setTurno] = useState<'Jugador' | 'Oponente'>('Jugador');
   const [showAttack, setShowAttack] = useState<boolean | null>(null)
   const [varLevel, setVarLevel] = useState<0 | 1 | 2 | 3>(0)
+  const [enemyToShow, setEnemyToShow] = useState<number>(0)
 
   const updateEnemy = () => {
     const numberOfEnemy = Math.round(Math.random()*2)
@@ -170,7 +171,7 @@ function DungeonPage(
       })
 
       setVarLevel(Math.floor(Math.random()*4) as 0 | 1 | 2 | 3)
-      
+      setEnemyToShow(Math.floor(Math.random()*5))
     }
     if(enemy.life <= 0){
       updateEnemy()
@@ -212,6 +213,7 @@ function DungeonPage(
                 levelSelected={level}
                 startMission={(val: boolean) => handleSelectLevel(val)}
                 varLevel={varLevel}
+                enemyToShow={enemyToShow}
               />
                 <div className='flex col pad-05 buttons'>
                 

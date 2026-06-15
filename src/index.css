@@ -39,8 +39,7 @@ main{
 }
 
 .dungeon-view{
-  width: 20rem;
-  height: 20rem;
+  height: 45%;
   background-color: rgb(196, 159, 159);
   background-size: cover;
   justify-content: center;
@@ -315,4 +314,52 @@ th{
 
 .wrap{
   flex-wrap: wrap;
+}
+
+.space-ship-battle{
+  transform: rotate(180deg);
+}
+
+.space-ship-battle img:first-child{
+  animation: ship-horizontal 10s ease 0s infinite;
+}
+
+@keyframes ship-horizontal  {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(50px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(-50px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+.space-ship-battle img:last-child{
+  animation: ship-horizontal2 10s ease 0s infinite;
+}
+
+@keyframes ship-horizontal2{
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(-50px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(50px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
 }

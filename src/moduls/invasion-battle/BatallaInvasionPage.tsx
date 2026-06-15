@@ -6,6 +6,8 @@ import ToolTipAtributo from "../../components/ToolTipAtributo"
 import "../../index.css"
 import ColumnaDeBatalla from "./component/ColumnaDeBatalla"
 
+import './BatallaInvasionPage.css'
+
 type HousesAvalibles = 'team1' | 'team2' | 'none'
 
 function BatallaInvasionPage() {
@@ -29,11 +31,11 @@ function BatallaInvasionPage() {
           {
             showTeam === 'none' ? <div className="flex col">
               <span>Vista General</span>
-              <div className="flex row">
+              <div className="flex row space-ship-battle">
                 <img src={naveTeamOne}></img>
                 <img src={naveTeamTwo}></img>
               </div>
-              <div className="flex row">
+              <div className="flex row space-ship-battle">
                 <img src={naveTeamOne}></img>
                 <img src={naveTeamTwo}></img>
               </div>
@@ -52,13 +54,27 @@ function BatallaInvasionPage() {
               </div>
           }
         </section>
+        <section style={{height: '10rem'}} className="flex center">
+          <div className="flex row">
+            <div>
+              <div className="bullet "></div>
+            </div>
+            <div>
+              <div className="bullet"></div>
+            </div>
+          </div>
+        </section>
         <section className="flex col center w-full">
-          <img src={jefe}></img>
-          <ToolTipAtributo
-            text='Invasor del Espacio'
-            actualValue={10}
-            maxValue={999}
-          />
+          <div className="flex col center">
+            <img src={jefe}></img>
+            <ToolTipAtributo
+              text='Invasor del Espacio'
+              actualValue={10}
+              maxValue={999}
+              highContrast={true}
+            />
+
+          </div>
         </section>
 
       </div>

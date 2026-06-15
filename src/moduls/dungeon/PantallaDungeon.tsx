@@ -10,18 +10,19 @@ function PantallaDungeon(
     statusEnemy: EnemyStatscontrol,
     startMission: Function,
     levelSelected: levelsAvalibles,
-    varLevel: 0 | 1 | 2 | 3
+    varLevel: 0 | 1 | 2 | 3,
+    enemyToShow: number,
   }
 ) {
   const selectMonster = () => {
     if(props.levelSelected === 0){
-      return bestiario.monsterT1[0]
+      return bestiario.monsterT1[props.enemyToShow]
     }else if(props.levelSelected === 1){
-      return bestiario.monsterT2[0]
+      return bestiario.monsterT2[props.enemyToShow]
     }else if(props.levelSelected === 2){
-      return bestiario.monsterT3[0]
+      return bestiario.monsterT3[props.enemyToShow]
     }else if(props.levelSelected === 3){
-      return bestiario.monsterT4[0]
+      return bestiario.monsterT4[props.enemyToShow]
     }
   }
 
