@@ -10,6 +10,7 @@ function PantallaDungeon(
     statusEnemy: EnemyStatscontrol,
     startMission: Function,
     levelSelected: levelsAvalibles,
+    varLevel: 0 | 1 | 2 | 3
   }
 ) {
   const selectMonster = () => {
@@ -24,11 +25,13 @@ function PantallaDungeon(
     }
   }
 
+
+
   return (
     <>
       {
         props.playerStats.life > 0? 
-          <div className={`back-${props.levelSelected+1} center dungeon-view flex col`}>
+          <div className={`back-${props.levelSelected+1}-${props.varLevel} center dungeon-view flex col`}>
             <div className='flex row center'>
               <div className='flex col'>
                 <ToolTipAtributo
