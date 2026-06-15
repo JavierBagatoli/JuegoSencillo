@@ -10,6 +10,7 @@ import ToolTipAtributo from './components/ToolTipAtributo'
 import type { MenuOptions } from './components/models/menu.interfaces'
 import ConfigPerfilPage from './moduls/configPerfil/ConfigPerfilPage'
 import BatallaInvasionPage from './moduls/invasion-battle/BatallaInvasionPage'
+import TrabajoPage from './moduls/trabajo/components/TrabajoPage'
 
 function App() {
   const [page, setPage] = useState<MenuOptions>('mapa')
@@ -27,6 +28,8 @@ function App() {
 
   const showPage = () => {
     switch(page){
+      case 'trabajar':
+        return <TrabajoPage/>
       case 'configPerfil':
         return <ConfigPerfilPage/>
       case 'mapa':

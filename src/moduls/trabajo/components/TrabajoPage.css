@@ -1,0 +1,10 @@
+.detail-job{
+    background-color: rgba(0, 0, 0, 0.534);
+    width: 100%;
+    border: 0.5rem solid transparent;
+    border-image: url('../../../assets/background/border.jpg') 16;
+}
+.detail-job img{
+    height: auto;
+    width: auto;
+}
