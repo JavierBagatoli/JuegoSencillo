@@ -7,3 +7,11 @@
 .pfp_option img{
     aspect-ratio: initial;
 }
+
+input{
+    background-color: rgb(50, 66, 85);
+    border: none;
+    padding: 0.5rem;
+    font-size: 1rem;
+    color: white;
+}

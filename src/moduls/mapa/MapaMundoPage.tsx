@@ -10,30 +10,24 @@ function MapaGlobalPage() {
     <>
       <section 
         className="flex col background-texto mapa-mundo max-h">
-          <div>
-            <img 
-              className='shipStyle'
-              src={spaceHuman}
-            />
-          </div>
-          <div style={{transform: 'translateX(90px)'}}>
-            <img 
-              className='shipStyle'
-              src={spaceHuman_2} 
-            />
-          </div>
-          <div style={{transform: 'translateX(20px)'}}>
-            <img
-              className='shipStyle'
-              src={spaceHuman_3}
-            />
-          </div>
-          <div  style={{transform: 'translateX(70px)'}}>
-            <img
-              className='shipStyle'
-              src={spaceAnulaki}
-            />
-          </div>
+          <section className='flex col'>
+          {
+            [spaceHuman,spaceHuman_2,spaceHuman_3,spaceAnulaki].map((val, index) => 
+              <div className='zone'>
+                <span>Zona {index} - Drop: {index*5}%</span>
+                <div>{
+                  [''].map(_v => 
+                    <img 
+                      src={val}
+                    />
+                  )
+                  }
+                </div>
+              </div>
+            )
+          }
+          
+          </section>          
       </section>
     </>
   )

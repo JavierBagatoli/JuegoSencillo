@@ -2,6 +2,20 @@
     transform: rotate(90deg);
 }
 
-.shipStyle{
+.zone{
     filter: drop-shadow(0px 0px 5px rgb(142, 209, 229));
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    padding: 1rem;
+    border: 0.125rem rgba(160, 116, 116, 0.685) dashed;
+}
+
+.zone:nth-child(2n){
+    border: 0.125rem rgba(130, 160, 116, 0.685) dashed;
+}
+
+.zone span{
+
+    color: rgb(153, 170, 185);
 }
