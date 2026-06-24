@@ -1,9 +1,6 @@
-import { ARMORY } from "../../components/initialData/armory.init"
-import type { Weapon } from "../../components/models/items-fight.interfaces"
 import "./ComercioPage.css"
 
 function ComercioPage() {
-  const listaItems: Record<number, Weapon> = ARMORY
   const listOfProducts: string[] = ['Kit de Reparacion', 'Combustible', 'Plano de habitacion']
   
   return (
