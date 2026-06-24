@@ -26,15 +26,15 @@ function InventarioPage(
 
     switch(id){
       case 'inv-arma':
-        setIdShowInfo(props.playerStats.equipment.idWeapon || 0);
+        setIdShowInfo(props.playerStats.equipment.idWeapon || 999);
         setTypeItem(_val => 'weapon')
         break;
       case 'inv-armadura':
-        setIdShowInfo(props.playerStats.equipment.idArmor || 0);
+        setIdShowInfo(props.playerStats.equipment.idArmor || 999);
         setTypeItem(_val => 'armor')
         break;
       case 'inv-shield':
-        setIdShowInfo(props.playerStats.equipment.idShield || 0);
+        setIdShowInfo(props.playerStats.equipment.idShield || 999);
         setTypeItem(_val => 'shield')
         break;
       case 'habitacion-0':
@@ -64,23 +64,24 @@ function InventarioPage(
   const typesOfSlots: string[] = ['inv-arma','inv-armadura','inv-shield','habitacion-0','habitacion-1','habitacion-2','habitacion-3','habitacion-4'];
 
   function handleSetSlotInventory2(id: string){
-    setSlotInvetory((val:string | null) => val !== id? id: null)
+    setSlotInvetory((val:string | null) => val !== id? id: '999')
 
     if(!typesOfSlots.includes(slot || '')){ return }
     const i: number = Number(id)
-    const idItemSelected = biblioteca[inventarioReal[i]?.id]
+    const idItemSelected = biblioteca[inventarioReal[i].id]
     
-      let idW: number = props.playerStats.equipment.idWeapon || 999;
-      let idA: number = props.playerStats.equipment.idArmor || 999;
-      let idS: number = props.playerStats.equipment.idShield || 999;
-      let idR0: number = props.playerStats.room.r0 || 0;
-      let idR1: number = props.playerStats.room.r1 || 0;
-      let idR2: number = props.playerStats.room.r2 || 0;
-      let idR3: number = props.playerStats.room.r3 || 0;
-      let idR4: number = props.playerStats.room.r4 || 0;
+    let idW: number = props.playerStats.equipment.idWeapon?? 999;
+    let idA: number = props.playerStats.equipment.idArmor?? 1000;
+    let idS: number = props.playerStats.equipment.idShield?? 1001;
+    let idR0: number = props.playerStats.room.r0?? 999;
+    let idR1: number = props.playerStats.room.r1?? 999;
+    let idR2: number = props.playerStats.room.r2?? 999;
+    let idR3: number = props.playerStats.room.r3?? 999;
+    let idR4: number = props.playerStats.room.r4?? 999;
       
 
     if(typeof idItemSelected === 'undefined'){ return }
+
       if(slot === 'inv-arma' && idItemSelected.type === 'weapon'){
         idW = idItemSelected.id
       }else if(slot === 'inv-armadura' && idItemSelected.type === 'armor'){
@@ -140,18 +141,19 @@ function InventarioPage(
 
   const selectIcon = (typeIcon: 'armor' | 'weapon' | 'shield' | 'r0' | 'r1' | 'r2' | 'r3' | 'r4') => {
     let selectId: number | null = null
+    const playerData = props.playerStats.equipment;
 
     if (typeIcon === 'armor'){
-      if(props.playerStats.equipment?.idArmor){
-        selectId = props.playerStats.equipment?.idArmor
+      if(playerData.idArmor !== 999){
+        selectId = playerData.idArmor
       }
     }else if (typeIcon === 'shield'){
-      if(props.playerStats.equipment?.idShield){
-        selectId = props.playerStats.equipment?.idShield
+      if(playerData.idShield !== 999){
+        selectId = playerData.idShield
       }
     }else if (typeIcon === 'weapon'){
-      if(props.playerStats.equipment?.idWeapon){
-        selectId = props.playerStats.equipment?.idWeapon
+      if(playerData.idWeapon !== 999){
+        selectId = playerData.idWeapon
       }
     }else if (typeIcon.startsWith('r')){
       if(props.playerStats.room[typeIcon]){
@@ -163,17 +165,21 @@ function InventarioPage(
   }
 
   const TotalDamagePlayer = () => {
+    const playerData = props.playerStats.equipment;
+
     return ARMORY[props.playerStats.baseAttack].damage
-            + ARMORY[props.playerStats.equipment.idArmor || 0].damage
-            + ARMORY[props.playerStats.equipment.idShield || 0].damage
-            + ARMORY[props.playerStats.equipment.idWeapon || 0].damage
+         + ARMORY[playerData.idArmor?? 999].damage
+         + ARMORY[playerData.idShield?? 1001].damage
+         + ARMORY[playerData.idWeapon?? 1000].damage
   }
 
   const TotalDefensePlayer = () => {
+    const playerData = props.playerStats.equipment;
+
     return ARMORY[props.playerStats.baseAttack].defense
-      + ARMORY[props.playerStats.equipment.idArmor || 0].defense
-      + ARMORY[props.playerStats.equipment.idShield || 0].defense
-      + ARMORY[props.playerStats.equipment.idWeapon || 0].defense
+      + ARMORY[playerData.idArmor?? 999].defense
+      + ARMORY[playerData.idShield?? 1001].defense
+      + ARMORY[playerData.idWeapon?? 1000].defense
   }
 
   const TotalActionsPlayer = () => {
@@ -248,20 +254,20 @@ function InventarioPage(
             <div className="flex col tooltip-info">
               <span>
                 Daño: {
-                  ARMORY[props.playerStats.room.r0 || 0].damage
-                  + ARMORY[props.playerStats.room.r1 || 0].damage
-                  + ARMORY[props.playerStats.room.r2 || 0].damage
-                  + ARMORY[props.playerStats.room.r3 || 0].damage
-                  + ARMORY[props.playerStats.room.r4 || 0].damage
+                    ARMORY[props.playerStats.room.r0 || 999].damage
+                  + ARMORY[props.playerStats.room.r1 || 999].damage
+                  + ARMORY[props.playerStats.room.r2 || 999].damage
+                  + ARMORY[props.playerStats.room.r3 || 999].damage
+                  + ARMORY[props.playerStats.room.r4 || 999].damage
                   }
             </span>
             <span>
               Defensa: {
-                ARMORY[props.playerStats.room.r0 || 0].defense
-                + ARMORY[props.playerStats.room.r1 || 0].defense
-                + ARMORY[props.playerStats.room.r2 || 0].defense
-                + ARMORY[props.playerStats.room.r3 || 0].defense
-                + ARMORY[props.playerStats.room.r4 || 0].defense
+                  ARMORY[props.playerStats.room.r0 || 999].defense
+                + ARMORY[props.playerStats.room.r1 || 999].defense
+                + ARMORY[props.playerStats.room.r2 || 999].defense
+                + ARMORY[props.playerStats.room.r3 || 999].defense
+                + ARMORY[props.playerStats.room.r4 || 999].defense
                 }
             </span>
             </div>
