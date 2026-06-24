@@ -154,8 +154,10 @@ function DungeonPage(
     markEndOfTurn();
   }
 
-  const controlOfAnimationDamage = (ataque: number, defense:number) => {
-    if(defense-ataque < 0){ //Mejorar
+  const controlOfAnimationDamage = (ataque: number, defense:number, enemyLife: number) => {
+    if(enemyLife <= 0){
+      return
+    }else if(defense-ataque < 0){ //Mejorar
       setShowDamage("takeDamage")
     }else{
       setShowDamage("successDefense")
@@ -166,7 +168,7 @@ function DungeonPage(
   function handleEndTurno(){
     setplayerStats((val: PlayerStatsControl) => {
       const ataque = enemy.life > 0? 1: 0;
-      controlOfAnimationDamage(ataque, val.bonos.defense)
+      controlOfAnimationDamage(ataque, val.bonos.defense, enemy.life)
       const defensaFinal = val.bonos.defense-ataque > 0? val.bonos.defense-ataque : 0;
       const atk = ataque-val.bonos.defense
       const ataqueAVida = atk > 0? atk : 0
