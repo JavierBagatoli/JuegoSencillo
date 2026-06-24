@@ -69,7 +69,7 @@ function PantallaDungeon(
               />
             </div>
           </div>
-        : <div className='flex col center dungeon-view'>
+        : <div className={`back-${props.levelSelected+1}-${props.varLevel} flex col center dungeon-view`}>
             <h2>Quedas inconciente</h2>
             <button 
               onClick={() => props.startMission(false)}

@@ -1,0 +1,23 @@
+.hit{
+  animation: hit 0.3s linear 1;
+  background-color: brown;
+  border-radius: 1rem;
+  height: 2rem;
+  width: 2rem;
+  scale: 0;
+}
+
+@keyframes hit {
+  0%{
+    scale: 0;
+    background-color: rgb(225, 168, 168);
+  }
+  80%{
+    scale: 1;
+    background: #FD1D1D;
+background: radial-gradient(90deg,rgba(253, 29, 29, 1) 0%, rgba(252, 176, 69, 1) 100%);
+  }
+  100%{
+    scale: 0;
+  }
+}

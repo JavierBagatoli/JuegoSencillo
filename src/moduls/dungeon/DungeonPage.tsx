@@ -9,7 +9,6 @@ import type { EnemyStatscontrol } from '../../components/models/enemy.interfaces
 import { EMPTY_ENEMY, SLIME_HARD, SLIME_ROCK, SLIME_SOFT } from '../../components/initialData/enemys.init'
 import Animation1sec from '../../components/generics/Animation1Sec'
 import { ARMORY } from '../../components/initialData/armory.init'
-import attackAnimation from '../../assets/gif/ataque.gif'
 import type { levelsAvalibles } from '../../components/models/levels-avalibles.interfaces'
 
 function DungeonPage(
@@ -146,6 +145,7 @@ function DungeonPage(
       const ataqueAVida = atk > 0? atk : 0
       const vidaFinal = defensaFinal == 0? val.life-ataqueAVida : val.life
       
+      if(vidaFinal <= 0){prop.playerStats.life = 0}
       const statusFinal: PlayerStatsControl = {
         ...val,
         life: vidaFinal,
@@ -158,6 +158,7 @@ function DungeonPage(
 
       return statusFinal
     })
+
     const addEnemy: boolean = enemy.life <= 0
     
     if(addEnemy){
@@ -190,7 +191,6 @@ function DungeonPage(
               <Animation1sec
                 show={showAttack}
                 setShow={setShowAttack}
-                animation={attackAnimation}
               />
               <section
                 style={{position: 'absolute'}}
@@ -215,8 +215,9 @@ function DungeonPage(
                 varLevel={varLevel}
                 enemyToShow={enemyToShow}
               />
+               {prop.playerStats.life > 0 &&
                 <div className='flex col pad-05 buttons'>
-                
+                {prop.playerStats.life}
                 <div className='flex row buttons'>
                   <button
                     disabled={!isTurnoJugador()}
@@ -235,6 +236,8 @@ function DungeonPage(
                   onClick={() => handleEndTurno()}
                 >Terminar Turno</button>
               </div>
+
+               }
             </>
           :
             <SeleccionNivelPage

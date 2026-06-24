@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
+import "./Animation1Sec.css"
 
 function Animation1sec(
   props:{
     show: boolean | null,
     setShow: Function,
-    animation: any
   }
 ) {
   const [s, setS] = useState<boolean>(false)
@@ -15,7 +15,7 @@ function Animation1sec(
         if(!val){
           setTimeout(() => {
             setS(false)
-          }, 1000)
+          }, 300)
           return true
         }
         return val
@@ -26,7 +26,9 @@ function Animation1sec(
   },[props.show === true])
 
   function addAnimation(){
-    return s? <img style={{width: '10rem', height: '10rem'}} src={props.animation}/>: <></>
+    return s? <div className="hit"
+      style={{marginLeft: `${Math.random()*15+3}rem`, marginTop: `${Math.random()*15+3}rem`}}
+    ></div>: <></>
   }
 
   return (
