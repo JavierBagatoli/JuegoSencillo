@@ -10,6 +10,8 @@ import { EMPTY_ENEMY, SLIME_HARD, SLIME_ROCK, SLIME_SOFT } from '../../component
 import Animation1sec from '../../components/generics/Animation1Sec'
 import { ARMORY } from '../../components/initialData/armory.init'
 import type { levelsAvalibles } from '../../components/models/levels-avalibles.interfaces'
+import AnimationDropItem from '../../components/generics/AnimationDropItem'
+import type { TypesOfDrop } from '../../components/models/typesOfDrops.enum'
 
 function DungeonPage(
   prop: {
@@ -26,6 +28,7 @@ function DungeonPage(
   const [showAttack, setShowAttack] = useState<boolean | null>(null)
   const [varLevel, setVarLevel] = useState<0 | 1 | 2 | 3>(0)
   const [enemyToShow, setEnemyToShow] = useState<number>(0)
+  const [dropToShow, setDropToShow] = useState<TypesOfDrop>("none")
 
   const updateEnemy = () => {
     const numberOfEnemy = Math.round(Math.random()*2)
@@ -65,8 +68,6 @@ function DungeonPage(
       const isPoisonWeapon = weapon.special === "poison"
       const applyPoison = Math.random() < (weapon.prop || 0)
 
-      console.log(Math.random() < (weapon.prop || 0),Math.random() , (weapon.prop || 0))
-
       const enemy:EnemyStatscontrol = {
         ...val,
         life: finalLifeEnemy,
@@ -76,11 +77,16 @@ function DungeonPage(
         }
       }
       
+      if(enemy.life === 0){
+        updateInvetory();
+      }
       return enemy;
     })
 
-    
+    markEndOfTurn();
+  }
 
+  const updateInvetory = () => {
     prop.updateMochila((val:Mochila) => {
       const suerte: number = 1
       const newMetales = Math.random()* 100 < 10*suerte ? 1: 0
@@ -88,16 +94,25 @@ function DungeonPage(
       const newCircuitos = Math.random()* 100 < 4*suerte ? 1: 0
       const newCristales = Math.random()* 100 < 1*suerte ? 1: 0
 
+      if(newMetales){
+        setDropToShow("metal")
+      }else if(newNucleos){
+        setDropToShow("cores")
+      }else if(newCircuitos){
+        setDropToShow("circuit")
+      }else if(newCristales){
+        setDropToShow("crystal")        
+      }else{
+        setDropToShow("none")
+      }
+
       return {
         metales: val.metales + newMetales,
         nucleosEnergeticos: val.nucleosEnergeticos + newNucleos,
         circuito: val.circuito + newCircuitos,
         cristales: val.cristales + newCristales,
       }
-    }
-    )
-
-    markEndOfTurn();
+    })
   }
 
   function isTurnoJugador(){
@@ -189,8 +204,12 @@ function DungeonPage(
           startMission?
             <>
               <Animation1sec
-                show={showAttack}
                 setShow={setShowAttack}
+                show={showAttack}
+              />
+              <AnimationDropItem
+                setShow={setDropToShow}
+                typeDrop={dropToShow}
               />
               <section
                 style={{position: 'absolute'}}

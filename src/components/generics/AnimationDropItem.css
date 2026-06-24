@@ -1,0 +1,25 @@
+.drop{
+  animation: drop 1.2s ease-in 1;
+  border-radius: 1rem;
+  height: 2rem;
+  width: 2rem;
+  scale: 0;
+  margin-top: 7rem;
+  margin-left: 12rem;
+  z-index: -10;
+}
+
+@keyframes drop{
+  0%{
+    scale: 0;
+  }
+  50%{
+    scale: 1;
+    transform: translateY(-5rem);
+  }
+  100%{
+    scale: 0;
+    transform: translateY(-10rem);
+    filter: opacity(0);
+  }
+}
