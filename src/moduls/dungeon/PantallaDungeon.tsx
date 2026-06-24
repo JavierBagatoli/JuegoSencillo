@@ -3,9 +3,11 @@ import type { EnemyStatscontrol } from '../../components/models/enemy.interfaces
 import type { levelsAvalibles } from '../../components/models/levels-avalibles.interfaces'
 import type { PlayerStatsControl } from '../../components/models/player.interfaces'
 import ToolTipAtributo from '../../components/ToolTipAtributo'
+import "./DungeonPage.css"
 
 function PantallaDungeon(
   props: {
+    classname: string,
     playerStats: PlayerStatsControl,
     statusEnemy: EnemyStatscontrol,
     startMission: Function,
@@ -30,7 +32,7 @@ function PantallaDungeon(
     <>
       {
         props.playerStats.life > 0? 
-          <div className={`back-${props.levelSelected+1}-${props.varLevel} center dungeon-view flex col`}>
+          <div className={`back-${props.levelSelected+1}-${props.varLevel} center dungeon-view flex col ${props.classname}`}>
             <div className='flex row center'>
               <div className='flex col'>
                 <ToolTipAtributo

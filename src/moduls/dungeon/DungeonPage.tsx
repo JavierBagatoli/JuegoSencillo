@@ -12,6 +12,7 @@ import { ARMORY } from '../../components/initialData/armory.init'
 import type { levelsAvalibles } from '../../components/models/levels-avalibles.interfaces'
 import AnimationDropItem from '../../components/generics/AnimationDropItem'
 import type { TypesOfDrop } from '../../components/models/typesOfDrops.enum'
+import "./DungeonPage.css"
 
 function DungeonPage(
   prop: {
@@ -29,6 +30,7 @@ function DungeonPage(
   const [varLevel, setVarLevel] = useState<0 | 1 | 2 | 3>(0)
   const [enemyToShow, setEnemyToShow] = useState<number>(0)
   const [dropToShow, setDropToShow] = useState<TypesOfDrop>("none")
+  const [showDamage, setShowDamage] = useState<"successDefense" | "takeDamage" | "none">("none")
 
   const updateEnemy = () => {
     const numberOfEnemy = Math.round(Math.random()*2)
@@ -152,14 +154,25 @@ function DungeonPage(
     markEndOfTurn();
   }
 
+  const controlOfAnimationDamage = (ataque: number, defense:number) => {
+    if(defense-ataque < 0){ //Mejorar
+      setShowDamage("takeDamage")
+    }else{
+      setShowDamage("successDefense")
+    }
+    setTimeout(() => {setShowDamage("none")}, 1000)
+  }
+
   function handleEndTurno(){
     setplayerStats((val: PlayerStatsControl) => {
       const ataque = enemy.life > 0? 1: 0;
+      controlOfAnimationDamage(ataque, val.bonos.defense)
       const defensaFinal = val.bonos.defense-ataque > 0? val.bonos.defense-ataque : 0;
       const atk = ataque-val.bonos.defense
       const ataqueAVida = atk > 0? atk : 0
       const vidaFinal = defensaFinal == 0? val.life-ataqueAVida : val.life
       
+
       if(vidaFinal <= 0){prop.playerStats.life = 0}
       const statusFinal: PlayerStatsControl = {
         ...val,
@@ -225,8 +238,8 @@ function DungeonPage(
                   />
                 }
               </section>
-              
               <PantallaDungeon
+                classname={`${showDamage === "takeDamage"?"dungeon-view-damage": showDamage === "successDefense"?"dungeon-view-defense":""}`}
                 playerStats={playerStats}
                 statusEnemy={enemy}
                 levelSelected={level}

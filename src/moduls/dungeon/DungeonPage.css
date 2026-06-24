@@ -1,0 +1,89 @@
+.dungeon-view{
+  height: 45%;
+  background-color: rgb(196, 159, 159);
+  background-size: cover;
+  justify-content: center;
+  align-content: center;
+  display: flex;
+}
+
+.dungeon-view-damage{
+  animation: damage0 0.3s ease 1;
+}
+
+@keyframes damage0 {
+  0%{
+box-shadow: inset 0 0 0rem red;
+  }
+  50%{
+    box-shadow: inset 0 0 10rem red;
+  }
+  100%{
+    box-shadow: inset 0 0 0rem red;
+  }
+}
+
+.dungeon-view-defense{
+  animation: defense0 0.3s ease 1;
+}
+
+@keyframes defense0 {
+  0%{
+box-shadow: inset 0 0 0rem rgb(120, 144, 139);
+  }
+  50%{
+    box-shadow: inset 0 0 5rem rgb(120, 144, 139);
+  }
+  100%{
+    box-shadow: inset 0 0 0rem rgb(120, 144, 139);
+  }
+}
+
+.back-1-0{
+  background-image: url(../../assets/mapa/dungeon-level-1-0.jpg);
+}
+.back-1-1{
+  background-image: url(../../assets/mapa/dungeon-level-1-1.jpg);
+}
+.back-1-2{
+  background-image: url(../../assets/mapa/dungeon-level-1-2.jpg);
+}
+.back-1-3{
+  background-image: url(../../assets/mapa/dungeon-level-1-3.jpg);
+}
+
+.back-2-0{
+  background-image: url(../../assets/mapa/dungeon-level-2-0.jpg);
+}
+
+.back-3-0{
+  background-image: url(../../assets/mapa/dungeon-level-3-0.jpg);
+}
+
+.back-3-1{
+  background-image: url(../../assets/mapa/dungeon-level-3-1.jpg);
+}
+
+.back-3-2{
+  background-image: url(../../assets/mapa/dungeon-level-3-2.jpg);
+}
+
+.back-3-3{
+  background-image: url(../../assets/mapa/dungeon-level-3-3.jpg);
+}
+
+.back-4-0{
+  background-image: url(../../assets/mapa/dungeon-level-4-0.jpg);
+}
+
+.back-4-1{
+  background-image: url(../../assets/mapa/dungeon-level-4-1.jpg);
+}
+
+.back-4-2{
+  background-image: url(../../assets/mapa/dungeon-level-4-2.jpg);
+}
+
+.back-4-3{
+  background-image: url(../../assets/mapa/dungeon-level-4-3.jpg);
+}
