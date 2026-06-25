@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './index.css'
 import { PLAYER_INITIAL_DUNGEON } from './components/initialData/player.init'
-import type { PlayerStatsControl } from './components/models/player.interfaces'
+import type { InvetoryPlayer, PlayerStatsControl } from './components/models/player.interfaces'
 import MapaGlobalPage from './moduls/mapa/MapaMundoPage'
 import DungeonPage from './moduls/dungeon/DungeonPage'
 import ComercioPage from './moduls/comercio/ComercioPage'
@@ -12,17 +12,19 @@ import ConfigPerfilPage from './moduls/configPerfil/ConfigPerfilPage'
 import BatallaInvasionPage from './moduls/invasion-battle/BatallaInvasionPage'
 import TrabajoPage from './moduls/trabajo/components/TrabajoPage'
 import CrearPage from './moduls/crear/CrearPage'
+import { INVENTARY } from './components/initialData/inventary.init'
 
 function App() {
   const [page, setPage] = useState<MenuOptions>('mapa')
   const [mochila, setMochila] = useState<Mochila>({
     circuito: 0,
     metales: 0,
-    cristales: 0,
+    cristales: 3,
     nucleosEnergeticos: 0
   })
   const [playerStats, setPlayerStats] = useState<PlayerStatsControl>(PLAYER_INITIAL_DUNGEON)
   const [showAsidenav, setShowAsidenav] = useState<boolean>(false)
+  const [invetory, setInventory] = useState<InvetoryPlayer[]>(INVENTARY)
   const isMobile: boolean =window.innerWidth < 431
 
   const menuOptions: MenuOptions[] = ['mapa', 'trabajar', 'crear', 'comercio', 'dungeon', 'invasion', 'inventario', 'configPerfil']
@@ -49,7 +51,10 @@ function App() {
       case 'crear':
         return <CrearPage
           mochila={mochila}
-          updateMochila={setMochila}/>
+          updateMochila={setMochila}
+          invetory={invetory}
+          updateInventario={setInventory}
+          />
       case 'dungeon':
         return <DungeonPage 
           mochilla={mochila}
@@ -64,6 +69,7 @@ function App() {
         return <InventarioPage
           playerStats={playerStats}
           setEquipment={setPlayerStats}
+          invetory={invetory}
         />
     }
   }

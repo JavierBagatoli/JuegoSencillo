@@ -6,6 +6,10 @@ function ItemVenta(
     item: string
   }
 ) {
+  const comprar = () => {
+
+  }
+
   return (
     <>
       <div className="flex row">
@@ -15,7 +19,7 @@ function ItemVenta(
             <span>{value}</span>
           </>)
         }
-        <button>Comprar</button>
+        <button onClick={() => comprar()}>Comprar</button>
       </div>
     </>
   )

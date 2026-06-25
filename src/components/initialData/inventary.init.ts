@@ -1,4 +1,6 @@
-export const INVENTARY: {id:number, cantidad: number}[] = [
+import type { InvetoryPlayer } from "../models/player.interfaces";
+
+export const INVENTARY: InvetoryPlayer[] = [
     {
       id: 0,
       cantidad: 2,

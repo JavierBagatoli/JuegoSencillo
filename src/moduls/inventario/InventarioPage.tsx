@@ -1,8 +1,7 @@
 import { useState } from "react"
 import SlotInvetario from "./SlotInventario"
 import "./InventarioPage.css"
-import type { EquipmentUser, PlayerStatsControl } from "../../components/models/player.interfaces"
-import { INVENTARY } from "../../components/initialData/inventary.init"
+import type { EquipmentUser, InvetoryPlayer, PlayerStatsControl } from "../../components/models/player.interfaces"
 import { ARMORY } from "../../components/initialData/armory.init"
 import type { Weapon } from "../../components/models/items-fight.interfaces"
 
@@ -10,7 +9,8 @@ import type { Weapon } from "../../components/models/items-fight.interfaces"
 function InventarioPage(
   props: {
     playerStats: PlayerStatsControl,
-    setEquipment: Function
+    setEquipment: Function,
+    invetory: InvetoryPlayer[]
   }
 ) {
   const [slot, setSlot] = useState<string | null>(null)
@@ -18,7 +18,6 @@ function InventarioPage(
   const [idShowInfo, setIdShowInfo] = useState<number>(0)
   const [typeItem, setTypeItem] = useState<string | null>(null)
  
-  const inventarioReal: {id: number, cantidad: number}[] = INVENTARY;
   const biblioteca: Record<number, Weapon> = ARMORY;
 
   function handleSetSlot(id: string){
@@ -68,7 +67,7 @@ function InventarioPage(
 
     if(!typesOfSlots.includes(slot || '')){ return }
     const i: number = Number(id)
-    const idItemSelected = biblioteca[inventarioReal[i].id]
+    const idItemSelected = biblioteca[props.invetory[i].id]
     
     let idW: number = props.playerStats.equipment.idWeapon?? 999;
     let idA: number = props.playerStats.equipment.idArmor?? 1000;
@@ -295,16 +294,16 @@ function InventarioPage(
           <h3 style={{paddingTop: '0.5rem'}}>Inventario</h3>
           <section className="flex wrap">
           {
-          ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19'].map((val) => 
+          props.invetory.map((val,index) => 
               <div>
                 <SlotInvetario
-                  key={val}
-                  id={val}
+                  key={index}
+                  id={`item-inventory-${index}`}
                   slotSlected={slotInventory}
-                  unselected={biblioteca[inventarioReal[Number(val)]?.id]?.type.split('_')[0] === typeItem || typeItem === null}
-                  icon={biblioteca[inventarioReal[Number(val)]?.id]?.icon}
+                  unselected={biblioteca[val.id]?.type.split('_')[0] === typeItem || typeItem === null}
+                  icon={biblioteca[val.id]?.icon}
                   selected={(val:string) => handleSetSlotInventory2(val)}
-                  cant={inventarioReal[Number(val)]?.cantidad}
+                  cant={val.cantidad}
                 />
               </div>
             )

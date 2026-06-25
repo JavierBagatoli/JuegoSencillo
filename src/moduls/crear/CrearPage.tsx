@@ -3,45 +3,69 @@ import type { Mochila } from "../../App"
 import { ARMORY } from "../../components/initialData/armory.init"
 import type { Weapon } from "../../components/models/items-fight.interfaces"
 import "./CrearPage.css"
+import type { InvetoryPlayer } from "../../components/models/player.interfaces"
 
 function CrearPage(
   props: {
     mochila: Mochila,
-    updateMochila: Function
+    updateMochila: Function,
+    invetory: InvetoryPlayer[],
+    updateInventario: React.Dispatch<React.SetStateAction<InvetoryPlayer[]>>
   }
 ) {
   const listaItems: Record<number, Weapon> = ARMORY
   const [extendText, setExtendText] = useState<string>('')
+  const [effect, setEffect] = useState<"successBuy" | "errorBuy" | "">()
+  const [index, setIndex] = useState<number | null>()
   
-  function handleBuy(index: number){
-    props.updateMochila((val: Mochila)=>{
-      const metalesFinal = val.metales - listaItems[index].metales;
-      const nucleFinal = val.nucleosEnergeticos - listaItems[index].nucleosEnergeticos;
-      const circuitoFinal = val.circuito - listaItems[index].cristales;
-      const cristalFinal = val.cristales - listaItems[index].cristales;
+  function handleBuy(index: number, i: number){
+    const metalesFinal = props.mochila.metales - listaItems[index].metales;
+    const nucleFinal = props.mochila.nucleosEnergeticos - listaItems[index].nucleosEnergeticos;
+    const circuitoFinal = props.mochila.circuito - listaItems[index].circuito;
+    const cristalFinal = props.mochila.cristales - listaItems[index].cristales;
 
-      
-      if(metalesFinal < 0 && 
-        nucleFinal < 0 && 
-        circuitoFinal < 0 && 
+    setIndex(i)
+    setTimeout(() => {
+      setEffect("")
+      setIndex(null)
+    },500)
+    if(metalesFinal < 0 || 
+        nucleFinal < 0 || 
+        circuitoFinal < 0 || 
         cristalFinal < 0
       ){
         //notifyError("No puedes Comprar")
-        return val
-      }else{
-        //notifySuccess("Compra Realizada")
-        return {
+        setEffect("errorBuy")
+        return
+      }
+
+    
+    setEffect("successBuy");
+    props.updateMochila((_val: Mochila)=>{
+      return {
           metales: metalesFinal,
           nucleosEnergeticos: nucleFinal,
           circuito: circuitoFinal,
           cristales: cristalFinal,
         }
+    })
+
+    props.updateInventario((prev) => {
+      const existe = prev.find(item => item.id === index);
+      if (existe) {
+        return prev.map(item =>
+          item.id === index
+            ? { ...item, cantidad: item.cantidad + 1 }
+            : item
+        );
       }
 
-    })
+      return [...prev, { id: index, cantidad: 1 }];
+    });
+    
   }
 
-  function spanTextoBuy(val: Weapon){
+  function spanTextoBuy(val: Weapon, i: number){
     const circuito: boolean = val.circuito <= props.mochila.circuito
     const nucleo:   boolean = val.nucleosEnergeticos <= props.mochila.nucleosEnergeticos
     const metales:  boolean = val.metales <= props.mochila.metales
@@ -55,8 +79,8 @@ function CrearPage(
       <td><span className={cristales? 'green' : ''}>{val.cristales}</span></td>
       <td><button
             disabled={!circuito || !nucleo || !metales || !cristales}
-            onClick={() => handleBuy(1)}>
-            Comprar {circuito}
+            onClick={() => handleBuy(val.id,i)}>
+            Comprar
       </button></td>
     </>
   }
@@ -86,16 +110,14 @@ function CrearPage(
               
               <th className="isCompact">Cristales</th>
               <th className="isCompactOff" onClick={() => handleExtend('cristal')}>{extendText === 'cristal'? 'cristal':'cri'}</th>
-
-
               <th></th>
             </tr>
           </thead>
           <tbody>
               {
-                Object.values(listaItems).map((obj) => <tr>
+                Object.values(listaItems).map((obj, i) => <tr className={`${index === i? effect : ''}`}>
                   {
-                    spanTextoBuy(obj)
+                    spanTextoBuy(obj, i)
                   }
                 </tr>
                 )

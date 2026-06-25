@@ -32,3 +32,9 @@ export interface EquipmentShipUser{
   r3: number,
   r4: number,
 }
+
+
+export interface InvetoryPlayer{
+  id: number;
+  cantidad: number
+}

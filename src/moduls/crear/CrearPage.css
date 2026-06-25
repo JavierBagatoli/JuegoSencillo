@@ -35,8 +35,6 @@ thead tr th{
     padding-bottom: 1rem;
 }
 
-
-
 @media (max-width: 500px) {
     .isCompact{
         display: none;
@@ -46,5 +44,37 @@ thead tr th{
 @media (min-width: 501px) {
     .isCompactOff{
         display: none;
+    }
+}
+
+.successBuy{
+    animation: successBuy 0.5s ease 1;
+}
+
+@keyframes successBuy {
+    0%{
+        box-shadow: inset 0px 0px 0rem rgb(86, 173, 185);
+    }
+    50%{
+        box-shadow: inset 0px 0px 1rem rgb(86, 173, 185);
+    }
+    100%{
+        box-shadow: inset 0px 0px 0rem rgb(86, 173, 185);
+    }
+}
+
+.errorBuy{
+    animation: errorBuy 0.5s ease 1;
+}
+
+@keyframes errorBuy {
+    0%{
+        box-shadow: inset 0px 0px 0rem red;
+    }
+    50%{
+        box-shadow: inset 0px 0px 1rem red;
+    }
+    100%{
+        box-shadow: inset 0px 0px 0rem red;
     }
 }
