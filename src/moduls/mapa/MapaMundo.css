@@ -16,6 +16,43 @@
 }
 
 .zone span{
-
     color: rgb(153, 170, 185);
+}
+
+.display {
+    width: fit-content;
+    overflow: hidden;
+    transform-origin: left;
+}
+
+.display-on {
+    animation: open .5s ease forwards;
+}
+
+.display-off {
+    animation: close .5s ease forwards;
+}
+
+@keyframes open {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes close {
+    from {
+        transform: scaleX(1);
+    }
+    to {
+        transform: scaleX(0);
+    }
+}
+
+.display {
+    width: fit-content;
+    overflow: hidden;
+    transform-origin: left;
 }
