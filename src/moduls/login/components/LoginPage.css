@@ -1,0 +1,23 @@
+.login-page{
+    height: 100dvh !important;
+    background-color: rgb(22, 66, 104);
+    background-image: url('../../../assets/background/galaxy.png');
+    justify-content: center;
+    align-content: center;
+}
+
+.login-page .menu{
+    color: rgb(115, 174, 174);
+    align-items: center;
+    background-color: rgb(43, 43, 51);
+    height: 10rem;
+    width: 40rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-page .menu button{
+    width: 20rem;
+    height: 4rem;
+    font-size: 1.5rem;
+}

@@ -35,19 +35,19 @@
 
 @keyframes open {
     from {
-        transform: scaleX(0);
+        clip-path: inset(0 100% 0 0);
     }
     to {
-        transform: scaleX(1);
+        clip-path: inset(0 0 0 0);
     }
 }
 
 @keyframes close {
     from {
-        transform: scaleX(1);
+        clip-path: inset(0 0 0 0);
     }
     to {
-        transform: scaleX(0);
+        clip-path: inset(0 100% 0 0);
     }
 }
 

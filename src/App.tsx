@@ -13,6 +13,7 @@ import BatallaInvasionPage from './moduls/invasion-battle/BatallaInvasionPage'
 import TrabajoPage from './moduls/trabajo/components/TrabajoPage'
 import CrearPage from './moduls/crear/CrearPage'
 import { INVENTARY } from './components/initialData/inventary.init'
+import LoginPage from './moduls/login/components/LoginPage'
 
 function App() {
   const [page, setPage] = useState<MenuOptions>('mapa')
@@ -22,6 +23,7 @@ function App() {
     cristales: 3,
     nucleosEnergeticos: 0
   })
+  const [isLogin, setIsLogin] = useState<boolean>(false)
   const [playerStats, setPlayerStats] = useState<PlayerStatsControl>(PLAYER_INITIAL_DUNGEON)
   const [showAsidenav, setShowAsidenav] = useState<boolean>(false)
   const [invetory, setInventory] = useState<InvetoryPlayer[]>(INVENTARY)
@@ -76,7 +78,8 @@ function App() {
 
   return (
     <>
-      <main className={isMobile?'':'desktop'}>
+      {
+        isLogin?<main className={isMobile?'':'desktop'}>
         {isMobile && !showAsidenav &&
 
         <button
@@ -178,7 +181,13 @@ function App() {
             showPage()
           }
         </section>
-      </main>
+      </main>:
+        <LoginPage
+          handleLogin={(val: boolean) => setIsLogin(val)}
+        />
+      }
+
+      
     </>
   )
 }
