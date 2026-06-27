@@ -7,7 +7,7 @@ button span{
     position: absolute;
     padding: 0.5rem;
     color: black;
-    z-index: 10;
+    z-index: 1;
 }
 
 button{
@@ -19,13 +19,5 @@ button{
 }
 
 .b2{
-    height: 46.2rem;
-    width: 30rem;
-}
-
-@media screen and (max-width: 431px) {
-    .b2{
-        width: auto;
-    }
-    
+    height: 100dvh;
 }

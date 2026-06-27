@@ -79,7 +79,7 @@ function App() {
   return (
     <>
       {
-        isLogin?<main className={isMobile?'':'desktop'}>
+        isLogin?<main className={`principal-view ${isMobile?'':'desktop'}`}>
         {isMobile && !showAsidenav &&
 
         <button
@@ -91,7 +91,7 @@ function App() {
 
         {((showAsidenav && isMobile) ||!isMobile) &&
           <aside 
-            style={{position: isMobile?'absolute':'relative', zIndex: 1}}
+            style={{position: isMobile?'absolute':'relative', zIndex: 2}}
             className='menu-acciones'>
               {isMobile &&
               <button
@@ -176,7 +176,7 @@ function App() {
             </div>
           </aside>
         }
-        <section>
+        <section className='w100'>
           {
             showPage()
           }

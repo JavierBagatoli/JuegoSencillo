@@ -62,8 +62,8 @@ function InventarioPage(
 
   const typesOfSlots: string[] = ['inv-arma','inv-armadura','inv-shield','habitacion-0','habitacion-1','habitacion-2','habitacion-3','habitacion-4'];
 
-  function handleSetSlotInventory2(id: string){
-    setSlotInvetory((val:string | null) => val !== id? id: '999')
+  function handleSetSlotInventory2(id: number){
+    setSlotInvetory((val:string | null) => val !== `${id}`? `${id}`: '999')
 
     if(!typesOfSlots.includes(slot || '')){ return }
     const i: number = Number(id)
@@ -188,8 +188,7 @@ function InventarioPage(
   return (
     <>
       <section 
-        style={{maxWidth: '30rem'}}
-        className="flex col background-inventario pad-05 max-h">
+        className="background-inventario pad-05 max-h">
           <h3 className="text-center">Equipo de Personaje</h3>
         <div className="flex col gap-15">
           <div className="flex">
@@ -302,7 +301,7 @@ function InventarioPage(
                   slotSlected={slotInventory}
                   unselected={biblioteca[val.id]?.type.split('_')[0] === typeItem || typeItem === null}
                   icon={biblioteca[val.id]?.icon}
-                  selected={(val:string) => handleSetSlotInventory2(val)}
+                  selected={(_val:string) => handleSetSlotInventory2(index)}
                   cant={val.cantidad}
                 />
               </div>

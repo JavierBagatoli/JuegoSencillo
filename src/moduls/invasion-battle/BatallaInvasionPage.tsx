@@ -19,7 +19,6 @@ function BatallaInvasionPage() {
 
   return (
     <section 
-        style={{maxWidth: '30rem', width: '30rem', backgroundColor: 'gray'}}
         className="flex col pad-05 max-h mapa-mundo">
       <div className="flex col w-full">
         <h3 className="flex center">Invasion</h3>

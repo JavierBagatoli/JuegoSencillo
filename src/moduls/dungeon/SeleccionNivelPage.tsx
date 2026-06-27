@@ -4,7 +4,6 @@ import buttonAscensor from '../../assets/buttons/button-ascensor-level-dungeon.j
 import buttonPecio from '../../assets/buttons/button-pecio-level-dungeon.jpg'
 import buttonStart from '../../assets/buttons/button-start-dungeon.jpg'
 
-
 import "./SeleccionNivelPage.css"
 import { useState } from 'react'
 import type { levelsAvalibles } from '../../components/models/levels-avalibles.interfaces'
@@ -34,27 +33,27 @@ function SeleccionNivelPage(
       <section className='background-inventario b2'>
         <div 
           className="flex col pad-1 center dungeon-selector-buttons"
-          style={{justifyContent: 'space-between', height: '95%'}}
+          style={{justifyContent: 'space-between', height: '95dvh'}}
           >
           <div 
             className="flex col"
             >
             <button className='invisible' onClick={() => handleLevel(0)}>
-              <span className='high-contrast'>Minas</span>
+              <span className='mid-contrast'>Minas</span>
               <img
                 className={`${idLevelSected !== 0? 'unselected': ''}`}
                 src={buttonMina}/>
             </button>
 
             <button className='invisible'  onClick={() => handleLevel(1)}>
-              <span className='high-contrast'>Laberinto</span>
+              <span className='mid-contrast'>Laberinto</span>
               <img
                 className={`${idLevelSected !== 1? 'unselected': ''}`}
                 src={buttonLaberinto}/>
             </button>
 
             <button className='invisible' onClick={() => handleLevel(2)}>
-              <span className='high-contrast'>Ascensor</span>
+              <span className='mid-contrast'>Ascensor</span>
               <img 
                 className={`${idLevelSected !== 2? 'unselected': ''}`}
                 src={buttonAscensor}/>
@@ -63,7 +62,7 @@ function SeleccionNivelPage(
             <button
               className='invisible' 
               onClick={() => handleLevel(3)}>
-              <span className='high-contrast'>Pecio espacial</span>
+              <span className='mid-contrast'>Pecio espacial</span>
               <img
                 className={`${idLevelSected !== 3? 'unselected': ''}`}
                 src={buttonPecio}/>
@@ -74,7 +73,7 @@ function SeleccionNivelPage(
             className='invisible'
             disabled={idLevelSected === -1}
             onClick={() => handleStartMission()}>
-              <span className='high-contrast'>Iniciar Exploración</span>
+              <span className='mid-contrast'>Iniciar Exploración</span>
               <img 
               className={`${idLevelSected === -1? 'disabled': ''} no-shadow`}
               src={buttonStart}/>
