@@ -39,7 +39,6 @@ function App() {
     })
   }
 
-
   const showPage = () => {
     switch(page){
       case 'trabajar':

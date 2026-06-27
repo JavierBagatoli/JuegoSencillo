@@ -1,12 +1,12 @@
 import { useState } from "react"
 import naveTeamOne from "../../assets/ships/Humans.png"
 import naveTeamTwo from "../../assets/ships/Humans_2.png"
-import jefe from "../../assets/monster/slime.png"
 import ToolTipAtributo from "../../components/ToolTipAtributo"
 import "../../index.css"
 import ColumnaDeBatalla from "./component/ColumnaDeBatalla"
 
 import './BatallaInvasionPage.css'
+import JefeControl from "./component/JefeControl"
 
 type HousesAvalibles = 'team1' | 'team2' | 'none'
 
@@ -16,6 +16,16 @@ function BatallaInvasionPage() {
   const handleSetShowTeam = (team: HousesAvalibles) => {
     setShowTeam((val) => val !== team? team: 'none')
   }
+
+  const v: {
+        type: "Terra" | "Flor" | "Tempano"
+        life: number,
+        lifeMax: number,
+    } = {
+                type: "Tempano",
+                life: 100,
+                lifeMax: 100
+              }
 
   return (
     <section 
@@ -65,7 +75,9 @@ function BatallaInvasionPage() {
         </section>
         <section className="flex col center w-full">
           <div className="flex col center">
-            <img src={jefe}></img>
+            <JefeControl
+              boss={v}
+            />
             <ToolTipAtributo
               text='Invasor del Espacio'
               actualValue={10}

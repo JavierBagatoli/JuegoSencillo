@@ -2,7 +2,7 @@ import buttonMina from '../../assets/buttons/button-mina-level-dungeon.jpg'
 import buttonLaberinto from '../../assets/buttons/button-laberinto-level-dungeon.jpg'
 import buttonAscensor from '../../assets/buttons/button-ascensor-level-dungeon.jpg'
 import buttonPecio from '../../assets/buttons/button-pecio-level-dungeon.jpg'
-import buttonStart from '../../assets/buttons/button-start-dungeon.jpg'
+import buttonStart from '../../assets/buttons/button-start-dungeon.png'
 
 import "./SeleccionNivelPage.css"
 import { useState } from 'react'
@@ -26,8 +26,6 @@ function SeleccionNivelPage(
     props.startMission(true)
   }
 
-  //Me gustaria que los botones sean imagenes
-
   return (
     <>
       <section className='b2'>
@@ -36,6 +34,7 @@ function SeleccionNivelPage(
           style={{justifyContent: 'space-between', height: '95dvh'}}
           >
           <div 
+            style={{paddingTop: '1rem'}}
             className="flex col"
             >
             <button className='invisible' onClick={() => handleLevel(0)}>
@@ -73,7 +72,7 @@ function SeleccionNivelPage(
             className='invisible'
             disabled={idLevelSected === -1}
             onClick={() => handleStartMission()}>
-              <span className='mid-contrast'>Iniciar Exploración</span>
+              <span className='mid-contrast center'>Iniciar Exploración</span>
               <img 
               className={`${idLevelSected === -1? 'disabled': ''} no-shadow`}
               src={buttonStart}/>
