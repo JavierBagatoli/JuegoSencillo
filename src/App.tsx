@@ -27,7 +27,7 @@ function App() {
   const [playerStats, setPlayerStats] = useState<PlayerStatsControl>(PLAYER_INITIAL_DUNGEON)
   const [showAsidenav, setShowAsidenav] = useState<boolean>(false)
   const [invetory, setInventory] = useState<InvetoryPlayer[]>(INVENTARY)
-  const isMobile: boolean =window.innerWidth < 431
+  const isMobile: boolean =window.innerWidth < 720
 
   const menuOptions: MenuOptions[] = ['mapa', 'trabajar', 'crear', 'comercio', 'dungeon', 'invasion', 'inventario', 'configPerfil']
 

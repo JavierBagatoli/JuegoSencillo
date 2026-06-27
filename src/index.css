@@ -216,7 +216,7 @@ button:disabled{
   text-justify: center;
 }
 
-@media screen and (max-width: 431px) {
+@media screen and (max-width: 719px) {
   .background-inventario{
     background-size: 50% !important;
   }
@@ -370,7 +370,7 @@ th{
   }
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 720px) {
   .principal-view{
     padding: 0;
     backdrop-filter: blur(3px) grayscale(0.7);
