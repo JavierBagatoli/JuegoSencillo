@@ -30,7 +30,7 @@ function SeleccionNivelPage(
 
   return (
     <>
-      <section className='background-inventario b2'>
+      <section className='b2'>
         <div 
           className="flex col pad-1 center dungeon-selector-buttons"
           style={{justifyContent: 'space-between', height: '95dvh'}}

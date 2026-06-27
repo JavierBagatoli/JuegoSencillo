@@ -27,7 +27,7 @@ function Animation1sec(
 
   function addAnimation(){
     return s? <div className="hit"
-      style={{marginLeft: `${Math.random()*15+3}rem`, marginTop: `${Math.random()*15+3}rem`}}
+      style={{marginLeft: `${Math.round(Math.random()*50+20)}dvw`, marginTop: `${Math.round(Math.random()*5+5)}rem`}}
     ></div>: <></>
   }
 
