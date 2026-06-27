@@ -23,7 +23,7 @@ function MapaGlobalPage() {
               <div className='zone'>
                 <span>Zona {index} - Drop: {index*5}%</span>
                 <div>{
-                  ['',''].map((_v,i) => 
+                  ['',''].map((_v,_i) => 
                     <div className='flex'>
                     <img 
                       onClick={() => handleExpandInfo(index)}
