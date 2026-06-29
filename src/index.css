@@ -283,7 +283,7 @@ th{
 }
 
 .disabled{
-  filter: grayscale(1);
+  filter: grayscale(1) !important;
 }
 
 .unselected{

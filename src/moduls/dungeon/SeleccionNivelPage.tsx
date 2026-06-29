@@ -37,21 +37,21 @@ function SeleccionNivelPage(
             style={{paddingTop: '1rem'}}
             className="flex col"
             >
-            <button className='invisible' onClick={() => handleLevel(0)}>
+            <button className='invisible button-img' onClick={() => handleLevel(0)}>
               <span className='mid-contrast'>Minas</span>
               <img
                 className={`${idLevelSected !== 0? 'unselected': ''}`}
                 src={buttonMina}/>
             </button>
 
-            <button className='invisible'  onClick={() => handleLevel(1)}>
+            <button className='invisible button-img'  onClick={() => handleLevel(1)}>
               <span className='mid-contrast'>Laberinto</span>
               <img
                 className={`${idLevelSected !== 1? 'unselected': ''}`}
                 src={buttonLaberinto}/>
             </button>
 
-            <button className='invisible' onClick={() => handleLevel(2)}>
+            <button className='invisible button-img' onClick={() => handleLevel(2)}>
               <span className='mid-contrast'>Ascensor</span>
               <img 
                 className={`${idLevelSected !== 2? 'unselected': ''}`}
@@ -59,7 +59,7 @@ function SeleccionNivelPage(
             </button>
 
             <button
-              className='invisible' 
+              className='invisible button-img' 
               onClick={() => handleLevel(3)}>
               <span className='mid-contrast'>Pecio espacial</span>
               <img
@@ -69,7 +69,7 @@ function SeleccionNivelPage(
           </div>
 
           <button 
-            className='invisible'
+            className='invisible button-img'
             disabled={idLevelSected === -1}
             onClick={() => handleStartMission()}>
               <span className='mid-contrast center'>Iniciar Exploración</span>
