@@ -5,8 +5,9 @@ import buttonPecio from '../../assets/buttons/button-pecio-level-dungeon.jpg'
 import buttonStart from '../../assets/buttons/button-start-dungeon.png'
 
 import "./SeleccionNivelPage.css"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { levelsAvalibles } from '../../components/models/levels-avalibles.interfaces'
+import { controlerDungeon } from '../../services/dungeon'
 
 function SeleccionNivelPage(
   props: {
@@ -16,6 +17,12 @@ function SeleccionNivelPage(
   }
 ) {
   const [idLevelSected, updateIdLevelSelected] = useState<number>(-1)
+
+  useEffect(() => {
+    console.log(
+      controlerDungeon.getDungeons(1)
+    )
+  }, []);
 
   const handleLevel = (val: number) =>{
     updateIdLevelSelected(val)
