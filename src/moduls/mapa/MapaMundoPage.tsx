@@ -1,8 +1,6 @@
-import spaceHuman from '../../assets/ships/Humans.png'
-import spaceHuman_2 from '../../assets/ships/Humans_2.png'
-import spaceHuman_3 from '../../assets/ships/Humans_3.png'
-import spaceAnulaki from '../../assets/ships/Anulaki.png'
 
+
+import { CAPITAL_SHIPS } from '../../components/initialData/capitalShips.init'
 import './MapaMundo.css'
 import { useState } from 'react'
 
@@ -12,6 +10,15 @@ function MapaGlobalPage() {
   const handleExpandInfo = (index: number) => {
     setExpandInfoIndex(val => val === index? -1: index)
   }
+
+  const filterShips = () => {
+    let zone0 = CAPITAL_SHIPS.filter(s => s.zone === 0)
+    let zone1 = CAPITAL_SHIPS.filter(s => s.zone === 1)
+    let zone2 = CAPITAL_SHIPS.filter(s => s.zone === 2)
+    let zone3 = CAPITAL_SHIPS.filter(s => s.zone === 3)
+
+    return [zone0, zone1, zone2, zone3]
+  }
   
   return (
     <>
@@ -19,24 +26,23 @@ function MapaGlobalPage() {
         className="flex col background-texto mapa-mundo max-h">
           <section className='flex col'>
           {
-            [spaceHuman,spaceHuman_2,spaceHuman_3,spaceAnulaki].map((val, index) => 
+            filterShips().map((val, index) => 
               <div className='zone'>
                 <span>Zona {index} - Drop: {index*5}%</span>
                 <div>{
-                  ['',''].map((_v,_i) => 
-                    <div className='flex'>
-                    <img 
-                      onClick={() => handleExpandInfo(index)}
-                      src={val}
-                    />
-                    {
-                      <div className={`${expandInfoIndex === index?"display-on":"display-off"} flex col display`}>
-                        <span>StarShipTrooper</span>
-                        <span>Capitan: {'Jab'}</span>
-                        <span>Torres: 1, Defensas: 2, Sensores: 1</span>
-                      </div>
-                    }
-
+                  val.map((ship) => 
+                    <div className='flex row no-wrap'>
+                      <img 
+                        onClick={() => handleExpandInfo(ship.id)}
+                        src={ship.img}
+                      />
+                      {
+                        <div className={`${expandInfoIndex === ship.id?"display-on":"display-off"} flex col display`}>
+                          <span>{ship.name}</span>
+                          <span>Capitan: {ship.owner}</span>
+                          <span>Torres: {ship.levels.towers}, Defensas: {ship.levels.defense}, Sensores: {ship.levels.sensors}</span>
+                        </div>
+                      }
                     </div>
                   )
                   }

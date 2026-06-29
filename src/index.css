@@ -383,3 +383,7 @@ th{
     width: 30rem;
   }
 }
+
+.no-wrap{
+  flex-wrap: nowrap;
+}
