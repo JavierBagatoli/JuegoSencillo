@@ -13,6 +13,7 @@ export default interface StatsControl{
 }
 
 export interface PlayerStatsControl extends StatsControl{
+  id: number,
   equipment: EquipmentUser,
   room: EquipmentShipUser,
   money: number,

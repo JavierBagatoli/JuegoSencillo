@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { Mochila } from '../../App'
 import PantallaDungeon from './PantallaDungeon'
 import fireDebuf from '../../assets/debuf/fire.png'
@@ -13,6 +13,7 @@ import type { levelsAvalibles } from '../../components/models/levels-avalibles.i
 import AnimationDropItem from '../../components/generics/AnimationDropItem'
 import type { TypesOfDrop } from '../../components/models/typesOfDrops.enum'
 import "./DungeonPage.css"
+import { controlerDungeon } from '../../services/dungeon'
 
 function DungeonPage(
   prop: {
@@ -31,6 +32,17 @@ function DungeonPage(
   const [enemyToShow, setEnemyToShow] = useState<number>(0)
   const [dropToShow, setDropToShow] = useState<TypesOfDrop>("none")
   const [showDamage, setShowDamage] = useState<"successDefense" | "takeDamage" | "none">("none")
+
+  useEffect(() => {
+    const loadEnemy = async () => {
+      const newEnemy = await controlerDungeon.postCreateMonster(playerStats.id,level);
+      setEnemy(newEnemy);
+    };
+    
+    loadEnemy();
+    }
+  ,[])
+
 
   const updateEnemy = () => {
     const numberOfEnemy = Math.round(Math.random()*2)

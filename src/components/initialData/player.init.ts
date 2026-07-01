@@ -3,6 +3,7 @@ import type { PlayerStatsControl } from "../models/player.interfaces";
 export const PLAYER_INITIAL_DUNGEON: PlayerStatsControl = {
     life: 10,
     lifeMax: 10,
+    id: 1,
     bonos: {
         defense: 1,
         attack: 0,
