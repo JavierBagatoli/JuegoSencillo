@@ -14,8 +14,11 @@ import TrabajoPage from './moduls/trabajo/components/TrabajoPage'
 import CrearPage from './moduls/crear/CrearPage'
 import { INVENTARY } from './components/initialData/inventary.init'
 import LoginPage from './moduls/login/components/LoginPage'
+import { loginWithGoogle, logout, useAuth } from './hooks/useAuth'
 
 function App() {
+  const { user } = useAuth();
+
   const [page, setPage] = useState<MenuOptions>('mapa')
   const [mochila, setMochila] = useState<Mochila>({
     circuito: 0,
@@ -23,7 +26,6 @@ function App() {
     cristales: 3,
     nucleosEnergeticos: 0
   })
-  const [isLogin, setIsLogin] = useState<boolean>(false)
   const [playerStats, setPlayerStats] = useState<PlayerStatsControl>(PLAYER_INITIAL_DUNGEON)
   const [showAsidenav, setShowAsidenav] = useState<boolean>(false)
   const [invetory, setInventory] = useState<InvetoryPlayer[]>(INVENTARY)
@@ -76,9 +78,9 @@ function App() {
   }
 
   return (
-    <>
+    <>      
       {
-        isLogin?<main className={`principal-view ${isMobile?'':'desktop'}`}>
+        user?<main className={`principal-view ${isMobile?'':'desktop'}`}>
         {isMobile && !showAsidenav &&
 
         <button
@@ -107,9 +109,13 @@ function App() {
                 >
                   {text}
                 </button>
-
               )
             }
+            <button
+              style={{zIndex: 1}}
+              onClick={() => logout()}>
+              Cerrar Sesión
+            </button>
             <div className='flex col stats-section'>
               <h4 className='flex center'>
                 Dinero:
@@ -182,7 +188,7 @@ function App() {
         </section>
       </main>:
         <LoginPage
-          handleLogin={(val: boolean) => setIsLogin(val)}
+          loginWithGoogle={() =>loginWithGoogle()}
         />
       }
 

@@ -11,7 +11,8 @@
     align-items: center;
     background-color: rgb(43, 43, 51);
     height: 10rem;
-    width: 40rem;
+    max-width: 40rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
 }

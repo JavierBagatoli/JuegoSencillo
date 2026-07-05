@@ -1,17 +1,14 @@
 import './LoginPage.css'
 
-function LoginPage(props: {handleLogin: Function}) {
+function LoginPage(props: {loginWithGoogle: any}) {
 
-  const handleLogin = () =>{
-    props.handleLogin(true)
-  }
 
   return (
     <>
       <section className='login-page flex col'>
         <div className='menu'>
-          <h2>Bienvenido a "Nombre en Diseño"</h2>
-          <button onClick={() =>handleLogin()}>Login</button>
+          <h2>Bienvenido a <b>Otro Juego Web para Portafolio</b></h2>
+          <button onClick={() => props.loginWithGoogle()}>Login</button>
         </div>
       </section>
     </>
