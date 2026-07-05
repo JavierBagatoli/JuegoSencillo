@@ -15,7 +15,7 @@ interface AuthContextType {
 }
 
 const AuthContext = createContext<AuthContextType>(
-  { user: null, loading: true }
+  { user: null, loading: true}
 );
 const googleProvider = new GoogleAuthProvider();
 

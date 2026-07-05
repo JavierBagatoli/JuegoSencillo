@@ -77,6 +77,14 @@ function App() {
     }
   }
 
+  const handleLogin = async (use: "login" | "logout") => {
+    if(use === "login"){
+      loginWithGoogle()
+    }else{
+      logout()
+    }
+  }
+  
   return (
     <>      
       {
@@ -113,7 +121,7 @@ function App() {
             }
             <button
               style={{zIndex: 1}}
-              onClick={() => logout()}>
+              onClick={() => handleLogin("logout")}>
               Cerrar Sesión
             </button>
             <div className='flex col stats-section'>
@@ -188,7 +196,7 @@ function App() {
         </section>
       </main>:
         <LoginPage
-          loginWithGoogle={() =>loginWithGoogle()}
+          loginWithGoogle={() => handleLogin("login")}
         />
       }
 
