@@ -57,10 +57,8 @@ export const loginWithGoogle = async () => {
 // Función para cerrar sesión
 export const logout = async () => {
   try {
-    console.log("Cerrando sesión...");
     await signOut(auth);
   } catch (error: any) {
-    console.error("Error al cerrar sesión:", error.message);
     throw error;
   }
 };
