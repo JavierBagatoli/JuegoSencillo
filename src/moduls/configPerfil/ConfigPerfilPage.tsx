@@ -42,8 +42,8 @@ function ConfigPerfilPage() {
         <span>Seleccione la Imagen de Perfil:</span>
         <div className='flex row wrap pad'>
           {
-            vectorImagen.map(val => 
-              <div className='pfp_option'>
+            vectorImagen.map((val, index) => 
+              <div className='pfp_option' key={index}>
                 <img
                   src={val}
                 />

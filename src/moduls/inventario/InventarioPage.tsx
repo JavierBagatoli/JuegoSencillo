@@ -294,9 +294,8 @@ function InventarioPage(
           <section className="flex wrap">
           {
           props.invetory.map((val,index) => 
-              <div>
+              <div key={index}>
                 <SlotInvetario
-                  key={index}
                   id={`item-inventory-${index}`}
                   slotSlected={slotInventory}
                   unselected={biblioteca[val.id]?.type.split('_')[0] === typeItem || typeItem === null}

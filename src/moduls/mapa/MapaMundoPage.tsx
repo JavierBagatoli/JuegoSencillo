@@ -27,11 +27,13 @@ function MapaGlobalPage() {
           <section className='flex col'>
           {
             filterShips().map((val, index) => 
-              <div className='zone'>
+              <div className='zone' key={index}>
                 <span>Zona {index} - Drop: {index*5}%</span>
                 <div>{
-                  val.map((ship) => 
-                    <div className='flex row no-wrap'>
+                  val.map((ship, i) => 
+                    <div
+                     key={i}
+                     className='flex row no-wrap'>
                       <img 
                         onClick={() => handleExpandInfo(ship.id)}
                         src={ship.img}

@@ -16,7 +16,7 @@ function ComercioPage() {
           </thead>
           <tbody>
               {
-                listOfProducts.map(obj => <tr style={{width: '100%'}}>
+                listOfProducts.map((obj, index) => <tr key={index} style={{width: '100%'}}>
                   {
                     <td style={{width: '100%'}}><span>{obj}</span></td>
                   }

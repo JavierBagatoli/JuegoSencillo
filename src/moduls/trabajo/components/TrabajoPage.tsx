@@ -26,8 +26,8 @@ function TrabajoPage(props: {updateWork: Function}) {
       <section 
         style={{flexWrap: 'nowrap'}}
         className="flex col background-texto mapa-mundo max-h">
-          {infoWork.map((val) => 
-            <div className='detail-job flex row'>
+          {infoWork.map((val, index) => 
+            <div className='detail-job flex row' key={index}>
               <img src={val.img}></img>
               <div className='flex col'>
                   <p style={{color: 'white'}} className='flex row wrap'>{val.text}</p>

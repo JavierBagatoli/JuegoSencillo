@@ -115,7 +115,7 @@ function CrearPage(
           </thead>
           <tbody>
               {
-                Object.values(listaItems).map((obj, i) => <tr className={`${index === i? effect : ''}`}>
+                Object.values(listaItems).map((obj, i) => <tr key={i} className={`${index === i? effect : ''}`}>
                   {
                     spanTextoBuy(obj, i)
                   }

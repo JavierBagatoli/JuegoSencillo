@@ -110,8 +110,9 @@ function App() {
               }
 
             {
-              menuOptions.map(text => 
+              menuOptions.map((text, index) => 
                 <button
+                  key={index}
                   className={`${text}` === page? 'active' : ''}
                   onClick={() => setPage(text)}
                 >
