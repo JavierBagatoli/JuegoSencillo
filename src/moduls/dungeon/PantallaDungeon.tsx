@@ -28,6 +28,7 @@ function PantallaDungeon(
     }
   }
 
+
   return (
     <>
       {

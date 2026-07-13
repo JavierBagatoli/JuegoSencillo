@@ -1,7 +1,7 @@
 import type { EnemyStatscontrol } from "../components/models/enemy.interfaces";
 import { api } from "./api";
 
-export const controlerDungeon ={
+export const controlerDungeon = {
   async getDungeons(idUser: number): Promise<number[]> {
     const { data } = await api.post<number[]>("/api/dungeon/list-dungeons", {
         idUser
@@ -12,13 +12,23 @@ export const controlerDungeon ={
     const { data } = await api.post<EnemyStatscontrol>("/api/dungeon/create-monster", {
         idUser, level
     });
-    console.log(data)
     return data;
   },
-  async postEndTurn(idUser: number): Promise<number[]> {
+
+  async postEndTurn(idUser: endTurn): Promise<number[]> {
     const { data } = await api.post<number[]>("/api/dungeon/end-turn", {
-        idUser
+        ...idUser
     });
     return data;
   },
+}
+
+export interface endTurn{
+  idUser: number,
+  actions: string[]
+}
+
+export interface createMonster{
+  idUser: number,
+  level: number,
 }

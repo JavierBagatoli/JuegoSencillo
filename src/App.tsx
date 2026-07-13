@@ -15,6 +15,7 @@ import CrearPage from './moduls/crear/CrearPage'
 import { INVENTARY } from './components/initialData/inventary.init'
 import LoginPage from './moduls/login/components/LoginPage'
 import { loginWithGoogle, logout, useAuth } from './hooks/useAuth'
+import { DungeonProvider } from './hooks/useDungeonContext'
 
 function App() {
   const { user } = useAuth();
@@ -59,11 +60,13 @@ function App() {
           updateInventario={setInventory}
           />
       case 'dungeon':
-        return <DungeonPage 
-          mochilla={mochila}
-          updateMochila={setMochila}
-          playerStats={playerStats}
-          />
+        return <DungeonProvider>
+          <DungeonPage 
+            mochilla={mochila}
+            updateMochila={setMochila}
+            playerStats={playerStats}
+            />
+        </DungeonProvider>
       case 'invasion':
         return <BatallaInvasionPage/>
       case 'comercio':

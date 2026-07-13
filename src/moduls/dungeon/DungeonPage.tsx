@@ -13,7 +13,7 @@ import type { levelsAvalibles } from '../../components/models/levels-avalibles.i
 import AnimationDropItem from '../../components/generics/AnimationDropItem'
 import type { TypesOfDrop } from '../../components/models/typesOfDrops.enum'
 import "./DungeonPage.css"
-import { controlerDungeon } from '../../services/dungeon'
+import { useDungeon } from '../../hooks/useDungeonContext'
 
 function DungeonPage(
   prop: {
@@ -22,6 +22,7 @@ function DungeonPage(
     playerStats: PlayerStatsControl
   }
 ) {
+  const dungeonProv = useDungeon()
   const [enemy, setEnemy] = useState<EnemyStatscontrol>(EMPTY_ENEMY)
   const [level, setLevel] = useState<levelsAvalibles>(0)
   const [startMission, setStartMission] = useState<boolean>(false)
@@ -35,8 +36,7 @@ function DungeonPage(
 
   useEffect(() => {
     const loadEnemy = async () => {
-      const newEnemy = await controlerDungeon.postCreateMonster(playerStats.id,level);
-      setEnemy(newEnemy);
+      setEnemy(enemy);
     };
     
     loadEnemy();
@@ -178,6 +178,11 @@ function DungeonPage(
   }
 
   function handleEndTurno(){
+    dungeonProv?.endTurnEnemy({
+      idUser: 1,
+      actions: ["atk","atk"]
+    })
+
     setplayerStats((val: PlayerStatsControl) => {
       const ataque = enemy.life > 0? 1: 0;
       controlOfAnimationDamage(ataque, val.bonos.defense, enemy.life)
@@ -223,77 +228,77 @@ function DungeonPage(
   }
 
   return (
-    <section className='flex center max-w'> 
-      <section className='dungeon-port b2 background-inventario'>
-        <span style={{color: 'white'}}>
-          </span>
-        {
-          startMission?
-            <>
-              <Animation1sec
-                setShow={setShowAttack}
-                show={showAttack}
-              />
-              <AnimationDropItem
-                setShow={setDropToShow}
-                typeDrop={dropToShow}
-              />
-              <section
-                style={{position: 'absolute'}}
-                className='flex row pad-1'>
-                {enemy.debuf.poison > 0 &&
-                  <img
-                    src={fireDebuf}
-                  />
-                }
-                {enemy.debuf.slowness > 0 &&
-                  <img
-                    src={slowDebuf}
-                  />
-                }
-              </section>
-              <PantallaDungeon
-                classname={`${showDamage === "takeDamage"?"dungeon-view-damage": showDamage === "successDefense"?"dungeon-view-defense":""}`}
-                playerStats={playerStats}
-                statusEnemy={enemy}
-                levelSelected={level}
-                startMission={(val: boolean) => handleSelectLevel(val)}
-                varLevel={varLevel}
-                enemyToShow={enemyToShow}
-              />
-               {prop.playerStats.life > 0 &&
-                <div className='flex col pad-05 buttons'>
-                {prop.playerStats.life}
-                <div className='flex row buttons'>
+      <section className='flex center max-w'> 
+        <section className='dungeon-port b2 background-inventario'>
+          <span style={{color: 'white'}}>
+            </span>
+          {
+            startMission?
+              <>
+                <Animation1sec
+                  setShow={setShowAttack}
+                  show={showAttack}
+                />
+                <AnimationDropItem
+                  setShow={setDropToShow}
+                  typeDrop={dropToShow}
+                />
+                <section
+                  style={{position: 'absolute'}}
+                  className='flex row pad-1'>
+                  {enemy.debuf.poison > 0 &&
+                    <img
+                      src={fireDebuf}
+                    />
+                  }
+                  {enemy.debuf.slowness > 0 &&
+                    <img
+                      src={slowDebuf}
+                    />
+                  }
+                </section>
+                <PantallaDungeon
+                  classname={`${showDamage === "takeDamage"?"dungeon-view-damage": showDamage === "successDefense"?"dungeon-view-defense":""}`}
+                  playerStats={playerStats}
+                  statusEnemy={enemy}
+                  levelSelected={level}
+                  startMission={(val: boolean) => handleSelectLevel(val)}
+                  varLevel={varLevel}
+                  enemyToShow={enemyToShow}
+                />
+                {prop.playerStats.life > 0 &&
+                  <div className='flex col pad-05 buttons'>
+                  {prop.playerStats.life}
+                  <div className='flex row buttons'>
+                    <button
+                      disabled={!isTurnoJugador()}
+                      onClick={() => handleAttack()}
+                    >Golpear</button>
+                    <button
+                      disabled={!isTurnoJugador()}
+                      onClick={() => handleShield()}
+                      >Defender</button>
+                    <button
+                      disabled={!isTurnoJugador()}
+                      >Pocion c</button>
+                  </div>
                   <button
-                    disabled={!isTurnoJugador()}
-                    onClick={() => handleAttack()}
-                  >Golpear</button>
-                  <button
-                    disabled={!isTurnoJugador()}
-                    onClick={() => handleShield()}
-                    >Defender</button>
-                  <button
-                    disabled={!isTurnoJugador()}
-                    >Pocion c</button>
+                    disabled={isTurnoJugador()}
+                    onClick={() => handleEndTurno()}
+                  >Terminar Turno</button>
                 </div>
-                <button
-                  disabled={isTurnoJugador()}
-                  onClick={() => handleEndTurno()}
-                >Terminar Turno</button>
-              </div>
 
-               }
-            </>
-          :
-            <SeleccionNivelPage
-              level={level}
-              updateLevel={(val: levelsAvalibles) => setLevel(val)}
-              startMission={(val: boolean) => handleSelectLevel(val)}
-            />
-        }
+                }
+              </>
+            :
+              <SeleccionNivelPage
+                level={level}
+                updateLevel={(val: levelsAvalibles) => setLevel(val)}
+                startMission={(val: boolean) => handleSelectLevel(val)}
+              />
+          }
+        </section>
       </section>
-    </section>
   )
 }
 

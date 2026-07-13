@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react'
 import type { levelsAvalibles } from '../../components/models/levels-avalibles.interfaces'
 import { controlerDungeon } from '../../services/dungeon'
 import ButtonImage from '../../components/generics/component/ButtonImage'
+import { useDungeon } from '../../hooks/useDungeonContext'
 
 function SeleccionNivelPage(
   props: {
@@ -23,11 +24,10 @@ function SeleccionNivelPage(
   }
 ) {
   const [idLevelSected, updateIdLevelSelected] = useState<number>(-1)
+  const dungeonProv = useDungeon()
 
   useEffect(() => {
-    console.log(
-      controlerDungeon.getDungeons(1)
-    )
+    controlerDungeon.getDungeons(1)
   }, []);
 
   const handleLevel = (val: number) =>{
@@ -37,6 +37,7 @@ function SeleccionNivelPage(
 
   const handleStartMission = () =>{
     props.startMission(true)
+    dungeonProv?.createEnemy({idUser: 1, level: idLevelSected})
   }
 
   return (
