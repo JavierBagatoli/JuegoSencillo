@@ -1,14 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import type { Mochila } from '../../App'
 import PantallaDungeon from './PantallaDungeon'
 import fireDebuf from '../../assets/debuf/fire.png'
 import slowDebuf from '../../assets/debuf/snail.png'
 import SeleccionNivelPage from './SeleccionNivelPage'
 import type { PlayerStatsControl } from '../../components/models/player.interfaces'
-import type { EnemyStatscontrol } from '../../components/models/enemy.interfaces'
-import { EMPTY_ENEMY, SLIME_HARD, SLIME_ROCK, SLIME_SOFT } from '../../components/initialData/enemys.init'
 import Animation1sec from '../../components/generics/Animation1Sec'
-import { ARMORY } from '../../components/initialData/armory.init'
 import type { levelsAvalibles } from '../../components/models/levels-avalibles.interfaces'
 import AnimationDropItem from '../../components/generics/AnimationDropItem'
 import type { TypesOfDrop } from '../../components/models/typesOfDrops.enum'
@@ -23,40 +20,18 @@ function DungeonPage(
   }
 ) {
   const dungeonProv = useDungeon()
-  const [enemy, setEnemy] = useState<EnemyStatscontrol>(EMPTY_ENEMY)
+  const {enemy} = useDungeon()
   const [level, setLevel] = useState<levelsAvalibles>(0)
   const [startMission, setStartMission] = useState<boolean>(false)
   const [playerStats, setplayerStats] = useState<PlayerStatsControl>(prop.playerStats)
   const [turno, setTurno] = useState<'Jugador' | 'Oponente'>('Jugador');
   const [showAttack, setShowAttack] = useState<boolean | null>(null)
   const [varLevel, setVarLevel] = useState<0 | 1 | 2 | 3>(0)
-  const [enemyToShow, setEnemyToShow] = useState<number>(0)
   const [dropToShow, setDropToShow] = useState<TypesOfDrop>("none")
   const [showDamage, setShowDamage] = useState<"successDefense" | "takeDamage" | "none">("none")
 
-  useEffect(() => {
-    const loadEnemy = async () => {
-      setEnemy(enemy);
-    };
-    
-    loadEnemy();
-    }
-  ,[])
-
-
-  const updateEnemy = () => {
-    const numberOfEnemy = Math.round(Math.random()*2)
-    
-      if(level === 3){
-        setEnemy(numberOfEnemy === 1? SLIME_HARD: SLIME_ROCK)
-      }else{
-        setEnemy(JSON.parse(JSON.stringify(SLIME_SOFT)))
-      }
-  }
-
   function handleSelectLevel(val: boolean){
     setStartMission(val)
-    updateEnemy()
   }
 
   function handleAttack(){
@@ -70,36 +45,10 @@ function DungeonPage(
       return final
     })
 
-    setEnemy((val) => {
-      const lifeRest: number = val.life - (1*(playerStats.baseAttack+playerStats.bonos.attack))
-      const finalLifeEnemy: number = lifeRest > 0? lifeRest : 0;
-      
-      const weapon = ARMORY[prop.playerStats.equipment.idWeapon || 999]
-      // Slowness
-      const isSlownessWeapon = weapon.special === "slowness"
-      const applySlowness = Math.random() < (weapon.prop || 0)
-      // Poison
-      const isPoisonWeapon = weapon.special === "poison"
-      const applyPoison = Math.random() < (weapon.prop || 0)
-
-      const enemy:EnemyStatscontrol = {
-        ...val,
-        life: finalLifeEnemy,
-        debuf:{
-          slowness: isSlownessWeapon && applySlowness ? val.debuf.slowness++:  (val.debuf.slowness-1 >0? val.debuf.slowness-1 :0),
-          poison: isPoisonWeapon && applyPoison ? val.debuf.poison++:  ((val.debuf.poison-1) >0? val.debuf.poison-1 :0),
-        }
-      }
-      
-      if(enemy.life === 0){
-        updateInvetory();
-      }
-      return enemy;
-    })
-
     markEndOfTurn();
   }
 
+  /*
   const updateInvetory = () => {
     prop.updateMochila((val:Mochila) => {
       const suerte: number = 1
@@ -128,22 +77,13 @@ function DungeonPage(
       }
     })
   }
+  */
 
   function isTurnoJugador(){
     return 'Jugador' === turno
   }
 
   function markEndOfTurn(){
-     setEnemy((val: EnemyStatscontrol) => {
-      const life: number = val.life - val.debuf.poison
-      const lifeFinal: number = life > 0? life: 0
-      const final: EnemyStatscontrol = {
-        ...val,
-        life: lifeFinal
-      }
-      return final;
-    })
-
     if(playerStats.actions+1 >= playerStats.actionsMax + playerStats.bonos.actions){
       setTurno('Oponente')
     }
@@ -184,8 +124,8 @@ function DungeonPage(
     })
 
     setplayerStats((val: PlayerStatsControl) => {
-      const ataque = enemy.life > 0? 1: 0;
-      controlOfAnimationDamage(ataque, val.bonos.defense, enemy.life)
+      const ataque = enemy!.life > 0? 1: 0;
+      controlOfAnimationDamage(ataque, val.bonos.defense, enemy!.life)
       const defensaFinal = val.bonos.defense-ataque > 0? val.bonos.defense-ataque : 0;
       const atk = ataque-val.bonos.defense
       const ataqueAVida = atk > 0? atk : 0
@@ -206,24 +146,12 @@ function DungeonPage(
       return statusFinal
     })
 
-    const addEnemy: boolean = enemy.life <= 0
+    const addEnemy: boolean = enemy!.life <= 0
     
     if(addEnemy){
-      setEnemy((val: EnemyStatscontrol) => {
-        let typeOfEnemy: number = Math.random() * 10
-        return {
-          ...val,
-          lifeMax: Number((val.lifeMax*typeOfEnemy).toPrecision(3)),
-          life: Number((val.lifeMax*typeOfEnemy).toPrecision(3)),
-        }
-      })
-
       setVarLevel(Math.floor(Math.random()*4) as 0 | 1 | 2 | 3)
-      setEnemyToShow(Math.floor(Math.random()*5))
     }
-    if(enemy.life <= 0){
-      updateEnemy()
-    }
+
     setTurno('Jugador');
   }
 
@@ -246,12 +174,12 @@ function DungeonPage(
                 <section
                   style={{position: 'absolute'}}
                   className='flex row pad-1'>
-                  {enemy.debuf.poison > 0 &&
+                  {(enemy?.debuf.poison || 0) > 0 &&
                     <img
                       src={fireDebuf}
                     />
                   }
-                  {enemy.debuf.slowness > 0 &&
+                  {(enemy?.debuf.poison || 0) > 0 &&
                     <img
                       src={slowDebuf}
                     />
@@ -260,11 +188,10 @@ function DungeonPage(
                 <PantallaDungeon
                   classname={`${showDamage === "takeDamage"?"dungeon-view-damage": showDamage === "successDefense"?"dungeon-view-defense":""}`}
                   playerStats={playerStats}
-                  statusEnemy={enemy}
+                  statusEnemy={enemy!}
                   levelSelected={level}
                   startMission={(val: boolean) => handleSelectLevel(val)}
                   varLevel={varLevel}
-                  enemyToShow={enemyToShow}
                 />
                 {prop.playerStats.life > 0 &&
                   <div className='flex col pad-05 buttons'>

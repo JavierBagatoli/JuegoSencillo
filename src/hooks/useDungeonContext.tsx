@@ -20,10 +20,8 @@ export function DungeonProvider({ children }: any) {
   }
 
   async function endTurnEnemy(data: endTurn) {
-    console.log("aaa")
     controlerDungeon.postEndTurn(data).then((val) => {
-      console.log(val, "hola");
-      setEnemy(prev => prev)
+      setEnemy(val)
     })
   }
 
@@ -35,7 +33,13 @@ export function DungeonProvider({ children }: any) {
 }
 
 export function useDungeon() {
-  return useContext(dungeonContext);
+  const context = useContext(dungeonContext);
+
+  if (!context) {
+    throw new Error("useDungeon debe usarse dentro de DungeonProvider");
+  }
+
+  return context;
 }
 
 

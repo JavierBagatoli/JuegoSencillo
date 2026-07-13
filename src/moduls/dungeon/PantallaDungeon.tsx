@@ -3,6 +3,7 @@ import type { EnemyStatscontrol } from '../../components/models/enemy.interfaces
 import type { levelsAvalibles } from '../../components/models/levels-avalibles.interfaces'
 import type { PlayerStatsControl } from '../../components/models/player.interfaces'
 import ToolTipAtributo from '../../components/ToolTipAtributo'
+import { useDungeon } from '../../hooks/useDungeonContext'
 import "./DungeonPage.css"
 
 function PantallaDungeon(
@@ -13,18 +14,19 @@ function PantallaDungeon(
     startMission: Function,
     levelSelected: levelsAvalibles,
     varLevel: 0 | 1 | 2 | 3,
-    enemyToShow: number,
   }
 ) {
+  const {enemy} = useDungeon()
+
   const selectMonster = () => {
     if(props.levelSelected === 0){
-      return bestiario.monsterT1[props.enemyToShow]
+      return bestiario.monsterT1[enemy?.idTypeImage?? 0]
     }else if(props.levelSelected === 1){
-      return bestiario.monsterT2[props.enemyToShow]
+      return bestiario.monsterT2[enemy?.idTypeImage?? 0]
     }else if(props.levelSelected === 2){
-      return bestiario.monsterT3[props.enemyToShow]
+      return bestiario.monsterT3[enemy?.idTypeImage?? 0]
     }else if(props.levelSelected === 3){
-      return bestiario.monsterT4[props.enemyToShow]
+      return bestiario.monsterT4[enemy?.idTypeImage?? 0]
     }
   }
 
@@ -39,11 +41,11 @@ function PantallaDungeon(
                 <ToolTipAtributo
                   text='Vida'
                   highContrast={true}
-                  actualValue={props.statusEnemy.life}
-                  maxValue={props.statusEnemy.lifeMax}
+                  actualValue={enemy?.life || 0}
+                  maxValue={enemy?.lifeMax || 0}
                 />
 
-              {props.statusEnemy.life > 0 ?
+              {props.statusEnemy?.life > 0 ?
                 <img 
                   className='monster'
                   src={selectMonster()}/>
