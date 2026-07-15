@@ -1,18 +1,26 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import SlotInvetario from "./SlotInventario"
 import "./InventarioPage.css"
-import type { EquipmentUser, InvetoryPlayer, PlayerStatsControl } from "../../components/models/player.interfaces"
+import type { EquipmentUser, PlayerStatsControl } from "../../components/models/player.interfaces"
 import { ARMORY } from "../../components/initialData/armory.init"
 import type { Weapon } from "../../components/models/items-fight.interfaces"
+import { useInventory } from "../../hooks/useInventoryContext"
 
 
 function InventarioPage(
   props: {
     playerStats: PlayerStatsControl,
     setEquipment: Function,
-    invetory: InvetoryPlayer[]
+    /*invetory: InvetoryPlayer[]*/
   }
 ) {
+  const inventory = useInventory();
+
+  useEffect(() => {
+    inventory.getEquipment(props.playerStats.id);
+    inventory.getInventory(props.playerStats.id)
+  }, [])
+  
   const [slot, setSlot] = useState<string | null>(null)
   const [slotInventory, setSlotInvetory] = useState<string | null>(null)
   const [idShowInfo, setIdShowInfo] = useState<number>(0)
@@ -67,7 +75,7 @@ function InventarioPage(
 
     if(!typesOfSlots.includes(slot || '')){ return }
     const i: number = Number(id)
-    const idItemSelected = biblioteca[props.invetory[i].id]
+    const idItemSelected = biblioteca[inventory.inventory[i].id]
     
     let idW: number = props.playerStats.equipment.idWeapon?? 999;
     let idA: number = props.playerStats.equipment.idArmor?? 1000;
@@ -80,6 +88,7 @@ function InventarioPage(
       
 
     if(typeof idItemSelected === 'undefined'){ return }
+    if(slot === null) return
 
       if(slot === 'inv-arma' && idItemSelected.type === 'weapon'){
         idW = idItemSelected.id
@@ -101,6 +110,12 @@ function InventarioPage(
           idR4 = idItemSelected.id
         }
       }
+
+      inventory.getSetEquipment({
+        idUser: props.playerStats.id,
+        idSlot: slot,
+        playerIdinventory: idItemSelected.id
+      })
       
       const final: EquipmentUser = {
         idWeapon: idW,
@@ -112,6 +127,7 @@ function InventarioPage(
         + (biblioteca[idA].actions || 0)
         + (biblioteca[idS].actions || 0)
 
+        
       props.setEquipment((val: PlayerStatsControl) => {
 
         const finalStatus:PlayerStatsControl = {
@@ -293,7 +309,7 @@ function InventarioPage(
           <h3 style={{paddingTop: '0.5rem'}}>Inventario</h3>
           <section className="flex wrap">
           {
-          props.invetory.map((val,index) => 
+          inventory.inventory.map((val,index) => 
               <div key={index}>
                 <SlotInvetario
                   id={`item-inventory-${index}`}

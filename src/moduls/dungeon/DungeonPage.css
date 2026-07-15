@@ -87,3 +87,12 @@ box-shadow: inset 0 0 0rem rgb(120, 144, 139);
 .back-4-3{
   background-image: url(../../assets/mapa/dungeon-level-4-3.jpg);
 }
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}

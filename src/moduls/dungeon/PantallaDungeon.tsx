@@ -5,6 +5,7 @@ import type { PlayerStatsControl } from '../../components/models/player.interfac
 import ToolTipAtributo from '../../components/ToolTipAtributo'
 import { useDungeon } from '../../hooks/useDungeonContext'
 import "./DungeonPage.css"
+import frioTexture from '../../assets/texturas/frio.avif'
 
 function PantallaDungeon(
   props: {
@@ -46,9 +47,19 @@ function PantallaDungeon(
                 />
 
               {props.statusEnemy?.life > 0 ?
-                <img 
-                  className='monster'
-                  src={selectMonster()}/>
+              <> 
+                <div style={{position: 'relative'}}>
+                  <img 
+                    className={'monster'}
+                    src={selectMonster()}/>
+                  {(enemy?.debuf.slowness || 0) > 0 &&
+                    <img 
+                      src={frioTexture}
+                      className="overlay"
+                    />
+                  }
+                </div>
+              </>
                 : <div className='monster'></div>
               }
               </div>

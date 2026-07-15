@@ -16,6 +16,7 @@ import { INVENTARY } from './components/initialData/inventary.init'
 import LoginPage from './moduls/login/components/LoginPage'
 import { loginWithGoogle, logout, useAuth } from './hooks/useAuth'
 import { DungeonProvider } from './hooks/useDungeonContext'
+import { InventoryProvider } from './hooks/useInventoryContext'
 
 function App() {
   const { user } = useAuth();
@@ -72,11 +73,13 @@ function App() {
       case 'comercio':
         return <ComercioPage/>
       case 'inventario':
-        return <InventarioPage
-          playerStats={playerStats}
-          setEquipment={setPlayerStats}
-          invetory={invetory}
-        />
+        return <InventoryProvider>
+            <InventarioPage
+              playerStats={playerStats}
+              setEquipment={setPlayerStats}
+            />
+        </InventoryProvider>
+        
     }
   }
 
