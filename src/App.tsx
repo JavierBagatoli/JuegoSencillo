@@ -17,6 +17,7 @@ import LoginPage from './moduls/login/components/LoginPage'
 import { loginWithGoogle, logout, useAuth } from './hooks/useAuth'
 import { DungeonProvider } from './hooks/useDungeonContext'
 import { InventoryProvider } from './hooks/useInventoryContext'
+import { CarftProvider } from './hooks/useCraftContext'
 
 function App() {
   const { user } = useAuth();
@@ -54,12 +55,14 @@ function App() {
       case 'mapa':
         return <MapaGlobalPage/>
       case 'crear':
-        return <CrearPage
-          mochila={mochila}
-          updateMochila={setMochila}
-          invetory={invetory}
-          updateInventario={setInventory}
-          />
+        return <CarftProvider>
+          <CrearPage
+            mochila={mochila}
+            updateMochila={setMochila}
+            invetory={invetory}
+            updateInventario={setInventory}
+            />
+        </CarftProvider>
       case 'dungeon':
         return <DungeonProvider>
           <DungeonPage 

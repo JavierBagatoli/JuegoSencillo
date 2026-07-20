@@ -32,11 +32,11 @@ function InventarioPage(
     setSlot((val:string | null) => val !== id? id: null)
 
     switch(id){
-      case 'inv-arma':
+      case 'inv-weapon':
         setIdShowInfo(props.playerStats.equipment.idWeapon || 999);
         setTypeItem(_val => 'weapon')
         break;
-      case 'inv-armadura':
+      case 'inv-armor':
         setIdShowInfo(props.playerStats.equipment.idArmor || 999);
         setTypeItem(_val => 'armor')
         break;
@@ -68,7 +68,7 @@ function InventarioPage(
 
   }
 
-  const typesOfSlots: string[] = ['inv-arma','inv-armadura','inv-shield','habitacion-0','habitacion-1','habitacion-2','habitacion-3','habitacion-4'];
+  const typesOfSlots: string[] = ['inv-weapon','inv-armor','inv-shield','habitacion-0','habitacion-1','habitacion-2','habitacion-3','habitacion-4'];
 
   function handleSetSlotInventory2(id: number){
     setSlotInvetory((val:string | null) => val !== `${id}`? `${id}`: '999')
@@ -90,9 +90,9 @@ function InventarioPage(
     if(typeof idItemSelected === 'undefined'){ return }
     if(slot === null) return
 
-      if(slot === 'inv-arma' && idItemSelected.type === 'weapon'){
+      if(slot === 'inv-weapon' && idItemSelected.type === 'weapon'){
         idW = idItemSelected.id
-      }else if(slot === 'inv-armadura' && idItemSelected.type === 'armor'){
+      }else if(slot === 'inv-armor' && idItemSelected.type === 'armor'){
         idA = idItemSelected.id 
       }else if(slot === 'inv-shield'   && idItemSelected.type === 'shield'){
         idS = idItemSelected.id
@@ -225,14 +225,14 @@ function InventarioPage(
 
           <section className="flex">
             <SlotInvetario
-              id="inv-arma"
+              id="inv-weapon"
               slotSlected={slot}
               icon={selectIcon("weapon")}
               selected={(val:string) => handleSetSlot(val)}
               cant={null}
               />
             <SlotInvetario
-              id="inv-armadura"
+              id="inv-armor"
               slotSlected={slot}
               icon={selectIcon("armor")}
               selected={(val:string) => handleSetSlot(val)}

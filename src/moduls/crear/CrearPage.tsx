@@ -1,9 +1,8 @@
 import { useState } from "react"
 import type { Mochila } from "../../App"
-import { ARMORY } from "../../components/initialData/armory.init"
-import type { Weapon } from "../../components/models/items-fight.interfaces"
 import "./CrearPage.css"
 import type { InvetoryPlayer } from "../../components/models/player.interfaces"
+import { useCarft, type itemToSell } from "../../hooks/useCraftContext"
 
 function CrearPage(
   props: {
@@ -13,22 +12,26 @@ function CrearPage(
     updateInventario: React.Dispatch<React.SetStateAction<InvetoryPlayer[]>>
   }
 ) {
-  const listaItems: Record<number, Weapon> = ARMORY
-  const [extendText, setExtendText] = useState<string>('')
+  const context = useCarft()
+
+   const [extendText, setExtendText] = useState<string>('')
   const [effect, setEffect] = useState<"successBuy" | "errorBuy" | "">()
   const [index, setIndex] = useState<number | null>()
   
   function handleBuy(index: number, i: number){
-    const metalesFinal = props.mochila.metales - listaItems[index].metales;
-    const nucleFinal = props.mochila.nucleosEnergeticos - listaItems[index].nucleosEnergeticos;
-    const circuitoFinal = props.mochila.circuito - listaItems[index].circuito;
-    const cristalFinal = props.mochila.cristales - listaItems[index].cristales;
+    const metalesFinal = props.mochila.metales - (context.items[index].cost.metal ?? 0);
+    const nucleFinal = props.mochila.nucleosEnergeticos - (context.items[index].cost.nucleo ?? 0);
+    const circuitoFinal = props.mochila.circuito - (context.items[index].cost.circuito ?? 0);
+    const cristalFinal = props.mochila.cristales - (context.items[index].cost.cristal ?? 0);
 
     setIndex(i)
     setTimeout(() => {
       setEffect("")
       setIndex(null)
     },500)
+
+    console.log("index >", index, "el otro i>",i, metalesFinal, nucleFinal, circuitoFinal, cristalFinal)
+
     if(metalesFinal < 0 || 
         nucleFinal < 0 || 
         circuitoFinal < 0 || 
@@ -41,14 +44,9 @@ function CrearPage(
 
     
     setEffect("successBuy");
-    props.updateMochila((_val: Mochila)=>{
-      return {
-          metales: metalesFinal,
-          nucleosEnergeticos: nucleFinal,
-          circuito: circuitoFinal,
-          cristales: cristalFinal,
-        }
-    })
+    context.craftItem({
+      idUser:1, idItem: index
+    });
 
     props.updateInventario((prev) => {
       const existe = prev.find(item => item.id === index);
@@ -65,18 +63,18 @@ function CrearPage(
     
   }
 
-  function spanTextoBuy(val: Weapon, i: number){
-    const circuito: boolean = val.circuito <= props.mochila.circuito
-    const nucleo:   boolean = val.nucleosEnergeticos <= props.mochila.nucleosEnergeticos
-    const metales:  boolean = val.metales <= props.mochila.metales
-    const cristales:boolean = val.cristales <= props.mochila.cristales 
+  function spanTextoBuy(val: itemToSell, i: number){
+    const circuito: boolean = (val.cost.circuito ?? 0) <= props.mochila.circuito
+    const nucleo:   boolean = (val.cost.nucleo ?? 0)  <= props.mochila.nucleosEnergeticos
+    const metales:  boolean = (val.cost.metal ?? 0) <= props.mochila.metales
+    const cristales:boolean = (val.cost.cristal ?? 0) <= props.mochila.cristales 
 
     return <>
-      <td className="left"><span>{val.nombre}</span></td>
-      <td><span className={circuito ? 'green' : ''}>{val.circuito}</span></td>
-      <td><span className={nucleo   ? 'green' : ''}>{val.nucleosEnergeticos}</span></td>
-      <td><span className={metales  ? 'green' : ''}>{val.metales}</span></td>
-      <td><span className={cristales? 'green' : ''}>{val.cristales}</span></td>
+      <td className="left"><span>{val.title}</span></td>
+      <td><span className={circuito ? 'green' : ''}>{val.cost.circuito || "-"}</span></td>
+      <td><span className={nucleo   ? 'green' : ''}>{val.cost.nucleo || "-"}</span></td>
+      <td><span className={metales  ? 'green' : ''}>{val.cost.metal || "-"}</span></td>
+      <td><span className={cristales? 'green' : ''}>{val.cost.cristal || "-"}</span></td>
       <td><button
             disabled={!circuito || !nucleo || !metales || !cristales}
             onClick={() => handleBuy(val.id,i)}>
@@ -115,7 +113,7 @@ function CrearPage(
           </thead>
           <tbody>
               {
-                Object.values(listaItems).map((obj, i) => <tr key={i} className={`${index === i? effect : ''}`}>
+                context.items.map((obj, i) => <tr key={i} className={`${index === i? effect : ''}`}>
                   {
                     spanTextoBuy(obj, i)
                   }

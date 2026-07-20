@@ -15,9 +15,9 @@ function SlotInvetario(
   }
 ) {
   const showImageBase = ():any =>{
-    if(props.id === 'inv-arma'){
+    if(props.id === 'inv-weapon'){
       return sword
-    }else if(props.id === 'inv-armadura'){
+    }else if(props.id === 'inv-armor'){
       return armor
     }else if(props.id === 'inv-shield'){
       return shield
