@@ -25,7 +25,9 @@ const carftContext = createContext<CarftContextType | null>(null);
 
 export function CarftProvider({ children }: any) {
   useEffect(() => {
-    getCosts()
+    if(items.length === 0){
+      getCosts()
+    }
   }, [])
 
   const [items, setItems] = useState<itemToSell[]>([]);

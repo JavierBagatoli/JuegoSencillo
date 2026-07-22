@@ -114,7 +114,7 @@ function CrearPage(
           <tbody>
               {
                 context.items.map((obj, i) => <tr key={i} className={`${index === i? effect : ''}`}>
-                  {
+                  {i !== 0 &&
                     spanTextoBuy(obj, i)
                   }
                 </tr>

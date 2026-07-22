@@ -15,9 +15,9 @@ export const controlerDungeon = {
     return data;
   },
 
-  async postEndTurn(idUser: endTurn): Promise<EnemyStatscontrol> {
+  async postEndTurn(endTurn: endTurn): Promise<EnemyStatscontrol> {
     const { data } = await api.post<EnemyStatscontrol>("/api/dungeon/end-turn", {
-        ...idUser
+        ...endTurn
     });
     return data;
   },

@@ -95,7 +95,7 @@ export const ARMORY: Record<number, Weapon> ={
       damage: 1,
       defense: 0,
       uses: 3,
-      actions: 2,
+      actions: 1,
       metales: 6,
       nucleosEnergeticos: 0,
       circuito: 0,

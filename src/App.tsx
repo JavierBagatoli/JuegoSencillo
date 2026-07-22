@@ -34,7 +34,12 @@ function App() {
   const [invetory, setInventory] = useState<InvetoryPlayer[]>(INVENTARY)
   const isMobile: boolean =window.innerWidth < 720
 
-  const menuOptions: MenuOptions[] = ['mapa', 'trabajar', 'crear', 'comercio', 'dungeon', 'invasion', 'inventario', 'configPerfil']
+  const menuOptions: MenuOptions[] = ['mapa',
+    // 'trabajar', 
+    'crear',// 'comercio',
+    'dungeon',// 'invasion',
+    'inventario', //'configPerfil'
+    ]
 
   const updateMoney = () => {
     setPlayerStats((val) => {
@@ -142,7 +147,7 @@ function App() {
               <span>Platinos: {playerStats.platimun}</span>
             </div>
 
-            <div className='flex col stats-section'>
+            {false && <div className='flex col stats-section'>
               <h4 className='flex center'>Pociones:</h4>
               <ToolTipAtributo
                 text='Velocidad'
@@ -160,6 +165,9 @@ function App() {
                 maxValue={99}
               />
             </div>
+            }
+            
+
             <div className='flex col stats-section'>
               <h4 className='flex center'>Recusos</h4>
               <ToolTipAtributo
@@ -181,21 +189,7 @@ function App() {
                 text='Cristales'
                 actualValue={mochila.cristales}
                 maxValue={999}
-              />
-
-              <div>
-                <ToolTipAtributo
-                  text='Atk'
-                  actualValue={playerStats.baseAttack + playerStats.bonos.attack}
-                  maxValue={999}
-                />
-                <ToolTipAtributo
-                  text='Defense'
-                  actualValue={playerStats.bonos.defense}
-                  maxValue={999}
-                />
-              </div>
-              
+              />              
             </div>
           </aside>
         }

@@ -80,6 +80,7 @@ function SeleccionNivelPage(
               srcImg={buttonPecio}
             />
           </div>
+          {false &&
           <div 
             style={{paddingTop: '1rem'}}
             className="flex col"
@@ -113,7 +114,7 @@ function SeleccionNivelPage(
               srcImg={buttonZ1_3}
             />
           </div>
-
+}
           <button 
             className='invisible button-img'
             disabled={idLevelSected === -1 || idLevelSected > 3}

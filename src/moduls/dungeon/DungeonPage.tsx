@@ -29,6 +29,7 @@ function DungeonPage(
   const [varLevel, setVarLevel] = useState<0 | 1 | 2 | 3>(0)
   const [dropToShow, setDropToShow] = useState<TypesOfDrop>("none")
   const [showDamage, setShowDamage] = useState<"successDefense" | "takeDamage" | "none">("none")
+  const [vectorOfActions, setVectorOfActions] = useState<string[]>([])
 
   function handleSelectLevel(val: boolean){
     setStartMission(val)
@@ -36,7 +37,7 @@ function DungeonPage(
 
   function handleAttack(){
     setShowAttack(true)
-
+    setVectorOfActions(val => [...val, "atk"])
     setplayerStats(val => {
       const final: PlayerStatsControl = {
         ...val,
@@ -48,15 +49,7 @@ function DungeonPage(
     markEndOfTurn();
   }
 
-  /*
-  const updateInvetory = () => {
-    prop.updateMochila((val:Mochila) => {
-      const suerte: number = 1
-      const newMetales = Math.random()* 100 < 10*suerte ? 1: 0
-      const newNucleos= Math.random()* 100 < 6*suerte ? 1: 0
-      const newCircuitos = Math.random()* 100 < 4*suerte ? 1: 0
-      const newCristales = Math.random()* 100 < 1*suerte ? 1: 0
-
+  /* //retornar el item que gano, para activar la animacion
       if(newMetales){
         setDropToShow("metal")
       }else if(newNucleos){
@@ -68,15 +61,6 @@ function DungeonPage(
       }else{
         setDropToShow("none")
       }
-
-      return {
-        metales: val.metales + newMetales,
-        nucleosEnergeticos: val.nucleosEnergeticos + newNucleos,
-        circuito: val.circuito + newCircuitos,
-        cristales: val.cristales + newCristales,
-      }
-    })
-  }
   */
 
   function isTurnoJugador(){
@@ -90,6 +74,7 @@ function DungeonPage(
   }
 
   function handleShield(){
+    setVectorOfActions(val => [...val, "def"])
     setplayerStats((val) => {
       const final: PlayerStatsControl = {
         ...val,
@@ -120,9 +105,10 @@ function DungeonPage(
   function handleEndTurno(){
     dungeonProv?.endTurnEnemy({
       idUser: 1,
-      actions: ["atk","atk"]
+      actions: vectorOfActions
     })
 
+    setVectorOfActions([])
     setplayerStats((val: PlayerStatsControl) => {
       const ataque = enemy!.life > 0? 1: 0;
       controlOfAnimationDamage(ataque, val.bonos.defense, enemy!.life)
