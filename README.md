@@ -108,8 +108,8 @@ The architecture has been designed to allow new gameplay systems to be added wit
 - [x] Authentication
 - [x] Basic inventory
 - [x] Equipment system
-- [ ] Dungeon generation
-- [ ] Combat system
+- [x] Dungeon generation
+- [x] Combat system
 - [ ] Character progression
 
 ## Multiplayer
