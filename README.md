@@ -1,73 +1,161 @@
-# React + TypeScript + Vite
+# Dungeon Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> 🚧 **Work in Progress**
+>
+> This project is currently under active development. Core systems are already being built, while many gameplay features and content are still in progress.
 
-Currently, two official plugins are available:
+## About
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Dungeon Game is an asynchronous multiplayer dungeon crawler currently being developed as a personal full-stack project.
 
-## React Compiler
+The goal of the project is not only to create an enjoyable game, but also to explore modern frontend architecture, scalable backend design and game systems using web technologies.
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+Players will be able to explore dangerous dungeons, collect resources, craft equipment, improve their characters and cooperate through clans.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+# Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Current
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- React + TypeScript frontend
+- Node.js + Express backend
+- Firebase Authentication
+- Modular project structure
+- Responsive interface
+- Equipment management
+- Inventory system
+- Basic dungeon exploration
+- REST API
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+# Planned Features
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+The following systems are currently under development:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Turn-based asynchronous gameplay
+- Procedurally generated dungeons
+- Character progression
+- Item crafting
+- Mining system
+- Equipment upgrades
+- Marketplace
+- Clan system
+- Multiple world zones
+- PvE encounters
+- Boss battles
+- Achievements
+- Daily missions
+- Save synchronization
+- Admin tools
+
+---
+
+# Technology Stack
+
+## Frontend
+
+- React
+- TypeScript
+- HTML
+- CSS
+
+## Backend
+
+- Node.js
+- Express
+
+## Authentication
+
+- Firebase Authentication
+
+## Database
+
+- Firebase
+
+---
+
+# Project Goals
+
+Besides creating a game, this project focuses on learning and applying software engineering concepts such as:
+
+- Component-based architecture
+- Reusable UI components
+- Type-safe development with TypeScript
+- REST API design
+- Authentication and authorization
+- State management
+- Scalable frontend architecture
+- Modular backend development
+
+---
+
+# Project Status
+
+This is an active long-term project.
+
+Several core mechanics are already implemented, while others are continuously being developed and refined.
+
+The architecture has been designed to allow new gameplay systems to be added without major refactoring.
+
+---
+
+# Roadmap
+
+## Core Gameplay
+
+- [x] Authentication
+- [x] Basic inventory
+- [x] Equipment system
+- [ ] Dungeon generation
+- [ ] Combat system
+- [ ] Character progression
+
+## Multiplayer
+
+- [ ] Clan management
+- [ ] Cooperative gameplay
+- [ ] Trading
+- [ ] Global chat
+
+## Content
+
+- [ ] New dungeon types
+- [ ] New enemies
+- [ ] Crafting recipes
+- [ ] World events
+
+---
+
+# Screenshots
+
+> Screenshots and gameplay videos will be added as development progresses.
+
+---
+
+# Future Improvements
+
+Some of the planned improvements include:
+
+- Electron desktop version
+- Performance optimizations
+- Automated testing
+- Offline support
+- Better animations
+- Accessibility improvements
+- Internationalization (i18n)
+
+---
+
+# Contributing
+
+This project is currently developed by a single developer.
+
+Suggestions, bug reports and ideas are always welcome.
+
+---
+
+# License
+
+MIT
