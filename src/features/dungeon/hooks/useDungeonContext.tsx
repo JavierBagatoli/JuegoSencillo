@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import type { EnemyStatscontrol } from "../components/models/enemy.interfaces";
+import type { EnemyStatscontrol } from "../models/enemy.interfaces";
 import { controlerDungeon, type createMonster, type endTurn } from "../services/dungeon";
 
 interface DungeonContextType{

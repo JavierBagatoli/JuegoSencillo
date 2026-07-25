@@ -1,16 +1,16 @@
 import { useState } from 'react'
-import type { Mochila } from '../../App'
-import PantallaDungeon from './PantallaDungeon'
-import fireDebuf from '../../assets/debuf/fire.png'
-import slowDebuf from '../../assets/debuf/snail.png'
-import SeleccionNivelPage from './SeleccionNivelPage'
-import type { PlayerStatsControl } from '../../components/models/player.interfaces'
-import Animation1sec from '../../components/generics/Animation1Sec'
-import type { levelsAvalibles } from '../../components/models/levels-avalibles.interfaces'
-import AnimationDropItem from '../../components/generics/AnimationDropItem'
-import type { TypesOfDrop } from '../../components/models/typesOfDrops.enum'
+import type { Mochila } from '../../../App'
+import PantallaDungeon from '../PantallaDungeon'
+import fireDebuf from '../../../assets/debuf/fire.png'
+import slowDebuf from '../../../assets/debuf/snail.png'
+import SeleccionNivelPage from '../SeleccionNivelPage'
+import type { PlayerStatsControl } from '../../../components/models/player.interfaces'
+import Animation1sec from '../../../components/shareds/Animation1Sec'
+import type { levelsAvalibles } from '../../../components/models/levels-avalibles.interfaces'
+import AnimationDropItem from '../../../components/shareds/AnimationDropItem'
+import type { TypesOfDrop } from '../../../components/models/typesOfDrops.enum'
 import "./DungeonPage.css"
-import { useDungeon } from '../../hooks/useDungeonContext'
+import { useDungeon } from '../hooks/useDungeonContext'
 
 function DungeonPage(
   prop: {

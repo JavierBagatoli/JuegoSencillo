@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
-import SlotInvetario from "./SlotInventario"
+import SlotInvetario from "./components/SlotInventario"
 import "./InventarioPage.css"
 import type { EquipmentUser, PlayerStatsControl } from "../../components/models/player.interfaces"
 import { ARMORY } from "../../components/initialData/armory.init"
 import type { Weapon } from "../../components/models/items-fight.interfaces"
-import { useInventory } from "../../hooks/useInventoryContext"
+import { useInventory } from "./hooks/useInventoryContext"
+
 
 
 function InventarioPage(

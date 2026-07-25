@@ -1,4 +1,4 @@
-import type StatsControl from "./player.interfaces";
+import type StatsControl from "../../../components/models/player.interfaces";
 
 export interface EnemyStatscontrol extends StatsControl{
     idTypeImage: number,

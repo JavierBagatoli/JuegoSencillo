@@ -1,5 +1,6 @@
-import type { EnemyStatscontrol } from "../components/models/enemy.interfaces";
-import { api } from "./api";
+import type { EnemyStatscontrol } from "../models/enemy.interfaces";
+import { api } from "../../../services/api";
+
 
 export const controlerDungeon = {
   async getDungeons(idUser: number): Promise<number[]> {

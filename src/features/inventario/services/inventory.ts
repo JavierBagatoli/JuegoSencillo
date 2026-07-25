@@ -1,5 +1,6 @@
-import type { EquipmentPlayer, InvetoryItemPlayer } from "../hooks/useInventoryContext";
-import { api } from "./api";
+
+import { api } from "../../../services/api";
+import type { EquipmentPlayer, InvetoryItemPlayer } from "../models/inventory";
 
 export const controlerInventory = {
   async getEquipmentUser(idUser: number): Promise<EquipmentPlayer> {

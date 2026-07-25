@@ -12,9 +12,9 @@ import buttonZ1_3 from '../../assets/buttons/button-z1-3.jpg'
 import "./SeleccionNivelPage.css"
 import { useEffect, useState } from 'react'
 import type { levelsAvalibles } from '../../components/models/levels-avalibles.interfaces'
-import { controlerDungeon } from '../../services/dungeon'
-import ButtonImage from '../../components/generics/component/ButtonImage'
-import { useDungeon } from '../../hooks/useDungeonContext'
+import ButtonImage from '../../components/shareds/component/ButtonImage'
+import { useDungeon } from './hooks/useDungeonContext'
+import { controlerDungeon } from './services/dungeon'
 
 function SeleccionNivelPage(
   props: {

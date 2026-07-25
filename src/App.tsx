@@ -2,22 +2,22 @@ import { useState } from 'react'
 import './index.css'
 import { PLAYER_INITIAL_DUNGEON } from './components/initialData/player.init'
 import type { InvetoryPlayer, PlayerStatsControl } from './components/models/player.interfaces'
-import MapaGlobalPage from './moduls/mapa/MapaMundoPage'
-import DungeonPage from './moduls/dungeon/DungeonPage'
-import ComercioPage from './moduls/comercio/ComercioPage'
-import InventarioPage from './moduls/inventario/InventarioPage'
+import MapaGlobalPage from './features/mapa/MapaMundoPage'
+import ComercioPage from './features/comercio/ComercioPage'
+import InventarioPage from './features/inventario/InventarioPage'
 import ToolTipAtributo from './components/ToolTipAtributo'
 import type { MenuOptions } from './components/models/menu.interfaces'
-import ConfigPerfilPage from './moduls/configPerfil/ConfigPerfilPage'
-import BatallaInvasionPage from './moduls/invasion-battle/BatallaInvasionPage'
-import TrabajoPage from './moduls/trabajo/components/TrabajoPage'
-import CrearPage from './moduls/crear/CrearPage'
+import ConfigPerfilPage from './features/configPerfil/ConfigPerfilPage'
+import BatallaInvasionPage from './features/invasion-battle/BatallaInvasionPage'
+import TrabajoPage from './features/trabajo/components/TrabajoPage'
+import CrearPage from './features/craft/CrearPage'
 import { INVENTARY } from './components/initialData/inventary.init'
-import LoginPage from './moduls/login/components/LoginPage'
+import LoginPage from './features/login/components/LoginPage'
 import { loginWithGoogle, logout, useAuth } from './hooks/useAuth'
-import { DungeonProvider } from './hooks/useDungeonContext'
-import { InventoryProvider } from './hooks/useInventoryContext'
-import { CarftProvider } from './hooks/useCraftContext'
+import { CarftProvider } from './features/craft/hooks/useCraftContext'
+import { DungeonProvider } from './features/dungeon/hooks/useDungeonContext'
+import DungeonPage from './features/dungeon/components/DungeonPage'
+import { InventoryProvider } from './features/inventario/hooks/useInventoryContext'
 
 function App() {
   const { user } = useAuth();
@@ -70,7 +70,7 @@ function App() {
         </CarftProvider>
       case 'dungeon':
         return <DungeonProvider>
-          <DungeonPage 
+          <DungeonPage
             mochilla={mochila}
             updateMochila={setMochila}
             playerStats={playerStats}

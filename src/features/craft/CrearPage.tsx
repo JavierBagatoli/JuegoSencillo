@@ -2,7 +2,8 @@ import { useState } from "react"
 import type { Mochila } from "../../App"
 import "./CrearPage.css"
 import type { InvetoryPlayer } from "../../components/models/player.interfaces"
-import { useCarft, type itemToSell } from "../../hooks/useCraftContext"
+import { useCarft } from "./hooks/useCraftContext"
+import type { itemToSell } from "./models/craft.interfaces"
 
 function CrearPage(
   props: {

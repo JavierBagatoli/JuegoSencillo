@@ -1,4 +1,4 @@
-import type { EnemyStatscontrol } from "../models/enemy.interfaces"
+import type { EnemyStatscontrol } from "../../features/dungeon/models/enemy.interfaces"
 
 export const EMPTY_ENEMY: EnemyStatscontrol = {
     life: 0,

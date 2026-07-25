@@ -1,7 +1,7 @@
-import shield from '../../assets/icons/shield.png'
-import armor from '../../assets/icons/armadura.png'
-import sword from '../../assets/icons/sword.png'
-import shipModule from '../../assets/icons/room_speed/speed1.png'
+import shield from '../../../assets/icons/shield.png'
+import armor from '../../../assets/icons/armadura.png'
+import sword from '../../../assets/icons/sword.png'
+import shipModule from '../../../assets/icons/room_speed/speed1.png'
 
 
 function SlotInvetario(

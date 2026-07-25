@@ -3,10 +3,11 @@ import naveTeamOne from "../../assets/ships/Humans.png"
 import naveTeamTwo from "../../assets/ships/Humans_2.png"
 import ToolTipAtributo from "../../components/ToolTipAtributo"
 import "../../index.css"
-import ColumnaDeBatalla from "./component/ColumnaDeBatalla"
+
 
 import './BatallaInvasionPage.css'
-import JefeControl from "./component/JefeControl"
+import JefeControl from "./components/JefeControl"
+import ColumnaDeBatalla from "./components/ColumnaDeBatalla"
 
 type HousesAvalibles = 'team1' | 'team2' | 'none'
 

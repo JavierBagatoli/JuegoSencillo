@@ -1,5 +1,5 @@
-import type { itemToSell } from "../hooks/useCraftContext";
-import { api } from "./api";
+import { api } from "../../../services/api";
+import type { itemToSell } from "../models/craft.interfaces";
 
 export const controlerCraft = {
   async getCosts(): Promise<itemToSell[]> {
