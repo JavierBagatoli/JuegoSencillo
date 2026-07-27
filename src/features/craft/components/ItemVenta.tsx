@@ -1,4 +1,4 @@
-import type { Mochila } from "../../App"
+import type { Mochila } from "../../../App"
 
 function ItemVenta(
   props: {
