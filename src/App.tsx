@@ -18,17 +18,19 @@ import { CarftProvider } from './features/craft/hooks/useCraftContext'
 import { DungeonProvider } from './features/dungeon/hooks/useDungeonContext'
 import DungeonPage from './features/dungeon/components/DungeonPage'
 import { InventoryProvider } from './features/inventario/hooks/useInventoryContext'
+import { usePlayer } from './features/player/hooks/usePlayerContext'
 
 function App() {
   const { user } = useAuth();
+  const { player } = usePlayer();
 
   const [page, setPage] = useState<MenuOptions>('mapa')
-  const [mochila, setMochila] = useState<Mochila>({
-    circuito: 0,
-    metales: 0,
-    cristales: 3,
-    nucleosEnergeticos: 0
-  })
+  //const [mochila, setMochila] = useState<Mochila>({
+  //  circuito: 0,
+  //  metales: 0,
+  //  cristales: 3,
+  //  nucleosEnergeticos: 0
+  //})
   const [playerStats, setPlayerStats] = useState<PlayerStatsControl>(PLAYER_INITIAL_DUNGEON)
   const [showAsidenav, setShowAsidenav] = useState<boolean>(false)
   const [invetory, setInventory] = useState<InvetoryPlayer[]>(INVENTARY)
@@ -62,8 +64,6 @@ function App() {
       case 'crear':
         return <CarftProvider>
           <CrearPage
-            mochila={mochila}
-            updateMochila={setMochila}
             invetory={invetory}
             updateInventario={setInventory}
             />
@@ -71,8 +71,6 @@ function App() {
       case 'dungeon':
         return <DungeonProvider>
           <DungeonPage
-            mochilla={mochila}
-            updateMochila={setMochila}
             playerStats={playerStats}
             />
         </DungeonProvider>
@@ -143,8 +141,8 @@ function App() {
               <h4 className='flex center'>
                 Dinero:
               </h4>
-              <span>Creditos: {playerStats.money}</span>
-              <span>Platinos: {playerStats.platimun}</span>
+              <span>Creditos: {player.wallet.credits}</span>
+              <span>Platinos: {player.wallet.platino}</span>
             </div>
 
             {false && <div className='flex col stats-section'>
@@ -172,22 +170,22 @@ function App() {
               <h4 className='flex center'>Recusos</h4>
               <ToolTipAtributo
                 text='Circuitos'
-                actualValue={mochila.circuito}
+                actualValue={player.resources.circuits}
                 maxValue={999}
               />
               <ToolTipAtributo
                 text='Nucleos'
-                actualValue={mochila.nucleosEnergeticos}
+                actualValue={player.resources.cores}
                 maxValue={999}
               />
               <ToolTipAtributo
                 text='Metales'
-                actualValue={mochila.metales}
+                actualValue={player.resources.metals}
                 maxValue={999}
               />
               <ToolTipAtributo
                 text='Cristales'
-                actualValue={mochila.cristales}
+                actualValue={player.resources.crystals}
                 maxValue={999}
               />              
             </div>

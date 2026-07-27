@@ -15,7 +15,8 @@ export const EMPTY_ENEMY: EnemyStatscontrol = {
     debuf: {
         poison: 0,
         slowness: 0,
-    }
+    },
+    idTypeImage: 0,
 }
 
 export const SLIME_SOFT: EnemyStatscontrol = {
@@ -33,7 +34,8 @@ export const SLIME_SOFT: EnemyStatscontrol = {
     debuf: {
         poison: 0,
         slowness: 0,
-    }
+    },
+    idTypeImage: 0,
 }
 
 export const SLIME_HARD: EnemyStatscontrol = {
@@ -51,7 +53,8 @@ export const SLIME_HARD: EnemyStatscontrol = {
     debuf: {
         poison: 0,
         slowness: 0,
-    }
+    },
+    idTypeImage: 0,
 }
 
 export const SLIME_ROCK: EnemyStatscontrol = {
@@ -69,5 +72,6 @@ export const SLIME_ROCK: EnemyStatscontrol = {
     debuf: {
         poison: 0,
         slowness: 0,
-    }
+    },
+    idTypeImage: 0,
 }

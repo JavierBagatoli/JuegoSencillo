@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import type { Mochila } from '../../../App'
 import PantallaDungeon from '../PantallaDungeon'
 import fireDebuf from '../../../assets/debuf/fire.png'
 import slowDebuf from '../../../assets/debuf/snail.png'
@@ -14,8 +13,6 @@ import { useDungeon } from '../hooks/useDungeonContext'
 
 function DungeonPage(
   prop: {
-    mochilla: Mochila,
-    updateMochila: Function,
     playerStats: PlayerStatsControl
   }
 ) {

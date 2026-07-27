@@ -1,29 +1,28 @@
 import { useState } from "react"
-import type { Mochila } from "../../App"
 import "./CrearPage.css"
 import type { InvetoryPlayer } from "../../components/models/player.interfaces"
 import { useCarft } from "./hooks/useCraftContext"
 import type { itemToSell } from "./models/craft.interfaces"
+import { usePlayer } from "../player/hooks/usePlayerContext"
 
 function CrearPage(
   props: {
-    mochila: Mochila,
-    updateMochila: Function,
     invetory: InvetoryPlayer[],
     updateInventario: React.Dispatch<React.SetStateAction<InvetoryPlayer[]>>
   }
 ) {
   const context = useCarft()
+  const { player, getRefreshPlayer } = usePlayer()
 
-   const [extendText, setExtendText] = useState<string>('')
+  const [extendText, setExtendText] = useState<string>('')
   const [effect, setEffect] = useState<"successBuy" | "errorBuy" | "">()
   const [index, setIndex] = useState<number | null>()
   
   function handleBuy(index: number, i: number){
-    const metalesFinal = props.mochila.metales - (context.items[index].cost.metal ?? 0);
-    const nucleFinal = props.mochila.nucleosEnergeticos - (context.items[index].cost.nucleo ?? 0);
-    const circuitoFinal = props.mochila.circuito - (context.items[index].cost.circuito ?? 0);
-    const cristalFinal = props.mochila.cristales - (context.items[index].cost.cristal ?? 0);
+    const metalesFinal = player.resources.metals - (context.items[index].cost.metal ?? 0);
+    const nucleFinal = player.resources.cores - (context.items[index].cost.nucleo ?? 0);
+    const circuitoFinal = player.resources.circuits - (context.items[index].cost.circuito ?? 0);
+    const cristalFinal = player.resources.crystals - (context.items[index].cost.cristal ?? 0);
 
     setIndex(i)
     setTimeout(() => {
@@ -45,6 +44,7 @@ function CrearPage(
 
     
     setEffect("successBuy");
+    getRefreshPlayer()
     context.craftItem({
       idUser:1, idItem: index
     });
@@ -65,10 +65,10 @@ function CrearPage(
   }
 
   function spanTextoBuy(val: itemToSell, i: number){
-    const circuito: boolean = (val.cost.circuito ?? 0) <= props.mochila.circuito
-    const nucleo:   boolean = (val.cost.nucleo ?? 0)  <= props.mochila.nucleosEnergeticos
-    const metales:  boolean = (val.cost.metal ?? 0) <= props.mochila.metales
-    const cristales:boolean = (val.cost.cristal ?? 0) <= props.mochila.cristales 
+    const circuito: boolean = (val.cost.circuito ?? 0) <= player.resources.circuits;
+    const nucleo:   boolean = (val.cost.nucleo ?? 0)  <= player.resources.cores;
+    const metales:  boolean = (val.cost.metal ?? 0) <= player.resources.metals;
+    const cristales:boolean = (val.cost.cristal ?? 0) <= player.resources.crystals; 
 
     return <>
       <td className="left"><span>{val.title}</span></td>
