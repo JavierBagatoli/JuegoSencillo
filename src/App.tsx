@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './index.css'
 import { PLAYER_INITIAL_DUNGEON } from './components/initialData/player.init'
 import type { InvetoryPlayer, PlayerStatsControl } from './components/models/player.interfaces'
@@ -7,7 +7,7 @@ import ComercioPage from './features/comercio/ComercioPage'
 import InventarioPage from './features/inventario/InventarioPage'
 import ToolTipAtributo from './components/ToolTipAtributo'
 import type { MenuOptions } from './components/models/menu.interfaces'
-import ConfigPerfilPage from './features/configPerfil/ConfigPerfilPage'
+import ConfigPerfilPage from './features/perfil/PerfilPage'
 import BatallaInvasionPage from './features/invasion-battle/BatallaInvasionPage'
 import TrabajoPage from './features/trabajo/components/TrabajoPage'
 import CrearPage from './features/craft/CrearPage'
@@ -19,28 +19,30 @@ import { DungeonProvider } from './features/dungeon/hooks/useDungeonContext'
 import DungeonPage from './features/dungeon/components/DungeonPage'
 import { InventoryProvider } from './features/inventario/hooks/useInventoryContext'
 import { usePlayer } from './features/player/hooks/usePlayerContext'
+import { ProfileProvider } from './features/perfil/hooks/useProfileContext'
 
 function App() {
   const { user } = useAuth();
   const { player } = usePlayer();
 
   const [page, setPage] = useState<MenuOptions>('mapa')
-  //const [mochila, setMochila] = useState<Mochila>({
-  //  circuito: 0,
-  //  metales: 0,
-  //  cristales: 3,
-  //  nucleosEnergeticos: 0
-  //})
   const [playerStats, setPlayerStats] = useState<PlayerStatsControl>(PLAYER_INITIAL_DUNGEON)
   const [showAsidenav, setShowAsidenav] = useState<boolean>(false)
   const [invetory, setInventory] = useState<InvetoryPlayer[]>(INVENTARY)
   const isMobile: boolean =window.innerWidth < 720
 
+  useEffect(() => {//Not Work
+    if(player.name === "No Name"){
+      setPage("Perfil")
+    }
+  }, [player.name])
+
   const menuOptions: MenuOptions[] = ['mapa',
     // 'trabajar', 
     'crear',// 'comercio',
     'dungeon',// 'invasion',
-    'inventario', //'configPerfil'
+    'inventario', 
+    'Perfil'
     ]
 
   const updateMoney = () => {
@@ -57,8 +59,10 @@ function App() {
         return <TrabajoPage
           updateWork={() => updateMoney()}
         />
-      case 'configPerfil':
-        return <ConfigPerfilPage/>
+      case 'Perfil':
+        return <ProfileProvider>
+          <ConfigPerfilPage/>
+        </ProfileProvider>
       case 'mapa':
         return <MapaGlobalPage/>
       case 'crear':
@@ -141,8 +145,8 @@ function App() {
               <h4 className='flex center'>
                 Dinero:
               </h4>
-              <span>Creditos: {player.wallet.credits}</span>
-              <span>Platinos: {player.wallet.platino}</span>
+              <span>Creditos: {player?.wallet?.credits ?? 0}</span>
+              <span>Platinos: {player?.wallet?.platino ?? 0}</span>
             </div>
 
             {false && <div className='flex col stats-section'>

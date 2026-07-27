@@ -33,14 +33,17 @@ export function InventoryProvider({ children }: any) {
     })
   }
 
-  async function getInventory(idUser: number) {
-    controlerInventory.getInventoryUser(idUser).then((val) => {
+  async function getInventory() {
+    controlerInventory.getInventoryUser().then((val) => {
+      console.log("inventario",val)
       setInventory(val)
     })
   }
 
-  async function getSetEquipment(data: {idUser: number,idSlot: string,playerIdinventory: number}){
-    controlerInventory.getSetEquipment(data.idUser,data.idSlot,data.playerIdinventory).then((val) => {
+  async function getSetEquipment(data: {idSlot: string,playerIdinventory: number}){
+    controlerInventory.getSetEquipment(data.idSlot,data.playerIdinventory).then((val) => {
+            console.log("equipo",val)
+
       setEquipment(val)
     })
   }

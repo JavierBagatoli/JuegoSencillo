@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react'
 import fotoPerfil from '../../assets/icons/dagas.png'
 import f2 from '../../assets/icons/escopeta-fuego.png'
 import f3 from '../../assets/icons/potion.png'
@@ -12,9 +13,20 @@ import potion_6 from '../../assets/potions/resistance.png'
 import potion_7 from '../../assets/potions/speed.png'
 import potion_8 from '../../assets/potions/unvisible.png'
 
-import './ConfigPerfilPage.css'
+import './PerfilPage.css'
+import { usePlayer } from '../player/hooks/usePlayerContext'
+import { useProfile } from './hooks/useProfileContext'
 
 function ConfigPerfilPage() {
+  const {player} = usePlayer()
+  const profile = useProfile()
+
+  const [indexImgUsed, setIndexImgUsed] = useState<number>(
+    Number(profile.profile.imgProfile)
+  )
+
+  const [doesClick, setDoesClick] = useState<boolean>(false)
+
   const vectorImagen: any[] = [
     fotoPerfil,
     f2,
@@ -28,6 +40,23 @@ function ConfigPerfilPage() {
     potion_6,
     potion_7,
     potion_8,]
+    const nameRef = useRef(null);
+
+    const handleUpdate = () =>{
+      if(!nameRef.current) return
+      const newName: string = (nameRef as any).current.value
+
+      profile.postUpdateNameAndPhoto(
+        {
+          name: newName,
+          imgProfile: `${indexImgUsed}`
+        }
+      )
+    }
+
+    const idToShow = ():number =>{
+      return doesClick? indexImgUsed: Number(profile.profile.imgProfile)
+    }
 
     return (
     <>
@@ -36,21 +65,30 @@ function ConfigPerfilPage() {
       className='flex col pad-1 b2 background-inventario'>
 
         <span>Nombre:</span>
-        <input>
-        </input>
-
+        <input ref={nameRef} defaultValue={player.name}/>
+        
+        
         <span>Seleccione la Imagen de Perfil:</span>
         <div className='flex row wrap pad'>
           {
             vectorImagen.map((val, index) => 
-              <div className='pfp_option' key={index}>
+              <div 
+                className={`${idToShow() === index? "selected": ""} pfp_option`}
+                key={index}
+                onClick={() => {setIndexImgUsed(index); setDoesClick(true)}}>
                 <img
                   src={val}
-                />
+                  />
 
               </div>
             )
           }
+          <div className='flex' style={{width: "100%"}}>
+          <button 
+            onClick={() => handleUpdate()}
+            style={{width: "100%"}}>Actualizar Perfil</button>
+
+          </div>
           
         </div>
       </section>

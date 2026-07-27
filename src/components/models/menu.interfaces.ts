@@ -1,1 +1,1 @@
-export type MenuOptions = 'crear' | 'mapa' | 'dungeon' | 'invasion' | 'comercio' | 'inventario' | 'trabajar' | 'configPerfil';
+export type MenuOptions = 'crear' | 'mapa' | 'dungeon' | 'invasion' | 'comercio' | 'inventario' | 'trabajar' | 'Perfil';

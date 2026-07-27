@@ -8,6 +8,10 @@
     aspect-ratio: initial;
 }
 
+.selected {
+    background-color: rgb(15, 59, 59);
+}
+
 input{
     background-color: rgb(50, 66, 85);
     border: none;

@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import type { EnemyStatscontrol } from "../models/enemy.interfaces";
 import { controlerDungeon, type createMonster, type endTurn } from "../services/dungeon";
+import { usePlayer } from "../../player/hooks/usePlayerContext";
 
 interface DungeonContextType{
   enemy: EnemyStatscontrol | null,
@@ -11,6 +12,7 @@ interface DungeonContextType{
 const dungeonContext = createContext<DungeonContextType | null>(null);
 
 export function DungeonProvider({ children }: any) {
+  const player = usePlayer();
   const [enemy, setEnemy] = useState<EnemyStatscontrol | null>(null);
 
   async function createEnemy(data: createMonster) {
@@ -21,7 +23,10 @@ export function DungeonProvider({ children }: any) {
 
   async function endTurnEnemy(data: endTurn) {
     controlerDungeon.postEndTurn(data).then((val) => {
-      setEnemy(val)
+      setEnemy(val);
+      if("newResourses" in val){
+        player.getRefreshPlayer()
+      }
     })
   }
 

@@ -59,8 +59,11 @@ export function PlayerProvider({ children }: any) {
     
     if(!idToken) return
     controlerPlayer.getPlayer().then((val) => {
-      console.log(">",val)
-      setPlayer(val)
+      if("error" in val) return
+
+      setPlayer(_v => {
+        return val
+      })
     })
   }
 

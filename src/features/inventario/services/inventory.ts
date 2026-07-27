@@ -3,17 +3,18 @@ import { api } from "../../../services/api";
 import type { EquipmentPlayer, InvetoryItemPlayer } from "../models/inventory";
 
 export const controlerInventory = {
-  async getEquipmentUser(idUser: number): Promise<EquipmentPlayer> {
-    const { data } = await api.get<EquipmentPlayer>(`/api/inventory/${idUser}`);
+  async getEquipmentUser(_idUser: number): Promise<EquipmentPlayer> {
+    const { data } = await api.get<EquipmentPlayer>(`/api/inventory/equipment`);
     return data;
   },
-  async getInventoryUser(idUser: number): Promise<InvetoryItemPlayer[]> {
-    const { data } = await api.get<InvetoryItemPlayer[]>(`/api/inventory/${idUser}/inventory`);
+  async getInventoryUser(): Promise<InvetoryItemPlayer[]> {
+    const { data } = await api.get<InvetoryItemPlayer[]>(`/api/inventory/inventory`);
+    console.log("data inventario", data)
     return data;
   },
 
-  async getSetEquipment(idUser: number,idSlot: string,playerIdinventory: number): Promise<EquipmentPlayer> {
-    const { data } = await api.get<EquipmentPlayer>(`/api/inventory/${idUser}/set/${idSlot}/${playerIdinventory}`);
+  async getSetEquipment(idSlot: string,playerIdinventory: number): Promise<EquipmentPlayer> {
+    const { data } = await api.get<EquipmentPlayer>(`/api/inventory/set/${idSlot}/${playerIdinventory}`);
     return data;
   },
 }
