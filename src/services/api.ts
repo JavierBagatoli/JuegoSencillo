@@ -3,7 +3,7 @@ import { auth } from "../firebase.config";
 import { logout } from "../hooks/useAuth";
 
 export const api = axios.create({
-  baseURL: "https://nodejssimplegame.onrender.com/",
+  baseURL: "https://nodejssimplegame.onrender.com/",// "http://localhost:3000/",//
   headers: {
     "Content-Type": "application/json",
   },

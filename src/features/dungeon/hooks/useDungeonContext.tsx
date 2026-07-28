@@ -24,7 +24,7 @@ export function DungeonProvider({ children }: any) {
   async function endTurnEnemy(data: endTurn) {
     controlerDungeon.postEndTurn(data).then((val) => {
       setEnemy(val);
-      if("newResourses" in val){
+      if("newResources" in val){
         player.getRefreshPlayer()
       }
     })

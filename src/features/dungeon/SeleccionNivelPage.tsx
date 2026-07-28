@@ -27,7 +27,7 @@ function SeleccionNivelPage(
   const dungeonProv = useDungeon()
 
   useEffect(() => {
-    controlerDungeon.getDungeons(1)
+    controlerDungeon.getDungeons()
   }, []);
 
   const handleLevel = (val: number) =>{

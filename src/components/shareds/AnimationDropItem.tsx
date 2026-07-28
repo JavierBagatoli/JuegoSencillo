@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import "./AnimationDropItem.css"
-import metal from "../../assets/resourses/metal.png"
-import circuit from "../../assets/resourses/circuit.png"
-import cores from "../../assets/resourses/cores.png"
-import crystal from "../../assets/resourses/crystals.png"
+import metal from "../../assets/resources/metal.png"
+import circuit from "../../assets/resources/circuit.png"
+import cores from "../../assets/resources/cores.png"
+import crystal from "../../assets/resources/crystals.png"
 import type { TypesOfDrop } from "../models/typesOfDrops.enum"
 
 function AnimationDropItem(

@@ -3,10 +3,8 @@ import { api } from "../../../services/api";
 
 
 export const controlerDungeon = {
-  async getDungeons(idUser: number): Promise<number[]> {
-    const { data } = await api.post<number[]>("/api/dungeon/list-dungeons", {
-        idUser
-    });
+  async getDungeons(): Promise<number[]> {
+    const { data } = await api.get<number[]>("/api/dungeon/list-dungeons");
     return data;
   },
   async postCreateMonster(idUser: number, level: number): Promise<EnemyStatscontrol> {
