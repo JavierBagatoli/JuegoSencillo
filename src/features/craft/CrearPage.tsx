@@ -45,9 +45,7 @@ function CrearPage(
     
     setEffect("successBuy");
     getRefreshPlayer()
-    context.craftItem({
-      idUser:1, idItem: index
-    });
+    context.craftItem(index);
 
     props.updateInventario((prev) => {
       const existe = prev.find(item => item.id === index);

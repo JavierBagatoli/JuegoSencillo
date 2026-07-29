@@ -5,7 +5,7 @@ import type { itemToSell } from "../models/craft.interfaces";
 interface CarftContextType{
   items: itemToSell[],
   getCosts: React.Dispatch<number>,
-  craftItem:React.Dispatch<{idUser: number, idItem: number}>,
+  craftItem:React.Dispatch<number>,
 }
 
 const carftContext = createContext<CarftContextType | null>(null);
@@ -25,8 +25,8 @@ export function CarftProvider({ children }: any) {
     })
   }
 
-  async function craftItem(data: {idUser: number, idItem: number}) {
-    controlerCraft.craftItem(data.idUser, data.idItem).then((val) => {
+  async function craftItem(idItem: number) {
+    controlerCraft.craftItem(idItem).then((val) => {
       console.log(val)
     })
   }

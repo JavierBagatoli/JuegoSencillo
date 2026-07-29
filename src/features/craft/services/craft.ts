@@ -7,9 +7,8 @@ export const controlerCraft = {
     return data;
   },
 
-  async craftItem(idUser: number, idItem: number): Promise<void> {
+  async craftItem( idItem: number): Promise<void> {
     const { data } = await api.post<void>(`/api/crafting/buy`,{
-      idUser,
       idItem
     });
     return data;
