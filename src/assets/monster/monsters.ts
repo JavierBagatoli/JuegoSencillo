@@ -16,7 +16,7 @@ import slimeElevador from '../../assets/monster/t3/slime-elevador-espacial.png'
 import robot from '../../assets/monster/t3/robot.png'
 import centinela from '../../assets/monster/t3/centinela.png'
 import dron from '../../assets/monster/t3/dron.png'
-import Torreta from '../../assets/monster/t3/Torreta.png'
+import torreta from '../../assets/monster/t3/torreta.png'
 
 import slimePecio from '../../assets/monster/t4/slime-pecio.png'
 import ghostTorret from '../../assets/monster/t4/ghostTorret.png'
@@ -44,7 +44,7 @@ const bestiario = {
         robot,
         centinela,
         dron,
-        Torreta,
+        torreta,
     ],
     monsterT4:[
         slimePecio,
