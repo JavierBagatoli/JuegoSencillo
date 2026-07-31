@@ -1,11 +1,11 @@
-import bestiario from '../../assets/monster/monsters'
-import type { EnemyStatscontrol } from './models/enemy.interfaces'
-import type { levelsAvalibles } from '../../components/models/levels-avalibles.interfaces'
-import type { PlayerStatsControl } from '../../components/models/player.interfaces'
-import ToolTipAtributo from '../../components/ToolTipAtributo'
-import { useDungeon } from './hooks/useDungeonContext'
-import "./components/DungeonPage.css"
-import frioTexture from '../../assets/texturas/frio.avif'
+import bestiario from '../../../assets/monster/monsters'
+import type { EnemyStatscontrol } from '../models/enemy.interfaces'
+import type { levelsAvalibles } from '../../../components/models/levels-avalibles.interfaces'
+import type { PlayerStatsControl } from '../../../components/models/player.interfaces'
+import ToolTipAtributo from '../../../components/ToolTipAtributo'
+import { useDungeon } from '../hooks/useDungeonContext'
+import "../components/DungeonPage.css"
+import frioTexture from '../../../assets/texturas/frio.avif'
 
 function PantallaDungeon(
   props: {

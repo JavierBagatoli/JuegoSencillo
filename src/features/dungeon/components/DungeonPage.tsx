@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import PantallaDungeon from '../PantallaDungeon'
+import PantallaDungeon from './PantallaDungeon'
 import fireDebuf from '../../../assets/debuf/fire.png'
 import slowDebuf from '../../../assets/debuf/snail.png'
 import SeleccionNivelPage from '../SeleccionNivelPage'
@@ -10,6 +10,7 @@ import AnimationDropItem from '../../../components/shareds/AnimationDropItem'
 import type { TypesOfDrop } from '../../../components/models/typesOfDrops.enum'
 import "./DungeonPage.css"
 import { useDungeon } from '../hooks/useDungeonContext'
+import LineOfActionOnCombat from './LineOfActionOnCombat'
 
 function DungeonPage(
   prop: {
@@ -21,7 +22,6 @@ function DungeonPage(
   const [level, setLevel] = useState<levelsAvalibles>(0)
   const [startMission, setStartMission] = useState<boolean>(false)
   const [playerStats, setplayerStats] = useState<PlayerStatsControl>(prop.playerStats)
-  const [turno, setTurno] = useState<'Jugador' | 'Oponente'>('Jugador');
   const [showAttack, setShowAttack] = useState<boolean | null>(null)
   const [varLevel, setVarLevel] = useState<0 | 1 | 2 | 3>(0)
   const [dropToShow, setDropToShow] = useState<TypesOfDrop>("none")
@@ -35,15 +35,6 @@ function DungeonPage(
   function handleAttack(){
     setShowAttack(true)
     setVectorOfActions(val => [...val, "atk"])
-    setplayerStats(val => {
-      const final: PlayerStatsControl = {
-        ...val,
-        actions: val.actions+1
-      }
-      return final
-    })
-
-    markEndOfTurn();
   }
 
   /* //retornar el item que gano, para activar la animacion
@@ -61,13 +52,7 @@ function DungeonPage(
   */
 
   function isTurnoJugador(){
-    return 'Jugador' === turno
-  }
-
-  function markEndOfTurn(){
-    if(playerStats.actions+1 >= playerStats.actionsMax + playerStats.bonos.actions){
-      setTurno('Oponente')
-    }
+    return vectorOfActions.length+1 <= playerStats.actionsMax + playerStats.bonos.actions
   }
 
   function handleShield(){
@@ -78,14 +63,11 @@ function DungeonPage(
         bonos:{
           ...val.bonos,
           defense: val.bonos.defense+1
-        },
-        actions: val.actions+1
+        }
       }
 
       return final
     })
-
-    markEndOfTurn();
   }
 
   const controlOfAnimationDamage = (ataque: number, defense:number, enemyLife: number) => {
@@ -134,8 +116,6 @@ function DungeonPage(
     if(addEnemy){
       setVarLevel(Math.floor(Math.random()*4) as 0 | 1 | 2 | 3)
     }
-
-    setTurno('Jugador');
   }
 
   return (
@@ -175,6 +155,10 @@ function DungeonPage(
                   levelSelected={level}
                   startMission={(val: boolean) => handleSelectLevel(val)}
                   varLevel={varLevel}
+                />
+                <LineOfActionOnCombat
+                  actions={vectorOfActions}
+                  deleteAction={setVectorOfActions}
                 />
                 {prop.playerStats.life > 0 &&
                   <div className='flex col pad-05 buttons'>
