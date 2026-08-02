@@ -121,8 +121,8 @@ function SeleccionNivelPage(
             onClick={() => handleStartMission()}>
               <span className='mid-contrast center'>Iniciar Exploración</span>
               <img 
-              className={`${idLevelSected === -1 || idLevelSected > 3? 'disabled': ''} no-shadow`}
-              src={buttonStart}/>
+                className={`${idLevelSected === -1 || idLevelSected > 3? 'disabled': ''} no-shadow`}
+                src={buttonStart}/>
           </button>
         </div>
       </section>
