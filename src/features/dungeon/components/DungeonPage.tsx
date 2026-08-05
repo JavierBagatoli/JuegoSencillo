@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import PantallaDungeon from './PantallaDungeon'
 import fireDebuf from '../../../assets/debuf/fire.png'
 import slowDebuf from '../../../assets/debuf/snail.png'
@@ -28,6 +28,10 @@ function DungeonPage(
   const [showDamage, setShowDamage] = useState<"successDefense" | "takeDamage" | "none">("none")
   const [vectorOfActions, setVectorOfActions] = useState<string[]>([])
 
+  useEffect(
+    () => showAnumation()
+    , [dungeonProv.drop])
+
   function handleSelectLevel(val: boolean){
     setStartMission(val)
   }
@@ -37,20 +41,27 @@ function DungeonPage(
     setVectorOfActions(val => [...val, "atk"])
   }
 
-  /* //retornar el item que gano, para activar la animacion
-      if(newMetales){
-        setDropToShow("metal")
-      }else if(newNucleos){
-        setDropToShow("cores")
-      }else if(newCircuitos){
-        setDropToShow("circuit")
-      }else if(newCristales){
-        setDropToShow("crystal")        
-      }else{
-        setDropToShow("none")
-      }
-  */
-
+  /**
+   * retornar el item que gano, para activar la animacion
+   */
+  function showAnumation() {
+    if(!dungeonProv?.drop) {
+      setDropToShow("none")
+      return}
+    const v = dungeonProv?.drop!
+    if((v?.metals ?? 0) > 0){
+      setDropToShow("metal")
+    }else if((v?.crystals ?? 0) > 0){
+      setDropToShow("crystal")        
+    }else if((v?.circuits ?? 0) > 0){
+      setDropToShow("circuit")
+    }else if((v?.cores ?? 0) > 0){
+      setDropToShow("cores")
+    }else{
+      setDropToShow("none")
+    }
+  }
+  
   function isTurnoJugador(){
     return vectorOfActions.length+1 <= playerStats.actionsMax + playerStats.bonos.actions
   }

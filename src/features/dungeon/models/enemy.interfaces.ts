@@ -7,3 +7,10 @@ export interface EnemyStatscontrol extends StatsControl{
         slowness: number,
     }
 }
+
+export interface ResourcesDrop{
+  circuits?: number,
+  cores?: number,
+  metals?: number,
+  crystals?: number,
+}
